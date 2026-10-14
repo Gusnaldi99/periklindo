@@ -17,10 +17,10 @@ export default function FloatingWhatsApp() {
       />
 
       <a
-        href="https://wa.me/628001234567"
+        href="https://wa.me/6287789703728"
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Hubungi kami via WhatsApp"
+        aria-label="Hubungi Sekretariat PERIKLINDO via WhatsApp"
         className="relative flex items-center justify-center
           w-14 h-14 rounded-full bg-teal text-white shadow-lg
           hover:bg-teal-hover hover:shadow-xl hover:scale-105 active:scale-95

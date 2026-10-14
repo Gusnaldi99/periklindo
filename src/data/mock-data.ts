@@ -218,55 +218,70 @@ export const memberBrands: MemberBrand[] = [
   },
 ];
 
-// [PLACEHOLDER] Berita menggunakan data contoh.
-// Konten asli akan dikelola melalui Admin CMS.
+// Data Berita Aktual dari portal publikasi resmi PERIKLINDO & PEVS
 export const newsPosts: NewsPost[] = [
   {
     id: 'np-1',
-    title: 'PERIKLINDO Electric Vehicle Show (PEVS) 2026 Resmi Dibuka',
-    slug: 'pevs-2026-resmi-dibuka',
+    title: 'PEVS 2026 Kembali Hadir, Fokus pada Future Mobility dan Teknologi Kendaraan Listrik',
+    slug: 'pevs-2026-kembali-hadir-fokus-future-mobility',
     excerpt:
-      'Pameran kendaraan listrik terbesar di Indonesia kembali digelar di JIExpo Kemayoran, menampilkan lebih dari 50 merek kendaraan listrik nasional dan internasional.',
-    content: '[REAL DATA] Konten lengkap artikel akan diisi melalui Admin CMS.',
+      'PERIKLINDO bersama Dyandra Promosindo resmi mengumumkan perhelatan pameran kendaraan listrik tahunan PEVS di JIExpo Kemayoran dengan skala lebih megah.',
+    content:
+      'PERIKLINDO bersama Dyandra Promosindo kembali menggelar pameran PERIKLINDO Electric Vehicle Show (PEVS) 2026 di JIExpo Kemayoran Jakarta. Pameran ini menjadi wadah strategis akselerasi industri otomotif masa depan dan transisi energi bersih di Tanah Air.',
     thumbnailUrl: '/placeholders/news-pevs.svg',
     category: 'Kegiatan',
-    publishedAt: '2026-10-10',
+    publishedAt: '2026-06-03',
     author: 'Sekretariat PERIKLINDO',
     isFeatured: true,
   },
   {
     id: 'np-2',
-    title: 'Pemerintah Terbitkan Insentif Baru untuk Kendaraan Listrik Domestik',
-    slug: 'insentif-baru-kendaraan-listrik-domestik',
+    title: 'Insentif Mobil Listrik Dinilai Perlu Menyasar Bus, Truk, dan Logistik',
+    slug: 'insentif-mobil-listrik-perlu-menyasar-bus-truk-dan-logistik',
     excerpt:
-      'Kebijakan insentif pajak dan subsidi baru diterbitkan untuk mendorong adopsi kendaraan listrik buatan dalam negeri di seluruh wilayah Indonesia.',
-    content: '[REAL DATA] Konten lengkap artikel akan diisi melalui Admin CMS.',
+      'PERIKLINDO mendorong perluasan kebijakan insentif KBLBB dari pemerintah agar mencakup armada transportasi publik dan niaga komersial demi efisiensi rantai pasok nasional.',
+    content:
+      'Ketua Umum PERIKLINDO menekankan pentingnya ekosistem kendaraan listrik menyentuh segmen bus, truk, dan armada logistik, sehingga dampak reduksi emisi karbon dan efisiensi bahan bakar dapat dirasakan lebih luas oleh perekonomian nasional.',
     thumbnailUrl: '/placeholders/news-insentif.svg',
     category: 'Regulasi',
-    publishedAt: '2026-10-05',
+    publishedAt: '2026-06-03',
     author: 'Sekretariat PERIKLINDO',
   },
   {
     id: 'np-3',
-    title: 'Audiensi PERIKLINDO dengan Kementerian Perindustrian',
-    slug: 'audiensi-kemenperin',
+    title: 'Panduan Aman Menggunakan dan Merawat Kendaraan Listrik Sehari-hari',
+    slug: 'panduan-aman-menggunakan-kendaraan-listrik',
     excerpt:
-      'Pengurus PERIKLINDO melakukan audiensi dengan Menteri Perindustrian membahas roadmap pengembangan industri kendaraan listrik nasional.',
-    content: '[REAL DATA] Konten lengkap artikel akan diisi melalui Admin CMS.',
+      'Sosialisasi resmi PERIKLINDO terkait keselamatan operasional KBLBB, tata cara pengisian daya (charging), dan ketahanan baterai saat cuaca hujan.',
+    content:
+      'Sebagai asosiasi resmi, PERIKLINDO secara aktif mengedukasi masyarakat tentang standar keselamatan kendaraan listrik berbasis baterai, mulai dari pengisian daya di rumah (home charging) hingga ketahanan sistem kelistrikan berstandar proteksi tinggi.',
     thumbnailUrl: '/placeholders/news-audiensi.svg',
-    category: 'Siaran Pers',
-    publishedAt: '2026-09-28',
+    category: 'Industri EV',
+    publishedAt: '2026-05-05',
+    author: 'Sekretariat PERIKLINDO',
+  },
+  {
+    id: 'np-4',
+    title: '5 Mitos Kendaraan Listrik yang Sering Disalahpahami Publik',
+    slug: '5-mitos-kendaraan-listrik-yang-bergentayangan',
+    excerpt:
+      'Meluruskan miskonsepsi publik seputar keandalan baterai kendaraan listrik, kesiapan stasiun pengisian daya nasional, hingga biaya kepemilikan jangka panjang.',
+    content:
+      'PERIKLINDO mengulas fakta teknis di balik mitos kendaraan listrik yang sering beredar di masyarakat, menegaskan kesiapan infrastruktur dan keandalan teknologi baterai modern.',
+    thumbnailUrl: '/placeholders/news-insentif.svg',
+    category: 'Industri EV',
+    publishedAt: '2026-07-02',
     author: 'Sekretariat PERIKLINDO',
   },
 ];
 
-// [PLACEHOLDER] Postingan social media dikurasi dari Admin CMS.
+// Postingan social media resmi dan dokumentasi kegiatan PERIKLINDO
 export const socialPosts: SocialMediaPost[] = [
   {
     id: 'sp-1',
     platform: 'Instagram',
     caption:
-      'Dokumentasi hari pertama PEVS 2026. Antusiasme pengunjung luar biasa!',
+      'Dokumentasi hari pertama PEVS 2026 di JIExpo Kemayoran. Antusiasme pengunjung dan pelaku industri otomotif luar biasa!',
     mediaUrl: '/placeholders/social-1.svg',
     externalUrl: 'https://instagram.com/periklindo',
     postedAt: '2026-10-10',
@@ -276,7 +291,7 @@ export const socialPosts: SocialMediaPost[] = [
     id: 'sp-2',
     platform: 'YouTube',
     caption:
-      'Keynote speech Ketua Umum PERIKLINDO di pembukaan PEVS 2026.',
+      'Keynote speech Ketua Umum PERIKLINDO Jend (Purn) Dr. Moeldoko, S.I.P pada pembukaan PEVS.',
     mediaUrl: '/placeholders/social-2.svg',
     externalUrl: 'https://youtube.com/@periklindo',
     postedAt: '2026-10-10',
@@ -286,7 +301,7 @@ export const socialPosts: SocialMediaPost[] = [
     id: 'sp-3',
     platform: 'Instagram',
     caption:
-      'Test drive kendaraan listrik roda dua di area outdoor PEVS 2026.',
+      'Test drive dan sosialisasi kendaraan listrik roda dua serta roda empat di arena outdoor PEVS.',
     mediaUrl: '/placeholders/social-3.svg',
     externalUrl: 'https://instagram.com/periklindo',
     postedAt: '2026-10-11',
@@ -296,7 +311,7 @@ export const socialPosts: SocialMediaPost[] = [
     id: 'sp-4',
     platform: 'LinkedIn',
     caption:
-      'Diskusi panel ekosistem kendaraan listrik Indonesia bersama pelaku industri.',
+      'Diskusi panel percepatan ekosistem KBLBB nasional bersama Kementerian Perindustrian dan produsen anggota PERIKLINDO.',
     mediaUrl: '/placeholders/social-4.svg',
     externalUrl: 'https://linkedin.com/company/periklindo',
     postedAt: '2026-10-12',
@@ -304,12 +319,11 @@ export const socialPosts: SocialMediaPost[] = [
   },
 ];
 
-// [PLACEHOLDER] Data pengurus organisasi.
-// Foto dan detail asli akan dimasukkan melalui Admin CMS.
+// Data Pengurus Resmi PERIKLINDO sesuai situs resmi periklindo.com/tentang-kami/
 export const orgMembers: OrgMember[] = [
   {
     id: 'om-1',
-    fullName: '[Nama Ketua Umum]',
+    fullName: 'Jend (Purn) Dr. Moeldoko, S.I.P',
     position: 'Ketua Umum',
     level: 'Pimpinan Inti',
     photoUrl: '/placeholders/person-placeholder.svg',
@@ -317,50 +331,122 @@ export const orgMembers: OrgMember[] = [
   },
   {
     id: 'om-2',
-    fullName: '[Nama Sekretaris Jenderal]',
-    position: 'Sekretaris Jenderal',
+    fullName: 'Bambang Soesatyo, S.E., M.B.A',
+    position: 'Dewan Pengawas',
     level: 'Pimpinan Inti',
     photoUrl: '/placeholders/person-placeholder.svg',
     order: 2,
   },
   {
     id: 'om-3',
-    fullName: '[Nama Bendahara]',
-    position: 'Bendahara',
+    fullName: 'Tenggono Chuandra Phoa',
+    position: 'Sekretaris Jenderal',
     level: 'Pimpinan Inti',
     photoUrl: '/placeholders/person-placeholder.svg',
     order: 3,
+  },
+  {
+    id: 'om-4',
+    fullName: 'Eddy Soepadmo',
+    position: 'Wakil Sekjen',
+    level: 'Pimpinan Inti',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 4,
+  },
+  {
+    id: 'om-5',
+    fullName: 'Cing Hok',
+    position: 'Bendahara',
+    level: 'Pimpinan Inti',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 5,
+  },
+  {
+    id: 'om-6',
+    fullName: 'Dhianisa Sasikirana',
+    position: 'Sekretaris',
+    level: 'Sekretariat',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 6,
+  },
+  {
+    id: 'om-7',
+    fullName: 'Adrianto Gani',
+    position: 'Ketua Promosi & Pemasaran',
+    level: 'Ketua Bidang',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 7,
+  },
+  {
+    id: 'om-8',
+    fullName: 'Prabowo K',
+    position: 'Ketua Pengembangan & Penelitian',
+    level: 'Ketua Bidang',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 8,
+  },
+  {
+    id: 'om-9',
+    fullName: 'Kelik Irwantono',
+    position: 'Ketua Organisasi & Kelembagaan',
+    level: 'Ketua Bidang',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 9,
+  },
+  {
+    id: 'om-10',
+    fullName: 'Ahmad Rofiqi',
+    position: 'Ketua Legal & Regulasi',
+    level: 'Ketua Bidang',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 10,
+  },
+  {
+    id: 'om-11',
+    fullName: 'Puryanto',
+    position: 'Ketua Legal & Regulasi',
+    level: 'Ketua Bidang',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 11,
+  },
+  {
+    id: 'om-12',
+    fullName: 'Winarto',
+    position: 'Ketua Data & Informasi',
+    level: 'Ketua Bidang',
+    photoUrl: '/placeholders/person-placeholder.svg',
+    order: 12,
   },
 ];
 
 export const galleryItems: GalleryItem[] = [
   {
     id: 'gi-1',
-    title: 'PEVS 2025 Grand Opening',
+    title: 'PEVS 2026 Grand Opening',
     category: 'Pameran PEVS',
     imageUrl: '/placeholders/gallery-1.jpg',
-    date: '2025-05-15',
+    date: '2026-06-03',
     description:
-      'Pembukaan resmi Pameran Kendaraan Listrik Indonesia di JIExpo Kemayoran.',
+      'Pembukaan resmi PERIKLINDO Electric Vehicle Show bersama Dyandra Promosindo di JIExpo Kemayoran.',
   },
   {
     id: 'gi-2',
     title: 'Audiensi Kementerian Perindustrian',
     category: 'Audiensi Pemerintah',
     imageUrl: '/placeholders/gallery-2.jpg',
-    date: '2025-03-20',
+    date: '2026-03-20',
     description:
-      'Pertemuan pengurus PERIKLINDO dengan jajaran Kementerian Perindustrian.',
+      'Pertemuan pengurus PERIKLINDO dengan jajaran regulator membahas roadmap KBLBB nasional.',
   },
 ];
 
-// FAQ khusus PERIKLINDO, bukan template generik (R-28)
+// FAQ faktual sesuai latar belakang dan regulasi PERIKLINDO resmi
 export const faqItems: FaqItem[] = [
   {
     id: 'faq-1',
     question: 'Apa itu PERIKLINDO dan kapan didirikan?',
     answer:
-      'PERIKLINDO (Perkumpulan Industri Kendaraan Listrik Indonesia) adalah asosiasi yang mewadahi pelaku industri kendaraan listrik di Indonesia. Didirikan pada tahun 2021 untuk memperkuat koordinasi dan advokasi industri kendaraan listrik nasional.',
+      'PERIKLINDO (Perkumpulan Industri Kendaraan Listrik Indonesia) didirikan pada tahun 2021 atas inisiatif PT Mobil Anak Bangsa (MAB), PT SGMW Motor Indonesia (Wuling Motors), dan PT Sokonindo Automobile (DFSK) guna mendukung percepatan implementasi Perpres No. 55 Tahun 2019 tentang Percepatan Program Kendaraan Bermotor Listrik Berbasis Baterai (KBLBB).',
     category: 'Umum',
     order: 1,
   },
@@ -368,7 +454,7 @@ export const faqItems: FaqItem[] = [
     id: 'faq-2',
     question: 'Bagaimana cara perusahaan mendaftar menjadi anggota PERIKLINDO?',
     answer:
-      'Perusahaan yang bergerak di bidang industri kendaraan listrik (manufaktur, komponen, baterai, atau infrastruktur pengisian) dapat mengajukan permohonan keanggotaan melalui formulir kontak di website ini atau menghubungi sekretariat PERIKLINDO langsung.',
+      'Perusahaan yang bergerak di bidang manufaktur kendaraan listrik (roda 2, 4, niaga), komponen & baterai, maupun penyedia infrastruktur pengisian daya dapat mendaftar dengan mengisi Formulir Registrasi Keanggotaan, melampirkan fotokopi Izin Usaha Industri (IUI/NIB), atau mengirim berkas ke email sekretariat@periklindo.com dan WhatsApp +62 812-9978-7588.',
     category: 'Keanggotaan',
     order: 2,
   },
@@ -376,16 +462,17 @@ export const faqItems: FaqItem[] = [
     id: 'faq-3',
     question: 'Apa saja kegiatan utama yang diselenggarakan PERIKLINDO?',
     answer:
-      'Kegiatan utama meliputi penyelenggaraan PERIKLINDO Electric Vehicle Show (PEVS), audiensi dengan pemerintah terkait regulasi industri EV, seminar dan forum diskusi industri, serta kunjungan kerja ke fasilitas produksi anggota.',
+      'Kegiatan utama mencakup penyelenggaraan tahunan PERIKLINDO Electric Vehicle Show (PEVS) bersama Dyandra Promosindo di JIExpo Kemayoran, advokasi kebijakan dan insentif KBLBB bersama pemerintah, sosialisasi keselamatan kendaraan listrik, serta fasilitasi sinergi bisnis antar anggota.',
     category: 'Kegiatan',
     order: 3,
   },
   {
     id: 'faq-4',
-    question: 'Apakah PERIKLINDO hanya untuk produsen kendaraan listrik roda empat?',
+    question: 'Apakah keanggotaan terbuka untuk produsen komponen dan pengembang infrastruktur?',
     answer:
-      'Tidak. PERIKLINDO mewadahi seluruh ekosistem industri kendaraan listrik, termasuk produsen roda dua, roda empat, produsen komponen dan baterai, serta penyedia infrastruktur pengisian daya.',
+      'Ya. PERIKLINDO terbuka bagi seluruh rantai pasok ekosistem kendaraan listrik nasional, termasuk produsen sel/pack baterai, stasiun pengisian kendaraan listrik (SPKLU), sistem pertukaran baterai (swap station), penyedia IoT, hingga bengkel konversi resmi.',
     category: 'Keanggotaan',
     order: 4,
   },
 ];
+

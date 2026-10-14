@@ -38,9 +38,9 @@ export default function HeroSection() {
 
           <ScrollReveal delay={250}>
             <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed mb-10 max-w-2xl font-normal">
-              Asosiasi resmi industri kendaraan listrik Indonesia sejak 2021. Mewadahi
-              produsen otomotif, inovator baterai, dan pengembang infrastruktur pengisian
-              daya nasional untuk masa depan transportasi berkelanjutan.
+              Perkumpulan resmi industri kendaraan listrik Indonesia yang berdiri sejak 2021
+              guna mendukung Perpres No. 55 Tahun 2019. Mewadahi pabrikan roda 4, roda 2,
+              industri baterai, hingga penyedia infrastruktur pengisian daya nasional.
             </p>
           </ScrollReveal>
 
@@ -72,16 +72,16 @@ export default function HeroSection() {
                 <AnimatedCounter end={2021} duration={1400} />
               </p>
               <p className="text-xs sm:text-sm text-slate-400 leading-snug">
-                Tahun Pendirian Resmi Asosiasi
+                Tahun Berdiri (Dukung Perpres 55/2019)
               </p>
             </div>
 
             <div>
               <p className="font-[family-name:var(--font-heading)] text-2xl sm:text-3xl md:text-4xl font-extrabold text-white mb-1">
-                <AnimatedCounter end={50} suffix="+" duration={1600} />
+                <AnimatedCounter end={25} suffix="+" duration={1600} />
               </p>
               <p className="text-xs sm:text-sm text-slate-400 leading-snug">
-                Merek & Pelaku Ekosistem EV Tergabung
+                Perusahaan & Merek Anggota Resmi
               </p>
             </div>
 
@@ -90,7 +90,7 @@ export default function HeroSection() {
                 PEVS
               </p>
               <p className="text-xs sm:text-sm text-slate-400 leading-snug">
-                Pameran Kendaraan Listrik Tahunan Nasional
+                Pameran Tahunan Resmi di JIExpo
               </p>
             </div>
           </div>

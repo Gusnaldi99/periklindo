@@ -34,12 +34,12 @@ export default function CtaSection() {
               </Link>
 
               <a
-                href="https://wa.me/628001234567"
+                href="https://wa.me/6287789703728"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center px-6 py-3.5 rounded-lg bg-teal text-white font-semibold text-sm sm:text-base hover:bg-teal-hover hover:shadow-lg hover:shadow-teal/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-150 min-h-[44px]"
               >
-                Konsultasi via WhatsApp
+                Konsultasi WhatsApp Sekretariat
               </a>
             </div>
           </div>

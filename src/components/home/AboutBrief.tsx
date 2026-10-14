@@ -6,21 +6,21 @@ export default function AboutBrief() {
   const pillars = [
     {
       number: '01',
-      title: 'Advokasi Regulasi & Kebijakan',
+      title: 'Mitra Strategis Kebijakan',
       description:
-        'Menjadi mitra strategis pemerintah dalam merumuskan standar keselamatan, insentif fiskal, serta regulasi transisi energi transportasi berbasis baterai.',
+        'Partner strategis pemerintah dalam merumuskan regulasi, standar keselamatan, dan insentif KBLBB untuk mempercepat implementasi Perpres No. 55 Tahun 2019.',
     },
     {
       number: '02',
-      title: 'Pameran PEVS & Edukasi Publik',
+      title: 'PEVS & Sosialisasi Publik',
       description:
-        'Menginisiasi PERIKLINDO Electric Vehicle Show (PEVS) sebagai panggung utama inovasi kendaraan listrik nasional sekaligus sarana edukasi masyarakat.',
+        'Menyelenggarakan pameran akbar tahunan PEVS di JIExpo Kemayoran bersama Dyandra Promosindo serta mengedukasi masyarakat luas tentang keandalan kendaraan listrik.',
     },
     {
       number: '03',
-      title: 'Penguatan Ekosistem Domestik',
+      title: 'Kolaborasi Rantai Pasok & R&D',
       description:
-        'Mendorong sinergi antara produsen kendaraan, penyedia sel baterai, rantai pasok lokal, dan operator stasiun pengisian kendaraan listrik (SPKLU).',
+        'Mensinergikan pabrikan roda 4, roda 2, produsen sel baterai nasional, dan penyedia stasiun pengisian daya (SPKLU) serta riset pengembangan (R&D).',
     },
   ];
 
@@ -32,7 +32,7 @@ export default function AboutBrief() {
           <div className="max-w-3xl mb-12">
             <SectionHeader
               title="Mendorong Indonesia Menuju Era Elektrifikasi"
-              subtitle="PERIKLINDO hadir sebagai wadah pemersatu industri untuk mempercepat adopsi kendaraan listrik yang aman, terjangkau, dan ramah lingkungan."
+              subtitle="Berdiri atas inisiatif produsen otomotif nasional guna memajukan industri KBLBB dan mewujudkan ekosistem transportasi Indonesia yang bersih serta berdaya saing global."
             />
           </div>
         </ScrollReveal>
