@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -12,9 +13,15 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr_1fr] gap-10 lg:gap-16">
           {/* Brand column */}
           <div>
-            <p className="font-[family-name:var(--font-heading)] text-white font-bold text-lg mb-3">
-              PERIKLINDO
-            </p>
+            <Link href="/" className="inline-block mb-4 group" aria-label="Beranda PERIKLINDO">
+              <Image
+                src="/assets/logo/logo-periklindo-putih.png"
+                alt="PERIKLINDO"
+                width={130}
+                height={80}
+                className="h-12 w-auto object-contain transition-opacity duration-150 group-hover:opacity-90"
+              />
+            </Link>
             <p className="text-sm leading-relaxed max-w-sm mb-4">
               Perkumpulan Industri Kendaraan Listrik Indonesia. Berdiri sejak 2021 mendukung Perpres No. 55 Tahun 2019 guna akselerasi ekosistem KBLBB nasional.
             </p>

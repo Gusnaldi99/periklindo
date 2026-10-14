@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const navLinks = [
   { href: '/', label: 'Beranda' },
@@ -22,12 +23,20 @@ export default function Navbar() {
         className="container-main flex items-center justify-between h-16 lg:h-[72px]"
         aria-label="Navigasi utama"
       >
-        {/* Brand mark: text-based, no fabricated logo (R-23) */}
+        {/* Official PERIKLINDO Brand Mark */}
         <Link
           href="/"
-          className="flex items-center gap-2 text-white font-[family-name:var(--font-heading)] font-bold text-lg tracking-tight"
+          className="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-electric rounded-md py-1"
+          aria-label="Beranda PERIKLINDO"
         >
-          PERIKLINDO
+          <Image
+            src="/assets/logo/logo-periklindo-putih.png"
+            alt="PERIKLINDO"
+            width={116}
+            height={72}
+            className="h-10 lg:h-12 w-auto object-contain transition-opacity duration-150 group-hover:opacity-90"
+            priority
+          />
         </Link>
 
         {/* Desktop nav links */}

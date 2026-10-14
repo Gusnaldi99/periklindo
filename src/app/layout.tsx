@@ -30,12 +30,31 @@ export const metadata: Metadata = {
     'PEVS',
     'electric vehicle Indonesia',
   ],
+  icons: {
+    icon: [
+      { url: '/assets/logo/logo.ico' },
+      { url: '/assets/logo/logo32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/assets/logo/android-chrome-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/assets/logo/android-chrome-512x512.png', sizes: '512x512', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/assets/logo/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'PERIKLINDO | Perkumpulan Industri Kendaraan Listrik Indonesia',
     description:
       'Asosiasi industri kendaraan listrik Indonesia. Berdiri sejak 2021.',
     type: 'website',
     locale: 'id_ID',
+    images: [
+      {
+        url: '/assets/logo/logo-periklindo.png',
+        width: 232,
+        height: 144,
+        alt: 'Logo PERIKLINDO',
+      },
+    ],
   },
 };
 
