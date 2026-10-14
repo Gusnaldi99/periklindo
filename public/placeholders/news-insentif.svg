@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="450" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="bgInsentif" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#1E293B" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="450" fill="url(#bgInsentif)" />
+  <rect x="80" y="80" width="130" height="32" rx="6" fill="#10B981" />
+  <text x="145" y="101" text-anchor="middle" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" letter-spacing="1">REGULASI</text>
+  <text x="80" y="210" fill="#FFFFFF" font-family="'Plus Jakarta Sans', sans-serif" font-size="32" font-weight="800">Insentif Fiskal EV Domestik</text>
+  <text x="80" y="250" fill="#6EE7B7" font-family="'Plus Jakarta Sans', sans-serif" font-size="18" font-weight="600">Kebijakan Baru Akselerasi Kendaraan Listrik</text>
+  <text x="80" y="290" fill="#94A3B8" font-family="'Inter', sans-serif" font-size="15">Mendorong Pertumbuhan Komponen Lokal dan Ekosistem Baterai</text>
+</svg>
