@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 
 const navLinks = [
   { href: '/', label: 'Beranda' },
@@ -16,6 +17,7 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 bg-navy border-b border-navy-light">
@@ -41,18 +43,24 @@ export default function Navbar() {
 
         {/* Desktop nav links */}
         <ul className="hidden lg:flex items-center gap-1">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="px-3 py-2 text-sm font-medium text-slate-300 rounded-md
-                  hover:text-white hover:bg-white/10
-                  transition-colors duration-150"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150 ${
+                    isActive
+                      ? 'text-white bg-white/10 font-semibold shadow-sm'
+                      : 'text-slate-300 hover:text-white hover:bg-white/10'
+                  }`}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
 
         {/* Mobile menu button with label for discoverability */}
@@ -89,19 +97,25 @@ export default function Navbar() {
           className="lg:hidden bg-navy border-t border-navy-light transition-all duration-200 ease-out"
         >
           <ul className="container-main py-3 space-y-1">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  onClick={() => setMobileOpen(false)}
-                  className="block px-3 py-3 text-sm font-medium text-slate-300 rounded-md
-                    hover:text-white hover:bg-white/10 transition-colors duration-150
-                    min-h-[44px] flex items-center"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = pathname === link.href;
+              return (
+                <li key={link.href}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setMobileOpen(false)}
+                    className={`block px-3 py-3 text-sm font-medium rounded-md transition-colors duration-150 min-h-[44px] flex items-center ${
+                      isActive
+                        ? 'text-white bg-white/15 font-semibold'
+                        : 'text-slate-300 hover:text-white hover:bg-white/10'
+                    }`}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

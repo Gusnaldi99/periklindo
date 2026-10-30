@@ -35,9 +35,12 @@ export interface OrgMember {
   id: string;
   fullName: string;
   position: string;
-  level: 'Pimpinan Inti' | 'Ketua Bidang' | 'Sekretariat';
+  positionEn?: string;
+  level: 'Pimpinan Inti' | 'Dewan Penasihat' | 'Ketua Bidang' | 'Sekretariat';
+  category?: 'chairman' | 'secretariat' | 'treasury' | 'advisor' | 'vice-chairman';
   photoUrl: string;
   order: number;
+  description?: string;
 }
 
 export interface GalleryItem {
