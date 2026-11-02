@@ -218,60 +218,77 @@ export const memberBrands: MemberBrand[] = [
   },
 ];
 
-// Data Berita Aktual dari portal publikasi resmi PERIKLINDO & PEVS
+// Liputan aktual PEVS 2026 (artikel MediaPatriot + video YouTube)
 export const newsPosts: NewsPost[] = [
   {
-    id: 'np-1',
-    title: 'PEVS 2026 Kembali Hadir, Fokus pada Future Mobility dan Teknologi Kendaraan Listrik',
-    slug: 'pevs-2026-kembali-hadir-fokus-future-mobility',
+    id: 'np-pevs-2026-game-changer',
+    title:
+      'PEVS 2026: Moeldoko Sebut Kendaraan Listrik Sebagai Game Changer Ekonomi',
+    slug: 'pevs-2026-moeldoko-sebut-kendaraan-listrik-sebagai-game-changer-ekonomi',
     excerpt:
-      'PERIKLINDO bersama Dyandra Promosindo resmi mengumumkan perhelatan pameran kendaraan listrik tahunan PEVS di JIExpo Kemayoran dengan skala lebih megah.',
+      'Ketua Umum PERIKLINDO Jenderal (Purn.) Dr. Moeldoko menegaskan kendaraan listrik bukan sekadar inovasi transportasi, melainkan game changer bagi transformasi industri dan energi nasional. Sekretaris Jenderal Tenggono Chuandra Phoa menambahkan, Indonesia berpotensi menjadi pusat produksi dan rantai pasok EV global.',
     content:
-      'PERIKLINDO bersama Dyandra Promosindo kembali menggelar pameran PERIKLINDO Electric Vehicle Show (PEVS) 2026 di JIExpo Kemayoran Jakarta. Pameran ini menjadi wadah strategis akselerasi industri otomotif masa depan dan transisi energi bersih di Tanah Air.',
-    thumbnailUrl: '/placeholders/news-pevs.svg',
+      'Ajang PERIKLINDO Electric Vehicle Show (PEVS) 2026 dan rangkaian Periklindo Electric Vehicle Conference (PEVC) 2026 menjadi momentum akselerasi ekosistem kendaraan listrik di Indonesia. Ketua Umum PERIKLINDO sekaligus Founder PT Mobil Anak Bangsa (MAB), Jenderal TNI (Purn.) Dr. H.C. Moeldoko, bersama Sekretaris Jenderal Tenggono Chuandra Phoa, menegaskan komitmen membawa Indonesia menjadi pemain utama industri kendaraan listrik dunia. Dalam pidato utamanya, Moeldoko menyebut peralihan ke EV menekan biaya rumah tangga, mengurangi subsidi BBM yang mencapai Rp264 triliun, menekan inflasi, serta menuntut kesiapan SPKLU, jaringan PLN, dan regulasi eVTOL. Tenggono menekankan kolaborasi pemerintah, asosiasi, dan pelaku industri agar Indonesia tidak hanya menjadi pasar, tetapi juga basis produksi dan rantai pasok EV internasional.',
+    thumbnailUrl: '/assets/news/pevs-2026-game-changer.jpg',
     category: 'Kegiatan',
-    publishedAt: '2026-06-03',
-    author: 'Sekretariat PERIKLINDO',
+    publishedAt: '2026-11-01',
+    author: 'Irwan Hasiholan',
     isFeatured: true,
+    mediaType: 'article',
+    sourceName: 'MediaPatriot',
+    externalUrl:
+      'https://www.mediapatriot.co.id/2026/11/01/pevs-2026-moeldoko-sebut-kendaraan-listrik-sebagai-game-changer-ekonomi-periklindo-optimis-dorong-indonesia-jadi-pemain-utama-global/',
   },
   {
-    id: 'np-2',
-    title: 'Insentif Mobil Listrik Dinilai Perlu Menyasar Bus, Truk, dan Logistik',
-    slug: 'insentif-mobil-listrik-perlu-menyasar-bus-truk-dan-logistik',
+    id: 'np-pevs-2026-pidato-moeldoko',
+    title:
+      'Pidato Ketum PERIKLINDO di PEVS 2026: EV Adalah Game Changer Transformasi Energi',
+    slug: 'pidato-ketum-periklindo-moeldoko-ev-game-changer-pevs-2026',
     excerpt:
-      'PERIKLINDO mendorong perluasan kebijakan insentif KBLBB dari pemerintah agar mencakup armada transportasi publik dan niaga komersial demi efisiensi rantai pasok nasional.',
+      'Moeldoko membuka PEVS 2026 di JIExpo Kemayoran dengan menekankan efisiensi biaya rumah tangga, pengurangan subsidi BBM, kesiapan SPKLU, hingga tantangan eVTOL dan SDM elektrifikasi.',
     content:
-      'Ketua Umum PERIKLINDO menekankan pentingnya ekosistem kendaraan listrik menyentuh segmen bus, truk, dan armada logistik, sehingga dampak reduksi emisi karbon dan efisiensi bahan bakar dapat dirasakan lebih luas oleh perekonomian nasional.',
-    thumbnailUrl: '/placeholders/news-insentif.svg',
-    category: 'Regulasi',
-    publishedAt: '2026-06-03',
-    author: 'Sekretariat PERIKLINDO',
+      'Dalam pidato pembukaan PEVS 2026, Ketua Umum PERIKLINDO Jenderal TNI (Purn.) Dr. Moeldoko menegaskan kendaraan listrik membawa transformasi ide, konsep, teknologi, dan energi. Ia membandingkan biaya operasional mobil ICE Rp6–8 juta per bulan dengan EV sekitar Rp800 ribu, menyoroti subsidi BBM Rp264 triliun, serta meminta pemerintah tidak ragu memberi insentif sambil menyiapkan ekosistem pendukung.',
+    thumbnailUrl: '/assets/news/pevs-2026-pidato-moeldoko.jpg',
+    category: 'Kegiatan',
+    publishedAt: '2026-10-29',
+    author: 'Irwan MediaPatriot',
+    mediaType: 'video',
+    sourceName: 'YouTube',
+    externalUrl: 'https://youtu.be/b9QcBG5Vhe0',
   },
   {
-    id: 'np-3',
-    title: 'Panduan Aman Menggunakan dan Merawat Kendaraan Listrik Sehari-hari',
-    slug: 'panduan-aman-menggunakan-kendaraan-listrik',
+    id: 'np-pevs-2026-wawancara-moeldoko',
+    title:
+      'Wawancara Ketum PERIKLINDO: Prospek EV Indonesia dan Kualitas Baterai',
+    slug: 'wawancara-ketum-periklindo-prospek-ev-indonesia-pevs-2026',
     excerpt:
-      'Sosialisasi resmi PERIKLINDO terkait keselamatan operasional KBLBB, tata cara pengisian daya (charging), dan ketahanan baterai saat cuaca hujan.',
+      'Moeldoko menilai tren penjualan mobil listrik mendekati 20 persen, mengingatkan publik tidak tergiur harga murah, dan menyinggung target TKDN 60 persen pada 2027.',
     content:
-      'Sebagai asosiasi resmi, PERIKLINDO secara aktif mengedukasi masyarakat tentang standar keselamatan kendaraan listrik berbasis baterai, mulai dari pengisian daya di rumah (home charging) hingga ketahanan sistem kelistrikan berstandar proteksi tinggi.',
-    thumbnailUrl: '/placeholders/news-audiensi.svg',
-    category: 'Industri EV',
-    publishedAt: '2026-05-05',
-    author: 'Sekretariat PERIKLINDO',
+      'Dalam wawancara di PEVS 2026, Ketua Umum PERIKLINDO Jenderal TNI (Purn.) Dr. H.C. Moeldoko menilai prospek EV Indonesia cerah berkat sumber daya baterai dan motor, pasar yang besar, serta kesadaran masyarakat yang tumbuh. Ia mengimbau konsumen memeriksa keamanan baterai, jarak tempuh, dan kecepatan pengisian daya, serta menyebut target TKDN menuju 60 persen pada 2027.',
+    thumbnailUrl: '/assets/news/pevs-2026-wawancara-moeldoko.jpg',
+    category: 'Kegiatan',
+    publishedAt: '2026-10-29',
+    author: 'Irwan MediaPatriot',
+    mediaType: 'video',
+    sourceName: 'YouTube',
+    externalUrl: 'https://youtu.be/jgTREAA6bbw',
   },
   {
-    id: 'np-4',
-    title: '5 Mitos Kendaraan Listrik yang Sering Disalahpahami Publik',
-    slug: '5-mitos-kendaraan-listrik-yang-bergentayangan',
+    id: 'np-pevs-2026-mab-moeldoko',
+    title:
+      'Moeldoko di PEVS 2026: MAB Hadirkan Mobilitas Bersih dan Command Center',
+    slug: 'moeldoko-mab-mobilitas-bersih-command-center-pevs-2026',
     excerpt:
-      'Meluruskan miskonsepsi publik seputar keandalan baterai kendaraan listrik, kesiapan stasiun pengisian daya nasional, hingga biaya kepemilikan jangka panjang.',
+      'Sebagai Founder PT Mobil Anak Bangsa, Moeldoko memaparkan solusi transportasi bersih untuk angkutan ringan, perkebunan, dan tambang, lengkap dengan sistem Command Center.',
     content:
-      'PERIKLINDO mengulas fakta teknis di balik mitos kendaraan listrik yang sering beredar di masyarakat, menegaskan kesiapan infrastruktur dan keandalan teknologi baterai modern.',
-    thumbnailUrl: '/placeholders/news-insentif.svg',
-    category: 'Industri EV',
-    publishedAt: '2026-07-02',
-    author: 'Sekretariat PERIKLINDO',
+      'Di PEVS 2026, Jenderal (Purn.) Dr. Moeldoko sebagai Founder PT Mobil Anak Bangsa (MAB) Indonesia memaparkan tema mobilitas masa depan yang bersih dan efisien. MAB menyasar kebutuhan transportasi ringan, perkebunan, dan pertambangan, serta dilengkapi aplikasi Command Center untuk memantau dan mengendalikan pergerakan armada.',
+    thumbnailUrl: '/assets/news/pevs-2026-mab-moeldoko.jpg',
+    category: 'Kegiatan',
+    publishedAt: '2026-10-29',
+    author: 'Irwan MediaPatriot',
+    mediaType: 'video',
+    sourceName: 'YouTube',
+    externalUrl: 'https://youtu.be/onSvOchAjps',
   },
 ];
 

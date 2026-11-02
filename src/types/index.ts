@@ -19,6 +19,9 @@ export interface NewsPost {
   publishedAt: string;
   author: string;
   isFeatured?: boolean;
+  mediaType?: 'article' | 'video';
+  externalUrl?: string;
+  sourceName?: string;
 }
 
 export interface SocialMediaPost {
