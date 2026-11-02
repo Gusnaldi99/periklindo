@@ -1,6 +1,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { animate, useReducedMotion } from 'motion/react';
+import { cn } from '@/lib/utils';
 
 interface AnimatedCounterProps {
   end: number;
@@ -9,6 +11,8 @@ interface AnimatedCounterProps {
   prefix?: string;
   className?: string;
 }
+
+const PRECISION_EASE: [number, number, number, number] = [0.16, 1, 0.3, 1];
 
 export default function AnimatedCounter({
   end,
@@ -20,40 +24,30 @@ export default function AnimatedCounter({
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
+  const shouldReduceMotion = useReducedMotion();
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      requestAnimationFrame(() => {
-        setCount(end);
-      });
-      return;
+    if (shouldReduceMotion) {
+      const frame = requestAnimationFrame(() => setCount(end));
+      return () => cancelAnimationFrame(frame);
     }
+
+    let controls: ReturnType<typeof animate> | undefined;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !started.current) {
           started.current = true;
-          let startTime: number | null = null;
-
-          const animate = (currentTime: number) => {
-            if (!startTime) startTime = currentTime;
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            // Ease out cubic
-            const easeOut = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(easeOut * end));
-
-            if (progress < 1) {
-              requestAnimationFrame(animate);
-            } else {
-              setCount(end);
-            }
-          };
-
-          requestAnimationFrame(animate);
+          controls = animate(0, end, {
+            duration: duration / 1000,
+            ease: PRECISION_EASE,
+            onUpdate: (latest) => {
+              setCount(Math.round(latest));
+            },
+          });
           observer.unobserve(element);
         }
       },
@@ -62,11 +56,14 @@ export default function AnimatedCounter({
 
     observer.observe(element);
 
-    return () => observer.disconnect();
-  }, [end, duration]);
+    return () => {
+      observer.disconnect();
+      controls?.stop();
+    };
+  }, [end, duration, shouldReduceMotion]);
 
   return (
-    <span ref={ref} className={className}>
+    <span ref={ref} className={cn('tabular-nums', className)}>
       {prefix}
       {count}
       {suffix}

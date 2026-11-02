@@ -1,18 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Clock, Play } from 'lucide-react';
+import { estimateReadMinutes, formatDateId } from '@/lib/content';
+import { cn } from '@/lib/utils';
 import type { NewsPost } from '@/types';
 
 interface NewsCardProps {
   post: NewsPost;
   variant?: 'default' | 'featured';
-}
-
-function formatNewsDate(isoDate: string) {
-  return new Date(isoDate).toLocaleDateString('id-ID', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
+  preferInternal?: boolean;
 }
 
 function PlayOverlay() {
@@ -22,31 +18,33 @@ function PlayOverlay() {
         className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-electric shadow-lg group-hover:scale-105 transition-transform duration-200"
         aria-hidden="true"
       >
-        <svg viewBox="0 0 24 24" className="h-6 w-6 ml-0.5 fill-current">
-          <path d="M8 5v14l11-7z" />
-        </svg>
+        <Play className="h-6 w-6 ml-0.5 fill-current" />
       </span>
     </div>
   );
 }
 
-export default function NewsCard({ post, variant = 'default' }: NewsCardProps) {
-  const formattedDate = formatNewsDate(post.publishedAt);
-  const isExternal = Boolean(post.externalUrl);
+export default function NewsCard({
+  post,
+  variant = 'default',
+  preferInternal = false,
+}: NewsCardProps) {
+  const formattedDate = formatDateId(post.publishedAt);
+  const isExternal = !preferInternal && Boolean(post.externalUrl);
   const isVideo = post.mediaType === 'video';
-  const href = post.externalUrl ?? `/berita/${post.slug}`;
-  const badgeLabel = post.sourceName ?? post.category;
-  const ctaLabel = isVideo
-    ? `Tonton di ${post.sourceName ?? 'YouTube'}`
-    : `Baca di ${post.sourceName ?? 'sumber'}`;
-  const className =
-    variant === 'featured'
-      ? `group grid md:grid-cols-2 h-full bg-white border border-slate-200 rounded-xl overflow-hidden
-        hover:shadow-xl hover:border-slate-300 hover:-translate-y-1.5
-        transition-all duration-200 ease-out`
-      : `group block h-full bg-white border border-slate-200 rounded-xl overflow-hidden
-        hover:shadow-xl hover:border-slate-300 hover:-translate-y-1.5
-        transition-all duration-200 ease-out`;
+  const href = isExternal ? (post.externalUrl as string) : `/berita/${post.slug}`;
+  const readMinutes = estimateReadMinutes(post);
+  const ctaLabel = preferInternal
+    ? 'Baca selengkapnya'
+    : isVideo
+      ? `Tonton di ${post.sourceName ?? 'YouTube'}`
+      : `Baca di ${post.sourceName ?? 'sumber'}`;
+  const className = cn(
+    'group h-full bg-white border border-slate-200 rounded-xl overflow-hidden',
+    'hover:shadow-xl hover:border-slate-300 hover:-translate-y-1.5',
+    'transition-all duration-200 ease-out',
+    variant === 'featured' ? 'grid md:grid-cols-2' : 'block'
+  );
 
   const body =
     variant === 'featured' ? (
@@ -57,23 +55,29 @@ export default function NewsCard({ post, variant = 'default' }: NewsCardProps) {
             alt={post.title}
             fill
             sizes="(max-width: 768px) 100vw, 50vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
           />
         </div>
 
         <div className="p-6 lg:p-8 flex flex-col justify-center">
           <div className="flex flex-wrap items-center gap-2 mb-3">
-            <span className="inline-block text-xs font-semibold text-electric bg-electric/10 px-2.5 py-1 rounded-md">
+            <span className="inline-block text-xs font-semibold text-white bg-electric px-2.5 py-1 rounded-md">
               {post.category}
             </span>
-            <span className="inline-block text-xs font-semibold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md">
-              {badgeLabel}
+            {post.sourceName ? (
+              <span className="inline-block text-xs font-semibold text-slate-600 bg-slate-100 px-2.5 py-1 rounded-md">
+                {post.sourceName}
+              </span>
+            ) : null}
+            <span className="inline-flex items-center gap-1 text-xs font-medium text-slate-500">
+              <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+              {readMinutes} mnt baca
             </span>
           </div>
 
           <p className="text-xs text-slate-400 mb-2 font-medium">{formattedDate}</p>
 
-          <h3 className="text-xl lg:text-2xl font-bold text-navy leading-snug mb-3 group-hover:text-electric transition-colors duration-150">
+          <h3 className="text-xl lg:text-2xl font-bold text-navy leading-snug mb-3 line-clamp-2 group-hover:text-electric transition-colors duration-150">
             {post.title}
           </h3>
 
@@ -94,16 +98,22 @@ export default function NewsCard({ post, variant = 'default' }: NewsCardProps) {
             alt={post.title}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+            className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
           />
           {isVideo ? <PlayOverlay /> : null}
         </div>
 
         <div className="p-5 lg:p-6 flex flex-col justify-between">
           <div>
-            <span className="inline-block text-xs font-semibold text-electric bg-electric/10 px-2.5 py-1 rounded-md mb-3">
-              {badgeLabel}
-            </span>
+            <div className="flex flex-wrap items-center gap-2 mb-3">
+              <span className="inline-block text-xs font-semibold text-white bg-electric px-2.5 py-1 rounded-md">
+                {post.category}
+              </span>
+              <span className="inline-flex items-center gap-1 text-xs font-medium text-slate-500">
+                <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+                {readMinutes} mnt baca
+              </span>
+            </div>
 
             <p className="text-xs text-slate-400 mb-2 font-medium">{formattedDate}</p>
 

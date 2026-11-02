@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ArrowDown, FileText, ShieldCheck } from 'lucide-react';
 import ScrollReveal from '@/components/shared/ScrollReveal';
 
 export default function OrgHero() {
@@ -49,14 +50,11 @@ export default function OrgHero() {
         </ScrollReveal>
 
         <div className="max-w-4xl">
-          {/* Status Badge */}
+          {/* Status Badge with Legal Legitimacy */}
           <ScrollReveal delay={100}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-electric/10 text-blue-300 border border-electric/30 mb-5">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500" />
-              </span>
-              Bagan Kepengurusan Resmi (Organization Structure)
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-electric/15 text-blue-300 border border-electric/30 mb-5">
+              <ShieldCheck className="w-3.5 h-3.5 text-teal" />
+              <span>Kepengurusan Resmi Periode Berjalan &bull; Landasan AD/ART & SK Kemenkumham RI</span>
             </div>
           </ScrollReveal>
 
@@ -79,16 +77,18 @@ export default function OrgHero() {
             <div className="flex flex-wrap items-center gap-4 mb-12">
               <a
                 href="#struktur-hirarki"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-electric text-white font-semibold text-sm hover:bg-electric-hover active:scale-[0.98] transition-all duration-150 min-h-[44px] shadow-md shadow-electric/25"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-electric text-white font-semibold text-sm hover:bg-electric-hover active:scale-[0.98] transition-all duration-150 min-h-[44px] shadow-md shadow-electric/25"
               >
-                Jelajahi Hierarki Pengurus
+                <span>Jelajahi Hierarki Pengurus</span>
+                <ArrowDown className="w-4 h-4" />
               </a>
 
               <a
                 href="#bagan-resmi"
-                className="inline-flex items-center justify-center px-6 py-3 rounded-lg border border-slate-700 bg-white/5 text-slate-200 font-semibold text-sm hover:bg-white/10 hover:border-slate-500 active:scale-[0.98] transition-all duration-150 min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-slate-700 bg-white/5 text-slate-200 font-semibold text-sm hover:bg-white/10 hover:border-slate-500 active:scale-[0.98] transition-all duration-150 min-h-[44px]"
               >
-                Lihat Bagan Resmi
+                <FileText className="w-4 h-4 text-slate-400" />
+                <span>Lihat Bagan Resmi</span>
               </a>
             </div>
           </ScrollReveal>

@@ -3,20 +3,21 @@ import { Plus_Jakarta_Sans, Inter } from 'next/font/google';
 import './globals.css';
 
 const plusJakarta = Plus_Jakarta_Sans({
-  variable: '--font-heading',
+  variable: '--font-plus-jakarta',
   subsets: ['latin'],
   weight: ['600', '700', '800'],
   display: 'swap',
 });
 
 const inter = Inter({
-  variable: '--font-body',
+  variable: '--font-inter',
   subsets: ['latin'],
   weight: ['400', '500', '600'],
   display: 'swap',
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://periklindo.or.id'),
   title: {
     default: 'PERIKLINDO | Perkumpulan Industri Kendaraan Listrik Indonesia',
     template: '%s | PERIKLINDO',
@@ -47,6 +48,8 @@ export const metadata: Metadata = {
       'Asosiasi industri kendaraan listrik Indonesia. Berdiri sejak 2021.',
     type: 'website',
     locale: 'id_ID',
+    url: '/',
+    siteName: 'PERIKLINDO',
     images: [
       {
         url: '/assets/logo/logo-periklindo.png',
@@ -68,7 +71,7 @@ export default function RootLayout({
       lang="id"
       className={`${plusJakarta.variable} ${inter.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col antialiased">
+      <body className={`${inter.className} min-h-full flex flex-col antialiased`}>
         {children}
       </body>
     </html>

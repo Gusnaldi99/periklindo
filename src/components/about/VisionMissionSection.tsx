@@ -1,119 +1,187 @@
-import ScrollReveal from '@/components/shared/ScrollReveal';
+'use client';
+
+import { motion, useReducedMotion } from 'motion/react';
+import { TrendingUp, Compass, CheckCircle2, Share2, Sparkles, Quote, ArrowRight } from 'lucide-react';
 import SectionHeader from '@/components/shared/SectionHeader';
+import { cn } from '@/lib/utils';
 
 export default function VisionMissionSection() {
+  const shouldReduceMotion = useReducedMotion();
+
   const missions = [
     {
-      number: '01',
+      code: 'MISI-01',
       title: 'Peningkatan Daya Saing Industri',
       description:
-        'Mendorong adopsi teknologi terkini, peningkatan kapasitas manufaktur dalam negeri, riset pengembangan (R&D), serta penguatan rantai pasok komponen dan baterai lokal.',
-      icon: (
-        <svg className="w-6 h-6 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-        </svg>
-      ),
+        'Mendorong adopsi teknologi terkini, peningkatan kapasitas manufaktur dalam negeri, riset pengembangan (R&D), serta penguatan rantai pasok komponen dan baterai lokal berstandar global.',
+      icon: TrendingUp,
+      accent: 'text-blue-500 bg-blue-50 border-blue-200',
+      badge: 'Manufaktur & R&D',
     },
     {
-      number: '02',
+      code: 'MISI-02',
       title: 'Kemitraan Strategis Stakeholder',
       description:
-        'Menjadi jembatan dan mitra terpercaya pemerintah dalam perumusan regulasi, harmonisasi standar teknis, insentif fiskal, serta penciptaan iklim investasi yang kondusif.',
-      icon: (
-        <svg className="w-6 h-6 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      ),
+        'Menjadi jembatan dan mitra terpercaya pemerintah dalam perumusan regulasi, harmonisasi standar teknis, insentif fiskal (PPN DTP), serta penciptaan iklim investasi yang kondusif bagi ekosistem EV.',
+      icon: Compass,
+      accent: 'text-amber-500 bg-amber-50 border-amber-200',
+      badge: 'Regulasi & Kebijakan',
     },
     {
-      number: '03',
+      code: 'MISI-03',
       title: 'Sosialisasi & Edukasi Publik',
       description:
-        'Meluruskan mitos dan mengedukasi masyarakat luas mengenai keselamatan, efisiensi operasional, dan keandalan kendaraan listrik melalui kegiatan interaktif serta pameran PEVS tahunan.',
-      icon: (
-        <svg className="w-6 h-6 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-        </svg>
-      ),
+        'Meluruskan mitos dan mengedukasi masyarakat luas mengenai keselamatan, efisiensi operasional, dan keandalan kendaraan listrik melalui kegiatan interaktif, edukasi uji banjir, serta pameran PEVS tahunan.',
+      icon: CheckCircle2,
+      accent: 'text-teal bg-emerald-50 border-emerald-200',
+      badge: 'Edukasi & Pameran PEVS',
     },
     {
-      number: '04',
+      code: 'MISI-04',
       title: 'Lingkungan Hidup Bersih & Berkelanjutan',
       description:
-        'Mendukung target Net Zero Emission Indonesia melalui pengurangan emisi karbon sektor transportasi, pengelolaan daur ulang baterai (battery recycling), dan efisiensi energi terbarukan.',
-      icon: (
-        <svg className="w-6 h-6 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
+        'Mendukung target Net Zero Emission Indonesia melalui dekarbonisasi sektor transportasi, pengembangan daur ulang baterai (battery circularity), dan utilisasi energi baru terbarukan.',
+      icon: Share2,
+      accent: 'text-purple-500 bg-purple-50 border-purple-200',
+      badge: 'Keberlanjutan & NZE',
     },
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: shouldReduceMotion
+        ? { duration: 0 }
+        : { staggerChildren: 0.12, delayChildren: 0.1 },
+    },
+  };
+
+  const cardVariants = {
+    hidden: shouldReduceMotion
+      ? { opacity: 0 }
+      : { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: shouldReduceMotion
+        ? { duration: 0.1 }
+        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
+    },
+  };
+
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-white border-b border-slate-200">
+    <section id="visi-misi" className="py-16 md:py-20 lg:py-24 bg-white border-b border-slate-200 scroll-mt-20">
       <div className="container-main">
         {/* Section Header */}
-        <ScrollReveal>
-          <div className="max-w-3xl mb-12 lg:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-teal mb-3">
-              Fondasi Idealisme
-            </div>
-            <SectionHeader
-              title="Visi & Misi PERIKLINDO"
-              subtitle="Pedoman strategis yang mengarahkan setiap langkah advokasi, kerja sama industri, dan edukasi publik kami demi kemajuan ekosistem kendaraan listrik Indonesia."
-            />
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          className="max-w-3xl mb-12 lg:mb-16"
+        >
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold bg-emerald-100 text-teal mb-3">
+            <Sparkles className="w-3.5 h-3.5" />
+            Fondasi Idealisme & Arah Haluan
           </div>
-        </ScrollReveal>
+          <SectionHeader
+            title="Visi & Misi PERIKLINDO"
+            subtitle="Pedoman strategis yang mengarahkan setiap langkah advokasi, kerja sama industri lintas sektoral, dan edukasi publik demi kedaulatan industri kendaraan listrik nasional."
+          />
+        </motion.div>
 
-        {/* Featured Vision Card */}
-        <ScrollReveal delay={100}>
-          <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-navy via-navy to-navy-light text-white p-8 sm:p-10 lg:p-12 mb-12 shadow-xl border border-slate-800">
-            {/* Subtle decorative glow */}
-            <div
-              className="absolute -right-20 -bottom-20 w-80 h-80 bg-electric/20 rounded-full blur-3xl pointer-events-none"
-              aria-hidden="true"
-            />
-            <div
-              className="absolute -left-20 -top-20 w-80 h-80 bg-teal/15 rounded-full blur-3xl pointer-events-none"
-              aria-hidden="true"
-            />
+        {/* Executive Statement Banner (Visi Resmi) */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.98, y: 20 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, margin: '-50px' }}
+          transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+          className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-navy via-[#0d2244] to-navy text-white p-8 sm:p-10 lg:p-14 mb-14 shadow-2xl border border-slate-800"
+        >
+          {/* Subtle Circuit Line SVGs */}
+          <div
+            className="absolute inset-0 opacity-[0.035] pointer-events-none"
+            style={{
+              backgroundImage:
+                'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)',
+              backgroundSize: '24px 24px',
+            }}
+            aria-hidden="true"
+          />
 
-            <div className="relative z-10 max-w-4xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider bg-white/10 text-emerald-400 border border-white/10 mb-6">
-                Visi Resmi Asosiasi
-              </div>
+          {/* Glowing Ambient Lights */}
+          <div
+            className="absolute -right-24 -bottom-24 w-96 h-96 bg-electric/25 rounded-full blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute -left-24 -top-24 w-96 h-96 bg-teal/20 rounded-full blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
 
-              <blockquote className="text-xl sm:text-2xl md:text-3xl font-bold leading-snug tracking-tight text-white mb-6">
+          <div className="relative z-10 max-w-4xl">
+            <div className="flex flex-wrap items-center gap-3 mb-6">
+              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-white/10 text-emerald-400 border border-emerald-500/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+                Visi Eksekutif Organisasi
+              </span>
+              <span className="text-xs text-slate-400 font-mono">
+                [STATUTA ASOSIASI 2021]
+              </span>
+            </div>
+
+            <div className="flex items-start gap-4 mb-6">
+              <Quote className="w-8 h-8 sm:w-10 sm:h-10 text-electric/40 shrink-0 mt-1 hidden sm:block" />
+              <blockquote className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold leading-snug tracking-tight text-white font-[family-name:var(--font-heading)]">
                 &ldquo;Memajukan industri Kendaraan Bermotor Listrik Berbasis Baterai (KBLBB) dan memasyarakatkan kendaraan listrik di seluruh penjuru Indonesia.&rdquo;
               </blockquote>
+            </div>
 
-              <p className="text-sm sm:text-base text-slate-300 leading-relaxed max-w-3xl">
-                Sebuah komitmen jangka panjang untuk mentransformasi sistem transportasi nasional menjadi ramah lingkungan, menekan emisi gas rumah kaca perkotaan, dan menempatkan Indonesia sebagai pusat produksi dan inovasi kendaraan listrik di kawasan Asia Tenggara.
+            <div className="sm:pl-14">
+              <p className="text-sm sm:text-base md:text-lg text-slate-300 leading-relaxed max-w-3xl">
+                Sebuah komitmen jangka panjang untuk mentransformasi sistem transportasi nasional menjadi ramah lingkungan, menekan subsidi bahan bakar fosil, dan menempatkan Indonesia sebagai pusat produksi dan inovasi rantai pasok kendaraan listrik utama di kawasan Asia Tenggara.
               </p>
             </div>
           </div>
-        </ScrollReveal>
+        </motion.div>
 
-        {/* Mission 4 Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-          {missions.map((mission, index) => (
-            <ScrollReveal
-              key={mission.number}
-              delay={index * 100}
-              className="h-full"
-            >
-              <div className="group h-full bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 hover:bg-white hover:shadow-lg hover:border-electric/40 hover:-translate-y-1 transition-all duration-200 ease-out flex flex-col justify-between">
+        {/* Industrial Serialized Missions (MISI-01 to MISI-04) */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-40px' }}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
+        >
+          {missions.map((mission) => {
+            const Icon = mission.icon;
+            return (
+              <motion.div
+                key={mission.code}
+                variants={cardVariants}
+                whileHover={shouldReduceMotion ? {} : { y: -4 }}
+                className="group h-full bg-slate-50/80 border border-slate-200/90 rounded-2xl p-6 sm:p-8 hover:bg-white hover:shadow-xl hover:border-electric/50 transition-all duration-300 ease-out flex flex-col justify-between relative overflow-hidden"
+              >
+                {/* Subtle top indicator bar */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-electric/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
                 <div>
                   <div className="flex items-center justify-between gap-4 mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-white border border-slate-200 shadow-sm flex items-center justify-center group-hover:bg-blue-50/50 group-hover:border-electric/30 transition-colors duration-200">
-                      {mission.icon}
+                    <div className={cn('w-12 h-12 rounded-xl border flex items-center justify-center transition-transform duration-300 group-hover:scale-110 shadow-sm', mission.accent)}>
+                      <Icon className="w-6 h-6" />
                     </div>
-                    <span className="font-[family-name:var(--font-heading)] text-xl font-bold text-slate-400 group-hover:text-electric transition-colors duration-200">
-                      Misi {mission.number}
-                    </span>
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] font-semibold text-slate-500 bg-white border border-slate-200 px-2.5 py-0.5 rounded-full">
+                        {mission.badge}
+                      </span>
+                      <span className="font-mono text-xs font-bold text-electric bg-blue-50 px-2 py-0.5 rounded">
+                        {mission.code}
+                      </span>
+                    </div>
                   </div>
 
-                  <h3 className="text-lg font-bold text-navy mb-2.5 group-hover:text-electric transition-colors duration-150">
+                  <h3 className="text-lg sm:text-xl font-bold text-navy mb-3 group-hover:text-electric transition-colors duration-150 font-[family-name:var(--font-heading)]">
                     {mission.title}
                   </h3>
                   <p className="text-sm text-slate-600 leading-relaxed">
@@ -121,14 +189,14 @@ export default function VisionMissionSection() {
                   </p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-slate-200/80 flex items-center gap-1.5 text-xs font-semibold text-slate-500 group-hover:text-navy transition-colors duration-150">
-                  <span>Pilar Pelaksanaan Mandat</span>
-                  <span aria-hidden="true">&rarr;</span>
+                <div className="mt-6 pt-4 border-t border-slate-200/70 flex items-center justify-between text-xs text-slate-500 group-hover:text-navy transition-colors duration-150">
+                  <span className="font-semibold">Pilar Pelaksanaan Mandat Organisasi</span>
+                  <ArrowRight className="w-4 h-4 text-slate-400 group-hover:text-electric group-hover:translate-x-1 transition-all" />
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
+              </motion.div>
+            );
+          })}
+        </motion.div>
       </div>
     </section>
   );

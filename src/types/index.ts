@@ -49,9 +49,10 @@ export interface OrgMember {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'Pameran PEVS' | 'Audiensi Pemerintah' | 'Seminar & Forum' | 'Kunjungan';
+  category: 'Pameran PEVS' | 'Audiensi Pemerintah' | 'Seminar' | 'Kunjungan Pabrik';
   imageUrl: string;
   date: string;
+  location?: string;
   description: string;
 }
 

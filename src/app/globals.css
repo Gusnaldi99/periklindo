@@ -38,8 +38,8 @@
   --color-slate-800: #1E293B;
   --color-slate-900: #0F172A;
 
-  --font-heading: 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-heading: var(--font-plus-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
+  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
 }
 
 * {
@@ -48,6 +48,8 @@
 
 html {
   scroll-behavior: smooth;
+  scrollbar-color: var(--color-electric) var(--color-navy);
+  scrollbar-width: thin;
 }
 
 body {
@@ -58,10 +60,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-heading);
-  color: var(--color-navy);
-  line-height: 1.2;
+/*
+ * Heading defaults live in @layer base so Tailwind color utilities
+ * (e.g. text-white on navy heroes) can override without fighting
+ * unlayered element selectors.
+ */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-navy);
+    line-height: 1.2;
+  }
 }
 
 /*
@@ -143,20 +157,62 @@ button:focus-visible {
 
 @keyframes pulse-ring {
   0% {
-    transform: scale(0.95);
-    opacity: 0.6;
+    transform: scale(1);
+    opacity: 0.5;
   }
-  50% {
-    transform: scale(1.25);
-    opacity: 0;
-  }
+  70%,
   100% {
-    transform: scale(0.95);
+    transform: scale(1.35);
     opacity: 0;
   }
 }
 
 .animate-pulse-ring {
-  animation: pulse-ring 2.8s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  animation: pulse-ring 4s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-electric) 28%, transparent);
+  color: var(--color-navy);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-navy);
+}
+
+::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--color-electric) 80%, var(--color-navy));
+  border-radius: 999px;
+  border: 2px solid var(--color-navy);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-electric);
+}
+
+.scrollbar-none {
+  scrollbar-width: none;
+}
+
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-marquee-track,
+  .animate-marquee,
+  .animate-pulse-ring,
+  .animate-ping {
+    animation: none !important;
+  }
 }
 

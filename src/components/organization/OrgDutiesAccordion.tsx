@@ -1,174 +1,295 @@
+'use client';
+
+import { useState } from 'react';
+import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
+import {
+  Megaphone,
+  FlaskConical,
+  Building2,
+  GraduationCap,
+  Globe2,
+  Scale,
+  ChevronDown,
+  CheckCircle2,
+  UserCheck,
+} from 'lucide-react';
 import ScrollReveal from '@/components/shared/ScrollReveal';
 import SectionHeader from '@/components/shared/SectionHeader';
+import { cn } from '@/lib/utils';
+
+interface Division {
+  id: string;
+  name: string;
+  en: string;
+  head: string;
+  role: string;
+  icon: typeof Megaphone;
+  duties: string[];
+}
+
+const divisions: Division[] = [
+  {
+    id: 'div-1',
+    name: 'Promosi & Pemasaran',
+    en: 'Promotion & Marketing',
+    head: 'Adrianto Gani',
+    role: 'Vice Chairman',
+    icon: Megaphone,
+    duties: [
+      'Penyelenggaraan pameran otomotif tahunan PEVS (PERIKLINDO Electric Vehicle Show) di JIExpo Kemayoran bersama Dyandra Promosindo.',
+      'Aktivasi kampanye pemasaran terpadu untuk kendaraan listrik para anggota di tingkat nasional dan regional.',
+      'Penetrasi pasar kendaraan listrik komersial, armada korporasi, dan konsumen perorangan.',
+    ],
+  },
+  {
+    id: 'div-2',
+    name: 'Penelitian & Pengembangan',
+    en: 'Research & Development (R&D)',
+    head: 'Prabowo Kartoleksono',
+    role: 'Vice Chairman',
+    icon: FlaskConical,
+    duties: [
+      'Kajian teknologi sel baterai, manajemen termal (thermal management), dan efisiensi motor penggerak listrik.',
+      'Standardisasi konektor pengisian SPKLU dan interoperabilitas sistem penukaran baterai (battery swapping).',
+      'Kerja sama riset dan prototipe bersama BRIN, BUMN Industri Pertahanan, serta perguruan tinggi terkemuka nasional.',
+    ],
+  },
+  {
+    id: 'div-3',
+    name: 'Organisasi & Kelembagaan',
+    en: 'Organization & Institutional',
+    head: 'Kelik Irwantono',
+    role: 'Vice Chairman',
+    icon: Building2,
+    duties: [
+      'Konsolidasi, verifikasi kelayakan, dan proses kurasi calon anggota baru PERIKLINDO.',
+      'Penyusunan tata kelola organisasi (good corporate governance) dan penegakan kode etik asosiasi.',
+      'Kolaborasi kelembagaan dengan asosiasi regional se-Asia Tenggara (AFEVA) dan stakeholder industri global.',
+    ],
+  },
+  {
+    id: 'div-4',
+    name: 'Hubungan Masyarakat & Edukasi',
+    en: 'Public Relation & Education',
+    head: 'Ahmad Rafiqi',
+    role: 'Vice Chairman',
+    icon: GraduationCap,
+    duties: [
+      'Sosialisasi berkala standar keselamatan operasional dan demonstrasi uji rendam air baterai kendaraan listrik.',
+      'Meluruskan miskonsepsi publik seputar keandalan, degradasi baterai, dan biaya pengisian daya EV.',
+      'Manajemen siaran pers resmi, media briefing berkala, serta diseminasi data ke kanal jurnalis otomotif.',
+    ],
+  },
+  {
+    id: 'div-5',
+    name: 'Hukum & Regulasi',
+    en: 'Legal & Regulatory',
+    head: 'Puryanto',
+    role: 'Vice Chairman',
+    icon: Scale,
+    duties: [
+      'Advokasi kebijakan fiskal dan non-fiskal bersama kementerian teknis (Kemenperin, Kemenhub, Kemenkeu, dan Kemenko).',
+      'Harmonisasi regulasi kemudahan sertifikasi uji tipe kendaraan (SUT & SRUT) serta sertifikasi kelaikan jalan.',
+      'Kajian kepatuhan hukum rantai pasok EV dan perlindungan konsumen kendaraan listrik nasional.',
+    ],
+  },
+  {
+    id: 'div-6',
+    name: 'Data & Informasi',
+    en: 'Data & Information',
+    head: 'Winarto',
+    role: 'Vice Chairman',
+    icon: Globe2,
+    duties: [
+      'Pengelolaan pusat data intelijen pasar industri kendaraan listrik Indonesia secara akurat dan transparan.',
+      'Pemetaan statistik pertumbuhan populasi EV roda 2, roda 4, bus listrik, dan sebaran infrastruktur SPKLU nasional.',
+      'Penerbitan laporan kuartalan industri kendaraan listrik sebagai rujukan strategis bagi anggota dan regulator.',
+    ],
+  },
+];
 
 export default function OrgDutiesAccordion() {
-  const divisions = [
-    {
-      name: 'Promosi & Pemasaran',
-      en: 'Promotion & Marketing',
-      head: 'Adrianto Gani',
-      role: 'Vice Chairman',
-      icon: (
-        <svg className="w-5 h-5 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-        </svg>
-      ),
-      duties: [
-        'Penyelenggaraan pameran otomotif tahunan PEVS di JIExpo Kemayoran.',
-        'Aktivasi kampanye pemasaran terpadu untuk kendaraan listrik para anggota.',
-        'Penetrasi pasar kendaraan listrik komersial dan konsumen perorangan.',
-      ],
-    },
-    {
-      name: 'Penelitian & Pengembangan',
-      en: 'Research & Development (R&D)',
-      head: 'Prabowo Kartoleksono',
-      role: 'Vice Chairman',
-      icon: (
-        <svg className="w-5 h-5 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
-        </svg>
-      ),
-      duties: [
-        'Kajian teknologi sel baterai, manajemen thermal, dan motor penggerak listrik.',
-        'Standardisasi konektor pengisian SPKLU dan interoperabilitas battery swapping.',
-        'Kerja sama riset dan prototipe bersama BRIN serta perguruan tinggi nasional.',
-      ],
-    },
-    {
-      name: 'Organisasi & Kelembagaan',
-      en: 'Organization & Institutional',
-      head: 'Kelik Irwantono',
-      role: 'Vice Chairman',
-      icon: (
-        <svg className="w-5 h-5 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-        </svg>
-      ),
-      duties: [
-        'Konsolidasi dan verifikasi kelayakan calon anggota baru PERIKLINDO.',
-        'Penyusunan tata kelola organisasi (governance) dan penegakan kode etik asosiasi.',
-        'Kolaborasi kelembagaan dengan asosiasi regional dan stakeholder internasional.',
-      ],
-    },
-    {
-      name: 'Hubungan Masyarakat & Edukasi',
-      en: 'Public Relation & Education',
-      head: 'Ahmad Rafiqi',
-      role: 'Vice Chairman',
-      icon: (
-        <svg className="w-5 h-5 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
-        </svg>
-      ),
-      duties: [
-        'Sosialisasi berkala standar keselamatan operasional dan uji rendam air baterai.',
-        'Meluruskan miskonsepsi publik seputar keandalan dan daya tahan kendaraan listrik.',
-        'Manajemen siaran pers resmi, media briefing, dan diseminasi informasi publik.',
-      ],
-    },
-    {
-      name: 'Hukum & Regulasi',
-      en: 'Legal & Regulatory',
-      head: 'Puryanto',
-      role: 'Vice Chairman',
-      icon: (
-        <svg className="w-5 h-5 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
-        </svg>
-      ),
-      duties: [
-        'Advokasi kebijakan fiskal/non-fiskal bersama kementerian terkait (Kemenperin, Kemenhub).',
-        'Harmonisasi regulasi kemudahan sertifikasi uji tipe (SUT dan SRUT).',
-        'Kajian regulasi perlindungan konsumen dan kepatuhan hukum rantai pasok EV.',
-      ],
-    },
-    {
-      name: 'Data & Informasi',
-      en: 'Data & Information',
-      head: 'Winarto',
-      role: 'Vice Chairman',
-      icon: (
-        <svg className="w-5 h-5 text-electric" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-        </svg>
-      ),
-      duties: [
-        'Pengelolaan pusat data dan intelijen pasar industri kendaraan listrik Indonesia.',
-        'Pemetaan statistik pertumbuhan populasi EV roda 2, roda 4, dan infrastruktur SPKLU.',
-        'Penerbitan laporan berkala kondisi industri untuk rujukan anggota dan regulator.',
-      ],
-    },
-  ];
+  const shouldReduceMotion = useReducedMotion();
+
+  // Track open state for each division. Default: all open for immediate accessibility
+  const [openIds, setOpenIds] = useState<Record<string, boolean>>({
+    'div-1': true,
+    'div-2': true,
+    'div-3': true,
+    'div-4': true,
+    'div-5': true,
+    'div-6': true,
+  });
+
+  const toggleAccordion = (id: string) => {
+    setOpenIds((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
+  const expandAll = () => {
+    const allOpen: Record<string, boolean> = {};
+    divisions.forEach((d) => (allOpen[d.id] = true));
+    setOpenIds(allOpen);
+  };
+
+  const collapseAll = () => {
+    setOpenIds({});
+  };
 
   return (
-    <section className="py-16 md:py-20 lg:py-24 bg-slate-50 border-b border-slate-200">
+    <section id="tupoksi" className="py-16 md:py-20 lg:py-24 bg-slate-50 border-b border-slate-200">
       <div className="container-main">
         {/* Section Header */}
         <ScrollReveal>
-          <div className="max-w-3xl mb-12 lg:mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold bg-blue-100 text-electric mb-3">
-              Tupoksi Organisasi
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold bg-blue-100 text-electric mb-3 border border-blue-200">
+                Tupoksi Kerja Bidang Eksekutif
+              </div>
+              <SectionHeader
+                title="Tugas Pokok & Tanggung Jawab Bidang"
+                subtitle="Setiap bidang kerja dipimpin oleh Vice Chairman berpengalaman untuk memastikan akselerasi ekosistem kendaraan listrik Indonesia berjalan terstruktur, terukur, dan berdampak nyata."
+              />
             </div>
-            <SectionHeader
-              title="Tugas Pokok & Tanggung Jawab Bidang"
-              subtitle="Setiap bidang dipimpin oleh Vice Chairman yang berpengalaman untuk memastikan target akselerasi ekosistem EV Indonesia tercapai secara terstruktur."
-            />
+
+            {/* Quick Actions */}
+            <div className="flex items-center gap-2 self-start md:self-end">
+              <button
+                type="button"
+                onClick={expandAll}
+                className="text-xs font-bold text-navy hover:text-electric px-3.5 py-2 rounded-lg border border-slate-300 bg-white hover:bg-slate-50 active:scale-[0.98] transition-all shadow-2xs"
+              >
+                Buka Semua
+              </button>
+              <button
+                type="button"
+                onClick={collapseAll}
+                className="text-xs font-bold text-slate-600 hover:text-navy px-3.5 py-2 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 active:scale-[0.98] transition-all shadow-2xs"
+              >
+                Tutup Semua
+              </button>
+            </div>
           </div>
         </ScrollReveal>
 
-        {/* 6 Divisions Grid Appearing One by One on Scroll */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {divisions.map((div, index) => (
-            <ScrollReveal
-              key={div.name}
-              delay={80 + index * 100}
-              className="h-full"
-            >
-              <div className="h-full bg-white border border-slate-200 rounded-2xl p-6 hover:shadow-lg hover:border-electric/40 transition-all duration-200 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-100 flex items-center justify-center">
-                      {div.icon}
-                    </div>
-                    <span className="text-[11px] font-bold text-slate-500 bg-slate-100 px-2.5 py-1 rounded-md">
-                      Bidang 0{index + 1}
-                    </span>
-                  </div>
+        {/* 6 Divisions Interactive Accordion Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {divisions.map((div, index) => {
+            const isOpen = !!openIds[div.id];
+            const Icon = div.icon;
 
-                  <h3 className="text-base sm:text-lg font-bold text-navy mb-0.5">
-                    Bidang {div.name}
-                  </h3>
-                  <p className="text-xs font-semibold text-slate-400 mb-3">
-                    {div.en}
-                  </p>
+            return (
+              <ScrollReveal
+                key={div.id}
+                delay={60 + index * 70}
+                className="h-full"
+              >
+                <div
+                  className={cn(
+                    'h-full bg-white border rounded-2xl transition-all duration-300 overflow-hidden flex flex-col justify-between',
+                    isOpen
+                      ? 'border-electric/40 shadow-lg shadow-electric/5 ring-1 ring-electric/20'
+                      : 'border-slate-200 shadow-xs hover:border-slate-300 hover:shadow-md'
+                  )}
+                >
+                  <div>
+                    {/* Header Button (Clickable Accordion Trigger) */}
+                    <button
+                      type="button"
+                      onClick={() => toggleAccordion(div.id)}
+                      className="w-full text-left p-6 flex items-start justify-between gap-4 select-none focus:outline-none focus-visible:ring-2 focus-visible:ring-electric rounded-t-2xl transition-colors hover:bg-slate-50/50"
+                      aria-expanded={isOpen}
+                    >
+                      <div className="flex items-start gap-3.5">
+                        <div
+                          className={cn(
+                            'w-11 h-11 rounded-xl flex items-center justify-center shrink-0 transition-colors duration-200',
+                            isOpen
+                              ? 'bg-electric text-white shadow-md shadow-electric/25'
+                              : 'bg-blue-50 text-electric border border-blue-100'
+                          )}
+                        >
+                          <Icon className="w-5 h-5" />
+                        </div>
 
-                  <div className="mb-4 pb-3 border-b border-slate-100">
-                    <p className="text-[11px] uppercase tracking-wider font-semibold text-slate-400">
-                      Ketua Bidang:
-                    </p>
-                    <p className="text-sm font-bold text-electric">
-                      {div.head}
-                    </p>
-                  </div>
-
-                  <div className="space-y-2">
-                    <p className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                      Fokus Utama:
-                    </p>
-                    {div.duties.map((duty) => (
-                      <div key={duty} className="flex items-start gap-2 text-xs text-slate-600 leading-relaxed">
-                        <span className="text-teal font-bold mt-0.5" aria-hidden="true">
-                          &bull;
-                        </span>
-                        <span>{duty}</span>
+                        <div>
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-md">
+                              Bidang 0{index + 1}
+                            </span>
+                          </div>
+                          <h3 className="text-base font-bold text-navy leading-snug">
+                            {div.name}
+                          </h3>
+                          <p className="text-xs font-semibold text-slate-400">
+                            {div.en}
+                          </p>
+                        </div>
                       </div>
-                    ))}
+
+                      <div
+                        className={cn(
+                          'w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-transform duration-300',
+                          isOpen
+                            ? 'bg-navy text-white border-navy rotate-180'
+                            : 'bg-slate-100 text-slate-500 border-slate-200 hover:bg-slate-200 rotate-0'
+                        )}
+                        aria-hidden="true"
+                      >
+                        <ChevronDown className="w-4 h-4" />
+                      </div>
+                    </button>
+
+                    {/* Head Officer Badge */}
+                    <div className="px-6 pb-4">
+                      <div className="flex items-center gap-2 p-2.5 bg-slate-50 rounded-xl border border-slate-100">
+                        <UserCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <div className="text-xs">
+                          <span className="text-slate-400 font-medium">Ketua Bidang: </span>
+                          <span className="font-bold text-navy">{div.head}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Collapsible Content with Zero Jitter Spring Physics */}
+                    <AnimatePresence initial={false}>
+                      {isOpen && (
+                        <motion.div
+                          key="content"
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={
+                            shouldReduceMotion
+                              ? { duration: 0 }
+                              : { type: 'spring', stiffness: 320, damping: 28 }
+                          }
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 pt-1 border-t border-slate-100 space-y-2.5">
+                            <p className="text-[11px] font-extrabold uppercase tracking-wider text-slate-400 mt-2">
+                              Fokus & Lingkup Tugas:
+                            </p>
+                            {div.duties.map((duty, dIdx) => (
+                              <div
+                                key={dIdx}
+                                className="flex items-start gap-2.5 text-xs text-slate-600 leading-relaxed"
+                              >
+                                <CheckCircle2 className="w-3.5 h-3.5 text-teal shrink-0 mt-0.5" />
+                                <span>{duty}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
-              </div>
-            </ScrollReveal>
-          ))}
+              </ScrollReveal>
+            );
+          })}
         </div>
       </div>
     </section>
