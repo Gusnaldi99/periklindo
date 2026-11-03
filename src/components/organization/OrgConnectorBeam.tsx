@@ -36,10 +36,10 @@ export default function OrgConnectorBeam({
         />
 
         {/* Downward Energy Flow Spark */}
-        {isActive && !shouldReduceMotion && (
+        {isActive && (
           <motion.span
-            className="absolute w-full h-4 bg-gradient-to-b from-transparent via-white to-transparent"
-            animate={{ top: ['-20%', '120%'] }}
+            className="absolute w-full h-4 bg-gradient-to-b from-transparent via-white to-transparent motion-reduce:hidden"
+            animate={shouldReduceMotion ? undefined : { top: ['-20%', '120%'] }}
             transition={{ repeat: Infinity, duration: 1.2, ease: 'easeInOut' }}
           />
         )}
@@ -119,10 +119,10 @@ export default function OrgConnectorBeam({
         />
 
         {/* Downward Energy Flow Spark */}
-        {isActive && !shouldReduceMotion && (
+        {isActive && (
           <motion.span
-            className="absolute w-full h-4 bg-gradient-to-b from-transparent via-cyan-200 to-transparent"
-            animate={{ top: ['-20%', '120%'] }}
+            className="absolute w-full h-4 bg-gradient-to-b from-transparent via-cyan-200 to-transparent motion-reduce:hidden"
+            animate={shouldReduceMotion ? undefined : { top: ['-20%', '120%'] }}
             transition={{ repeat: Infinity, duration: 1.2, delay: 0.4, ease: 'easeInOut' }}
           />
         )}

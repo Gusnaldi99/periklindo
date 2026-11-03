@@ -80,9 +80,7 @@ export default function SecretariatMapCard() {
             'shadow-lg shadow-teal/30'
           )}
         >
-          {!shouldReduceMotion ? (
-            <span className="absolute inset-0 rounded-xl bg-teal animate-pulse-ring pointer-events-none" />
-          ) : null}
+          <span className="absolute inset-0 rounded-xl bg-teal animate-pulse-ring pointer-events-none motion-reduce:hidden" />
           <MessageCircle className="relative w-4 h-4" />
           <span className="relative">WhatsApp Help Desk Sekretariat</span>
         </a>

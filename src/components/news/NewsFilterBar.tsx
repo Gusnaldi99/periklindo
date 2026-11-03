@@ -124,15 +124,12 @@ export default function NewsFilterBar({ posts, featuredId }: NewsFilterBarProps)
                     : 'bg-white text-slate-600 hover:text-navy border border-slate-200'
                 )}
               >
-                {isActive && !shouldReduceMotion ? (
+                {isActive ? (
                   <motion.span
-                    layoutId="news-filter-active"
+                    layoutId={shouldReduceMotion ? undefined : 'news-filter-active'}
                     className="absolute inset-0 rounded-xl bg-navy -z-10"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
-                ) : null}
-                {isActive && shouldReduceMotion ? (
-                  <span className="absolute inset-0 rounded-xl bg-navy -z-10" />
                 ) : null}
                 <span className="relative z-10">{FILTER_LABEL[filter]}</span>
                 <span

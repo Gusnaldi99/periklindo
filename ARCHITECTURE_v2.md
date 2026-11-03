@@ -1,4 +1,5 @@
 # SYSTEM ARCHITECTURE DOCUMENT (`ARCHITECTURE.MD`) - v2.0 (UI-First Architecture)
+
 **Proyek:** Website Resmi PERIKLINDO
 **Website Sebelumnya (Existing/Legacy):** [https://periklindo.com/](https://periklindo.com/)
 **Tech Stack:** Next.js 14/15 (App Router) + TypeScript + Tailwind CSS + Lucide Icons
@@ -7,11 +8,13 @@
 ---
 
 ## 1. Filosofi Arsitektur "UI-First & Database-Ready"
-Karena fokus tahap pertama adalah menyelesaikan **seluruh tampilan UI (Publik & Admin CMS)** menggunakan data *placeholder*, arsitektur kode dirancang menggunakan pola **Data Repository / Service Layer**.
+
+Karena fokus tahap pertama adalah menyelesaikan **seluruh tampilan UI (Publik & Admin CMS)** menggunakan data _placeholder_, arsitektur kode dirancang menggunakan pola **Data Repository / Service Layer**.
 
 Artinya:
-* Seluruh halaman UI mengambil data dari `src/data/mock-data.ts` melalui fungsi *helper* dengan kontrak `TypeScript Interface` yang ketat (`src/types/index.ts`).
-* Saat UI sudah disetujui klien dan siap disambungkan ke database (Supabase / MySQL / PostgreSQL), Anda **tidak perlu mengubah kode komponen UI sama sekali**—cukup mengganti isi fungsi di layer data.
+
+- Seluruh halaman UI mengambil data dari `src/data/mock-data.ts` melalui fungsi _helper_ dengan kontrak `TypeScript Interface` yang ketat (`src/types/index.ts`).
+- Saat UI sudah disetujui klien dan siap disambungkan ke database (Supabase / MySQL / PostgreSQL), Anda **tidak perlu mengubah kode komponen UI sama sekali**—cukup mengganti isi fungsi di layer data.
 
 ---
 
@@ -83,14 +86,15 @@ periklindo-web/
 ---
 
 ## 3. Kontrak Data TypeScript (`src/types/index.ts`)
-Berikut adalah *interface* utama yang menjadi fondasi seluruh komponen UI dan CMS:
+
+Berikut adalah _interface_ utama yang menjadi fondasi seluruh komponen UI dan CMS:
 
 ```typescript
 export interface MemberBrand {
   id: string;
   name: string;
   logoUrl: string;
-  category: 'Roda 2' | 'Roda 4' | 'Komponen & Baterai' | 'Infrastruktur';
+  category: "Roda 2" | "Roda 4" | "Komponen & Baterai" | "Infrastruktur";
   websiteUrl?: string;
   isFeatured: boolean;
   order: number;
@@ -103,7 +107,7 @@ export interface NewsPost {
   excerpt: string;
   content: string;
   thumbnailUrl: string;
-  category: 'Siaran Pers' | 'Regulasi' | 'Kegiatan' | 'Industri EV';
+  category: "Siaran Pers" | "Regulasi" | "Kegiatan" | "Industri EV";
   publishedAt: string;
   author: string;
   isFeatured?: boolean;
@@ -111,7 +115,7 @@ export interface NewsPost {
 
 export interface SocialMediaPost {
   id: string;
-  platform: 'Instagram' | 'YouTube' | 'LinkedIn';
+  platform: "Instagram" | "YouTube" | "LinkedIn";
   caption: string;
   mediaUrl: string;
   externalUrl: string;
@@ -123,7 +127,7 @@ export interface OrgMember {
   id: string;
   fullName: string;
   position: string;
-  level: 'Pimpinan Inti' | 'Ketua Bidang' | 'Sekretariat';
+  level: "Pimpinan Inti" | "Ketua Bidang" | "Sekretariat";
   photoUrl: string;
   order: number;
 }
@@ -131,7 +135,11 @@ export interface OrgMember {
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'Pameran PEVS' | 'Audiensi Pemerintah' | 'Seminar & Forum' | 'Kunjungan';
+  category:
+    | "Pameran PEVS"
+    | "Audiensi Pemerintah"
+    | "Seminar & Forum"
+    | "Kunjungan";
   imageUrl: string;
   date: string;
   description: string;

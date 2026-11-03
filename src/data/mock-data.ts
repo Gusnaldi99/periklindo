@@ -216,6 +216,14 @@ export const memberBrands: MemberBrand[] = [
     isFeatured: false,
     order: 25,
   },
+  {
+    id: 'mb-evpower',
+    name: 'EV Power',
+    logoUrl: '/assets/member/logo_evpower.webp',
+    category: 'Infrastruktur',
+    isFeatured: false,
+    order: 26,
+  },
 ];
 
 // Liputan aktual PEVS 2026 (artikel MediaPatriot + video YouTube)

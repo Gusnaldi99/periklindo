@@ -105,15 +105,12 @@ export default function Navbar() {
                       )}
                       aria-current={isActive ? 'page' : undefined}
                     >
-                      {isActive && !shouldReduceMotion && (
+                      {isActive && (
                         <motion.span
-                          layoutId="nav-active"
+                          layoutId={shouldReduceMotion ? undefined : 'nav-active'}
                           className="absolute inset-0 rounded-full bg-white/12 shadow-sm"
                           transition={springTransition}
                         />
-                      )}
-                      {isActive && shouldReduceMotion && (
-                        <span className="absolute inset-0 rounded-full bg-white/12" />
                       )}
                       <span className="relative z-10">{link.label}</span>
                     </Link>

@@ -69,15 +69,12 @@ export default function GalleryGrid({ items }: GalleryGridProps) {
                     : 'bg-white text-slate-600 hover:text-navy border border-slate-200'
                 )}
               >
-                {isActive && !shouldReduceMotion ? (
+                {isActive ? (
                   <motion.span
-                    layoutId="gallery-filter-active"
+                    layoutId={shouldReduceMotion ? undefined : 'gallery-filter-active'}
                     className="absolute inset-0 rounded-xl bg-navy -z-10"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
-                ) : null}
-                {isActive && shouldReduceMotion ? (
-                  <span className="absolute inset-0 rounded-xl bg-navy -z-10" />
                 ) : null}
                 <span className="relative z-10">{filter}</span>
                 <span
