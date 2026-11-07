@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react';
-import { Crown, FileSpreadsheet, Award, Layers, Sparkles } from 'lucide-react';
+import { Crown, FileSpreadsheet, Award, Layers } from 'lucide-react';
 import ScrollReveal from '@/components/shared/ScrollReveal';
 import SectionHeader from '@/components/shared/SectionHeader';
 import OrgMemberCard from './OrgMemberCard';
@@ -16,13 +16,11 @@ export default function OrgChartInteractive() {
   const [activeFilter, setActiveFilter] = useState<'all' | 'pimpinan' | 'advisor' | 'bidang'>('all');
   const [activeTier, setActiveTier] = useState<number>(1);
 
-  // References to tier DOM elements for intersection observation
   const tier1Ref = useRef<HTMLDivElement>(null);
   const tier2Ref = useRef<HTMLDivElement>(null);
   const tier3Ref = useRef<HTMLDivElement>(null);
   const tier4Ref = useRef<HTMLDivElement>(null);
 
-  // Animation variants for Staggered Cascade
   const tierContainerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,8 +28,8 @@ export default function OrgChartInteractive() {
       transition: shouldReduceMotion
         ? { duration: 0 }
         : {
-            staggerChildren: 0.12, // 120ms stagger delay
-            delayChildren: 0.08,
+            staggerChildren: 0.1,
+            delayChildren: 0.05,
           },
     },
   };
@@ -39,15 +37,14 @@ export default function OrgChartInteractive() {
   const cardCascadeVariants = {
     hidden: shouldReduceMotion
       ? { opacity: 0 }
-      : { opacity: 0, y: 24, scale: 0.97 },
+      : { opacity: 0, y: 16 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
       transition: shouldReduceMotion
         ? { duration: 0.1 }
         : {
-            duration: 0.5,
+            duration: 0.4,
             ease: [0.16, 1, 0.3, 1] as const,
           },
     },
@@ -56,21 +53,19 @@ export default function OrgChartInteractive() {
   const chairmanVariants = {
     hidden: shouldReduceMotion
       ? { opacity: 0 }
-      : { opacity: 0, scale: 0.96, y: 18 },
+      : { opacity: 0, y: 14 },
     visible: {
       opacity: 1,
-      scale: 1,
       y: 0,
       transition: shouldReduceMotion
         ? { duration: 0.1 }
         : {
-            duration: 0.6,
+            duration: 0.45,
             ease: [0.16, 1, 0.3, 1] as const,
           },
     },
   };
 
-  // Viewport detection via IntersectionObserver with required rootMargin '-20% 0px -30% 0px'
   useEffect(() => {
     const tierRefs = [
       { tier: 1, ref: tier1Ref },
@@ -81,7 +76,6 @@ export default function OrgChartInteractive() {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Find visible entries and sort by intersection ratio
         const visibleEntries = entries.filter((e) => e.isIntersecting);
         if (visibleEntries.length > 0) {
           visibleEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
@@ -108,10 +102,8 @@ export default function OrgChartInteractive() {
     };
   }, [activeFilter]);
 
-  // Handle tier selection from stepper: ensure tier is visible
   const handleSelectTierFromStepper = (tierNum: number) => {
     setActiveTier(tierNum);
-    // If current filter hides the chosen tier, reset to 'all' so element exists in DOM
     if (activeFilter !== 'all') {
       if (tierNum === 1 && activeFilter !== 'pimpinan') setActiveFilter('all');
       if (tierNum === 2 && activeFilter !== 'pimpinan') setActiveFilter('all');
@@ -120,7 +112,6 @@ export default function OrgChartInteractive() {
     }
   };
 
-  // Segregate members based on the official hierarchy
   const chairman = orgMembers.find((m) => m.category === 'chairman');
   const secretariat = orgMembers.filter((m) => m.category === 'secretariat');
   const treasury = orgMembers.find((m) => m.category === 'treasury');
@@ -134,22 +125,67 @@ export default function OrgChartInteractive() {
     { id: 'bidang', label: 'Ketua Bidang', count: 6 },
   ] as const;
 
+  const tierMarker = (
+    active: boolean,
+    Icon: typeof Crown,
+    label: string,
+    tone: 'navy' | 'slate' | 'muted' | 'blue'
+  ) => (
+    <div className="mb-8 flex items-center justify-center gap-3">
+      <span className="h-px w-12 bg-slate-300 sm:w-28" aria-hidden="true" />
+      <div
+        className={cn(
+          'inline-flex items-center gap-2 border px-4 py-2 transition-[background-color,border-color,color] duration-200',
+          tone === 'navy' &&
+            (active
+              ? 'border-electric bg-navy text-white'
+              : 'border-navy/40 bg-navy text-white'),
+          tone === 'slate' &&
+            (active
+              ? 'border-electric bg-white text-navy'
+              : 'border-slate-300 bg-white text-navy'),
+          tone === 'muted' &&
+            (active
+              ? 'border-slate-500 bg-slate-100 text-slate-900'
+              : 'border-slate-300 bg-slate-50 text-slate-800'),
+          tone === 'blue' &&
+            (active
+              ? 'border-electric bg-slate-100 text-navy'
+              : 'border-slate-300 bg-slate-50 text-navy')
+        )}
+      >
+        <Icon
+          className={cn(
+            'h-4 w-4 shrink-0',
+            active ? 'text-electric' : 'text-slate-500',
+            tone === 'navy' && 'text-slate-300'
+          )}
+          aria-hidden="true"
+        />
+        <span className="font-[family-name:var(--font-body)] text-xs font-semibold sm:text-sm">
+          {label}
+        </span>
+      </div>
+      <span className="h-px w-12 bg-slate-300 sm:w-28" aria-hidden="true" />
+    </div>
+  );
+
   return (
-    <section id="struktur-hirarki" className="relative py-16 md:py-20 lg:py-24 bg-slate-50 border-b border-slate-200">
-      {/* Floating HUD Stepper with ScrollSpy */}
+    <section
+      id="struktur-hirarki"
+      className="relative overflow-x-clip border-b border-slate-200 bg-slate-50 py-16 md:py-20 lg:py-24"
+    >
       <OrgTierStepper
         activeTier={activeTier}
         onSelectTier={handleSelectTierFromStepper}
       />
 
       <div className="container-main">
-        {/* Section Header */}
         <ScrollReveal>
-          <div className="max-w-3xl mb-10">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold bg-blue-100 text-electric mb-3 border border-blue-200">
-              <Sparkles className="w-3.5 h-3.5 text-electric" />
-              Hierarki Kepengurusan Terstruktur & Dinamis
-            </div>
+          <div className="mb-10 max-w-3xl">
+            <p className="mb-3 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500">
+              Hierarki Kepengurusan Terstruktur &amp; Dinamis
+            </p>
             <SectionHeader
               title="Bagan Struktur Organisasi Resmi"
               subtitle="Struktur komando dan koordinasi PERIKLINDO dirancang untuk memastikan kelincahan advokasi, kedalaman riset, dan soliditas sinergi ekosistem dari pucuk pimpinan tertinggi hingga bidang eksekutif operasional."
@@ -157,28 +193,31 @@ export default function OrgChartInteractive() {
           </div>
         </ScrollReveal>
 
-        {/* Filter Navigation Tabs */}
         <ScrollReveal delay={100}>
-          <div className="flex flex-wrap items-center gap-2 mb-14 p-1.5 bg-slate-200/80 rounded-xl max-w-max border border-slate-300/70">
+          <div
+            className="mb-14 flex max-w-max flex-wrap items-center gap-1 border border-slate-300/70 bg-slate-200/80 p-1.5"
+            role="tablist"
+            aria-label="Filter hierarki organisasi"
+          >
             {filterTabs.map((tab) => (
               <button
                 key={tab.id}
                 type="button"
+                role="tab"
+                aria-selected={activeFilter === tab.id}
                 onClick={() => setActiveFilter(tab.id)}
                 className={cn(
-                  'px-4 py-2 rounded-lg text-xs sm:text-sm font-semibold transition-all duration-150 min-h-[40px] flex items-center gap-2',
+                  'flex min-h-[40px] items-center gap-2 px-4 py-2 font-[family-name:var(--font-body)] text-xs font-semibold transition-[background-color,color] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric sm:text-sm',
                   activeFilter === tab.id
-                    ? 'bg-navy text-white shadow-sm'
-                    : 'text-slate-600 hover:text-navy hover:bg-white/50'
+                    ? 'bg-navy text-white'
+                    : 'text-slate-600 hover:bg-white/50 hover:text-navy'
                 )}
               >
                 <span>{tab.label}</span>
                 <span
                   className={cn(
-                    'text-[11px] px-1.5 py-0.5 rounded-full',
-                    activeFilter === tab.id
-                      ? 'bg-white/20 text-white'
-                      : 'bg-slate-300 text-slate-700'
+                    'text-[11px]',
+                    activeFilter === tab.id ? 'text-slate-300' : 'text-slate-500'
                   )}
                 >
                   {tab.count}
@@ -190,46 +229,23 @@ export default function OrgChartInteractive() {
 
         <AnimatePresence mode="wait">
           <div key={activeFilter} className="space-y-4">
-            {/* ============================================================== */}
-            {/* ---------------- TIER 1: CHAIRMAN (Pimpinan Tertinggi) ------- */}
-            {/* ============================================================== */}
             {(activeFilter === 'all' || activeFilter === 'pimpinan') && chairman && (
               <div id="tier-1" ref={tier1Ref} className="scroll-mt-24 pt-4">
-                {/* Tier Indicator Header with Dynamic Active Glow */}
                 <motion.div
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4 }}
-                  className="flex items-center justify-center gap-3 mb-8"
+                  transition={{ duration: 0.35 }}
                 >
-                  <span className="h-px bg-gradient-to-r from-transparent via-slate-300 to-slate-400 w-12 sm:w-28" />
-                  <div
-                    className={cn(
-                      'inline-flex items-center gap-2 px-5 py-2 rounded-full transition-all duration-300',
-                      activeTier === 1
-                        ? 'bg-navy text-white border border-amber-400/80 ring-2 ring-amber-400/50 shadow-xl shadow-amber-500/20 scale-[1.03]'
-                        : 'bg-navy text-white border border-electric/40 shadow-lg shadow-navy/25'
-                    )}
-                  >
-                    <Crown
-                      className={cn(
-                        'w-4 h-4 transition-colors duration-300',
-                        activeTier === 1 ? 'text-amber-400 fill-amber-400' : 'text-amber-400'
-                      )}
-                    />
-                    <span className="text-xs sm:text-sm font-black uppercase tracking-widest text-white">
-                      Tingkat I &bull; Pimpinan Tertinggi
-                    </span>
-                    {activeTier === 1 && (
-                      <Sparkles className="w-3.5 h-3.5 text-amber-300 animate-pulse" />
-                    )}
-                  </div>
-                  <span className="h-px bg-gradient-to-l from-transparent via-slate-300 to-slate-400 w-12 sm:w-28" />
+                  {tierMarker(
+                    activeTier === 1,
+                    Crown,
+                    'Tingkat I \u2022 Pimpinan Tertinggi',
+                    'navy'
+                  )}
                 </motion.div>
 
-                {/* Chairman Card with Dignified Glow & Scale Transition */}
-                <div className="max-w-md mx-auto">
+                <div className="mx-auto max-w-md">
                   <motion.div
                     initial="hidden"
                     whileInView="visible"
@@ -240,7 +256,6 @@ export default function OrgChartInteractive() {
                   </motion.div>
                 </div>
 
-                {/* Electric Conductor Beam to Tier 2 */}
                 {activeFilter === 'all' && (
                   <OrgConnectorBeam
                     label="Garis Komando & Koordinasi Eksekutif"
@@ -250,70 +265,46 @@ export default function OrgChartInteractive() {
               </div>
             )}
 
-            {/* ============================================================== */}
-            {/* ---------------- TIER 2: SECRETARIAT & TREASURY ------------- */}
-            {/* ============================================================== */}
             {(activeFilter === 'all' || activeFilter === 'pimpinan') && (
               <div id="tier-2" ref={tier2Ref} className="scroll-mt-24 pt-4">
-                {/* Tier Indicator Header with Dynamic Active Glow */}
                 <motion.div
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4 }}
-                  className="flex items-center justify-center gap-3 mb-8"
+                  transition={{ duration: 0.35 }}
                 >
-                  <span className="h-px bg-gradient-to-r from-transparent via-slate-300 to-slate-400 w-12 sm:w-28" />
-                  <div
-                    className={cn(
-                      'inline-flex items-center gap-2 px-5 py-2 rounded-full transition-all duration-300',
-                      activeTier === 2
-                        ? 'bg-blue-50 text-navy border-2 border-electric ring-2 ring-electric/40 shadow-xl shadow-electric/25 scale-[1.03]'
-                        : 'bg-white text-navy border border-electric/30 shadow-md shadow-electric/10'
-                    )}
-                  >
-                    <FileSpreadsheet
-                      className={cn(
-                        'w-4 h-4 transition-colors duration-300',
-                        activeTier === 2 ? 'text-electric' : 'text-slate-600'
-                      )}
-                    />
-                    <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-slate-800">
-                      Tingkat II &bull; Sekretariat Jenderal & Kebendaharaan
-                    </span>
-                    {activeTier === 2 && (
-                      <span className="w-2 h-2 rounded-full bg-electric animate-ping" />
-                    )}
-                  </div>
-                  <span className="h-px bg-gradient-to-l from-transparent via-slate-300 to-slate-400 w-12 sm:w-28" />
+                  {tierMarker(
+                    activeTier === 2,
+                    FileSpreadsheet,
+                    'Tingkat II \u2022 Sekretariat Jenderal & Kebendaharaan',
+                    'slate'
+                  )}
                 </motion.div>
 
-                {/* Staggered Cards (Sekjen, Wasekjen, Bendahara: 120ms stagger) */}
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-40px' }}
                   variants={tierContainerVariants}
-                  className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto"
+                  className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-3 lg:gap-8"
                 >
                   {secretariat[0] && (
-                    <motion.div variants={cardCascadeVariants} className="h-full">
+                    <motion.div variants={cardCascadeVariants} className="h-full min-w-0">
                       <OrgMemberCard member={secretariat[0]} />
                     </motion.div>
                   )}
                   {secretariat[1] && (
-                    <motion.div variants={cardCascadeVariants} className="h-full">
+                    <motion.div variants={cardCascadeVariants} className="h-full min-w-0">
                       <OrgMemberCard member={secretariat[1]} />
                     </motion.div>
                   )}
                   {treasury && (
-                    <motion.div variants={cardCascadeVariants} className="h-full">
+                    <motion.div variants={cardCascadeVariants} className="h-full min-w-0">
                       <OrgMemberCard member={treasury} />
                     </motion.div>
                   )}
                 </motion.div>
 
-                {/* Electric Conductor Beam to Tier 3 */}
                 {activeFilter === 'all' && (
                   <OrgConnectorBeam
                     label="Dewan Penasihat & Pertimbangan Senior"
@@ -323,64 +314,40 @@ export default function OrgChartInteractive() {
               </div>
             )}
 
-            {/* ============================================================== */}
-            {/* ---------------- TIER 3: SENIOR ADVISORS --------------------- */}
-            {/* ============================================================== */}
             {(activeFilter === 'all' || activeFilter === 'advisor') && (
               <div id="tier-3" ref={tier3Ref} className="scroll-mt-24 pt-4">
-                {/* Tier Indicator Header with Dynamic Active Glow */}
                 <motion.div
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4 }}
-                  className="flex items-center justify-center gap-3 mb-8"
+                  transition={{ duration: 0.35 }}
                 >
-                  <span className="h-px bg-gradient-to-r from-transparent via-amber-200 to-amber-300 w-12 sm:w-28" />
-                  <div
-                    className={cn(
-                      'inline-flex items-center gap-2 px-5 py-2 rounded-full transition-all duration-300',
-                      activeTier === 3
-                        ? 'bg-amber-100 text-amber-950 border-2 border-amber-400 ring-2 ring-amber-400/40 shadow-xl shadow-amber-500/25 scale-[1.03]'
-                        : 'bg-amber-50 text-amber-950 border border-amber-300 shadow-sm'
-                    )}
-                  >
-                    <Award
-                      className={cn(
-                        'w-4 h-4 transition-colors duration-300',
-                        activeTier === 3 ? 'text-amber-700' : 'text-amber-600'
-                      )}
-                    />
-                    <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-amber-900">
-                      Tingkat III &bull; Dewan Penasihat Senior (Senior Advisors)
-                    </span>
-                    {activeTier === 3 && (
-                      <span className="w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-                    )}
-                  </div>
-                  <span className="h-px bg-gradient-to-l from-transparent via-amber-200 to-amber-300 w-12 sm:w-28" />
+                  {tierMarker(
+                    activeTier === 3,
+                    Award,
+                    'Tingkat III \u2022 Dewan Penasihat Senior (Senior Advisors)',
+                    'muted'
+                  )}
                 </motion.div>
 
-                {/* 2 Advisors Staggered Cascade */}
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-40px' }}
                   variants={tierContainerVariants}
-                  className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8 max-w-3xl mx-auto"
+                  className="mx-auto grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2 lg:gap-8"
                 >
                   {advisors.map((advisor) => (
                     <motion.div
                       key={advisor.id}
                       variants={cardCascadeVariants}
-                      className="h-full"
+                      className="h-full min-w-0"
                     >
                       <OrgMemberCard member={advisor} />
                     </motion.div>
                   ))}
                 </motion.div>
 
-                {/* Electric Conductor Beam to Tier 4 */}
                 {activeFilter === 'all' && (
                   <OrgConnectorBeam
                     label="Distribusi Portofolio 6 Bidang Kerja Eksekutif"
@@ -390,57 +357,34 @@ export default function OrgChartInteractive() {
               </div>
             )}
 
-            {/* ============================================================== */}
-            {/* ---------------- TIER 4: 6 VICE CHAIRMEN (KETUA BIDANG) ------ */}
-            {/* ============================================================== */}
             {(activeFilter === 'all' || activeFilter === 'bidang') && (
               <div id="tier-4" ref={tier4Ref} className="scroll-mt-24 pt-4">
-                {/* Tier Indicator Header with Dynamic Active Glow */}
                 <motion.div
-                  initial={{ opacity: 0, y: 15 }}
+                  initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-40px' }}
-                  transition={{ duration: 0.4 }}
-                  className="flex items-center justify-center gap-3 mb-8"
+                  transition={{ duration: 0.35 }}
                 >
-                  <span className="h-px bg-gradient-to-r from-transparent via-blue-200 to-blue-300 w-12 sm:w-28" />
-                  <div
-                    className={cn(
-                      'inline-flex items-center gap-2 px-5 py-2 rounded-full transition-all duration-300',
-                      activeTier === 4
-                        ? 'bg-blue-100 text-blue-950 border-2 border-electric ring-2 ring-cyan-400/40 shadow-xl shadow-electric/25 scale-[1.03]'
-                        : 'bg-blue-50 text-blue-950 border border-blue-300 shadow-sm'
-                    )}
-                  >
-                    <Layers
-                      className={cn(
-                        'w-4 h-4 transition-colors duration-300',
-                        activeTier === 4 ? 'text-electric' : 'text-slate-600'
-                      )}
-                    />
-                    <span className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-blue-900">
-                      Tingkat IV &bull; Jajaran 6 Ketua Bidang Eksekutif (Vice Chairmen)
-                    </span>
-                    {activeTier === 4 && (
-                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
-                    )}
-                  </div>
-                  <span className="h-px bg-gradient-to-l from-transparent via-blue-200 to-blue-300 w-12 sm:w-28" />
+                  {tierMarker(
+                    activeTier === 4,
+                    Layers,
+                    'Tingkat IV \u2022 Jajaran 6 Ketua Bidang Eksekutif (Vice Chairmen)',
+                    'blue'
+                  )}
                 </motion.div>
 
-                {/* 6 Vice Chairmen Cascade in 3 Columns */}
                 <motion.div
                   initial="hidden"
                   whileInView="visible"
                   viewport={{ once: true, margin: '-40px' }}
                   variants={tierContainerVariants}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+                  className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8"
                 >
                   {viceChairmen.map((vc) => (
                     <motion.div
                       key={vc.id}
                       variants={cardCascadeVariants}
-                      className="h-full"
+                      className="h-full min-w-0"
                     >
                       <OrgMemberCard member={vc} />
                     </motion.div>

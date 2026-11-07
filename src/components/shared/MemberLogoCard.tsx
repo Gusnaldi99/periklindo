@@ -11,9 +11,7 @@ interface MemberLogoCardProps {
 }
 
 /**
- * Member logo card styled per DESIGN_v2.md section 3.1:
- * - 16:9 ratio, high-contrast plate so transparent logos stay readable
- * - Hover physics via motion spring
+ * Member logo plate: quiet border hover, no lift/scale costume.
  */
 export default function MemberLogoCard({
   member,
@@ -22,20 +20,20 @@ export default function MemberLogoCard({
   const shouldReduceMotion = useReducedMotion();
 
   const className = cn(
-    'group relative block overflow-hidden rounded-xl border border-slate-200',
-    'aspect-video flex items-center justify-center shrink-0',
-    'bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_55%,#eef2f7_100%)]',
-    'shadow-sm shadow-slate-200/70',
-    compact ? 'p-3 w-[190px] sm:w-[220px]' : 'p-4 sm:p-5'
+    'group relative block aspect-video shrink-0 overflow-hidden rounded-xl border border-slate-200',
+    'flex items-center justify-center bg-slate-50',
+    'transition-[border-color,box-shadow] duration-200 ease-out',
+    'hover:border-slate-300 hover:shadow-sm',
+    compact ? 'w-[190px] p-3 sm:w-[220px]' : 'p-4 sm:p-5'
   );
 
   const inner = (
     <>
       <div
-        className="absolute inset-0 opacity-[0.35] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.28]"
         style={{
           backgroundImage:
-            'linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px)',
+            'linear-gradient(var(--color-slate-200) 1px, transparent 1px), linear-gradient(90deg, var(--color-slate-200) 1px, transparent 1px)',
           backgroundSize: '18px 18px',
         }}
         aria-hidden="true"
@@ -45,12 +43,12 @@ export default function MemberLogoCard({
         alt={`Logo ${member.name}`}
         width={180}
         height={180}
-        className="relative z-10 object-contain max-h-16 sm:max-h-18 md:max-h-20 max-w-[85%] max-h-[72%] w-auto h-auto drop-shadow-[0_1px_1px_rgba(15,23,42,0.08)]"
+        className="relative z-10 h-auto max-h-16 w-auto max-w-[85%] max-h-[72%] object-contain sm:max-h-18 md:max-h-20"
       />
     </>
   );
 
-  const hover = shouldReduceMotion ? undefined : { y: -4, scale: 1.02 };
+  const hover = shouldReduceMotion ? undefined : { opacity: 0.96 };
 
   if (member.websiteUrl) {
     return (
@@ -61,8 +59,8 @@ export default function MemberLogoCard({
         title={member.name}
         aria-label={`Profil anggota ${member.name}`}
         whileHover={hover}
-        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        className={cn(className, 'hover:shadow-lg hover:shadow-slate-200/80 hover:border-electric/40')}
+        transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+        className={className}
       >
         {inner}
       </motion.a>
@@ -74,8 +72,8 @@ export default function MemberLogoCard({
       title={member.name}
       aria-label={`Profil anggota ${member.name}`}
       whileHover={hover}
-      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-      className={cn(className, 'hover:shadow-lg hover:shadow-slate-200/80 hover:border-electric/40')}
+      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
+      className={className}
     >
       {inner}
     </motion.div>

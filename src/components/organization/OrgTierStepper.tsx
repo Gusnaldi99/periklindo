@@ -5,7 +5,7 @@ import { Crown, FileSpreadsheet, Award, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface OrgTierStepperProps {
-  activeTier: number; // 1, 2, 3, 4
+  activeTier: number;
   onSelectTier?: (tier: number) => void;
 }
 
@@ -57,7 +57,7 @@ export default function OrgTierStepper({ activeTier, onSelectTier }: OrgTierStep
     }
     const element = document.getElementById(tierId);
     if (element) {
-      const yOffset = -90; // Header offset
+      const yOffset = -90;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({
         top: y,
@@ -68,14 +68,12 @@ export default function OrgTierStepper({ activeTier, onSelectTier }: OrgTierStep
 
   return (
     <>
-      {/* ================= DESKTOP FLOATING HUD (Right side) ================= */}
       <aside
         aria-label="Navigasi Tingkat Hierarki Organisasi"
-        className="hidden xl:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-3 select-none"
+        className="fixed top-1/2 right-6 z-40 hidden -translate-y-1/2 select-none flex-col items-end gap-3 xl:flex"
       >
-        <div className="bg-navy/95 backdrop-blur-md p-2.5 rounded-2xl border border-white/15 shadow-2xl shadow-navy/60 flex flex-col items-center gap-2">
-          {/* HUD Header Tag */}
-          <div className="px-2 py-1 text-[10px] font-black uppercase tracking-widest text-emerald-400 border-b border-white/10 mb-1">
+        <div className="flex flex-col items-center gap-2 border border-white/15 bg-navy/95 p-2.5 backdrop-blur-md">
+          <div className="mb-1 border-b border-white/10 px-2 py-1 font-[family-name:var(--font-body)] text-[11px] font-medium text-slate-300">
             Hierarki
           </div>
 
@@ -89,19 +87,18 @@ export default function OrgTierStepper({ activeTier, onSelectTier }: OrgTierStep
                 type="button"
                 onClick={() => scrollToTier(item.tier, item.id)}
                 className={cn(
-                  'group relative flex items-center justify-center w-11 h-11 rounded-xl transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-electric',
+                  'group relative flex h-11 w-11 items-center justify-center transition-[color,background-color] duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-electric',
                   isActive
-                    ? 'text-white shadow-lg shadow-electric/40 scale-105'
-                    : 'text-slate-400 hover:text-white hover:bg-white/10'
+                    ? 'text-white'
+                    : 'text-slate-400 hover:bg-white/10 hover:text-white'
                 )}
                 aria-label={`Lompat ke ${item.label}`}
                 aria-current={isActive ? 'step' : undefined}
               >
-                {/* Sliding active background indicator */}
                 {isActive && (
                   <motion.div
                     layoutId="stepper-active-pill"
-                    className="absolute inset-0 bg-electric rounded-xl -z-10 shadow-md shadow-electric/50 ring-2 ring-emerald-400/80"
+                    className="-z-10 absolute inset-0 bg-electric"
                     transition={{
                       type: 'spring',
                       stiffness: 350,
@@ -110,29 +107,22 @@ export default function OrgTierStepper({ activeTier, onSelectTier }: OrgTierStep
                   />
                 )}
 
-                <Icon
-                  className={cn(
-                    'w-4 h-4 z-10 transition-transform duration-200',
-                    isActive ? 'scale-110 text-white' : 'group-hover:scale-110'
-                  )}
-                />
+                <Icon className="z-10 h-4 w-4" aria-hidden="true" />
 
-                {/* Roman Numeral Badge */}
-                <span className="absolute -bottom-1 -right-1 text-[9px] font-black px-1 rounded-sm bg-navy border border-white/20 text-white z-20">
+                <span className="absolute -right-1 -bottom-1 z-20 border border-white/20 bg-navy px-1 font-[family-name:var(--font-body)] text-[11px] font-semibold text-white">
                   {item.roman}
                 </span>
 
-                {/* Tooltip on Hover (appears to the left) */}
-                <div className="pointer-events-none absolute right-full mr-3.5 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 group-focus-visible:opacity-100 transition-all duration-200 translate-x-1 group-hover:translate-x-0 z-50 whitespace-nowrap">
-                  <div className="bg-navy/95 backdrop-blur-md border border-white/15 text-white px-3.5 py-2 rounded-xl shadow-2xl flex items-center gap-2.5">
-                    <span className="w-5 h-5 rounded-full bg-electric/25 text-cyan-300 text-[10px] font-black flex items-center justify-center border border-electric/40">
+                <div className="pointer-events-none absolute top-1/2 right-full z-50 mr-3.5 -translate-y-1/2 translate-x-1 whitespace-nowrap opacity-0 transition-[opacity,transform] duration-200 group-hover:translate-x-0 group-hover:opacity-100 group-focus-visible:translate-x-0 group-focus-visible:opacity-100">
+                  <div className="flex items-center gap-2.5 border border-white/15 bg-navy/95 px-3.5 py-2 text-white backdrop-blur-md">
+                    <span className="flex h-5 w-5 items-center justify-center border border-electric/40 bg-electric/25 font-[family-name:var(--font-body)] text-[11px] font-semibold text-slate-200">
                       {item.roman}
                     </span>
                     <div>
-                      <p className="text-xs font-bold leading-tight text-white">
+                      <p className="font-[family-name:var(--font-body)] text-xs font-semibold leading-tight text-white">
                         {item.label}
                       </p>
-                      <p className="text-[10px] text-slate-400 font-medium">
+                      <p className="font-[family-name:var(--font-body)] text-[11px] font-medium text-slate-300">
                         {item.role} &bull; {item.count} Pengurus
                       </p>
                     </div>
@@ -144,9 +134,8 @@ export default function OrgTierStepper({ activeTier, onSelectTier }: OrgTierStep
         </div>
       </aside>
 
-      {/* ================= MOBILE / TABLET FLOATING DOCK (Bottom center) ================= */}
-      <div className="xl:hidden sticky bottom-4 z-40 flex justify-center px-4 pointer-events-none select-none">
-        <div className="pointer-events-auto bg-navy/95 backdrop-blur-md border border-white/15 shadow-2xl rounded-full p-1.5 flex items-center gap-1">
+      <div className="sticky bottom-4 z-40 flex justify-center px-4 pointer-events-none select-none xl:hidden">
+        <div className="pointer-events-auto flex items-center gap-1 border border-white/15 bg-navy/95 p-1.5 backdrop-blur-md">
           {tiers.map((item) => {
             const isActive = activeTier === item.tier;
             return (
@@ -155,17 +144,17 @@ export default function OrgTierStepper({ activeTier, onSelectTier }: OrgTierStep
                 type="button"
                 onClick={() => scrollToTier(item.tier, item.id)}
                 className={cn(
-                  'relative px-3 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1.5 transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-electric',
+                  'relative flex items-center gap-1.5 px-3 py-1.5 font-[family-name:var(--font-body)] text-xs font-semibold transition-[color,background-color] duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-electric',
                   isActive
-                    ? 'text-white shadow-md shadow-electric/40 scale-105'
-                    : 'text-slate-300 hover:text-white hover:bg-white/10'
+                    ? 'text-white'
+                    : 'text-slate-300 hover:bg-white/10 hover:text-white'
                 )}
                 aria-label={`Lompat ke ${item.label}`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="mobile-stepper-active-pill"
-                    className="absolute inset-0 bg-electric rounded-full -z-10 shadow-sm shadow-electric/50 ring-1 ring-emerald-400/80"
+                    className="-z-10 absolute inset-0 bg-electric"
                     transition={{
                       type: 'spring',
                       stiffness: 350,
@@ -173,11 +162,8 @@ export default function OrgTierStepper({ activeTier, onSelectTier }: OrgTierStep
                     }}
                   />
                 )}
-                <span className="text-[10px] font-bold opacity-80 z-10">Tingkat</span>
-                <span className="font-extrabold z-10">{item.roman}</span>
-                {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping ml-0.5 z-10" />
-                )}
+                <span className="z-10 text-[10px] font-medium opacity-80">Tingkat</span>
+                <span className="z-10 font-semibold">{item.roman}</span>
               </button>
             );
           })}

@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
-import { Camera, MapPin, CalendarDays, Images } from 'lucide-react';
+import { Camera } from 'lucide-react';
 import { galleryItems } from '@/data/mock-data';
 
 export default function GalleryHero() {
@@ -10,129 +10,102 @@ export default function GalleryHero() {
   const total = galleryItems.length;
   const categories = new Set(galleryItems.map((item) => item.category)).size;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? { duration: 0 }
-        : { staggerChildren: 0.08, delayChildren: 0.04 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion
-        ? { duration: 0.1 }
-        : { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
   return (
-    <section className="relative bg-navy text-white overflow-hidden py-14 sm:py-18 md:py-20 lg:py-24 border-b border-navy-light">
+    <section className="relative overflow-x-clip border-b border-navy-light bg-navy py-12 text-white sm:py-14 md:py-16 lg:py-18">
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)',
-          backgroundSize: '28px 28px',
+            'radial-gradient(circle at 1px 1px, var(--color-slate-100) 1px, transparent 0)',
+          backgroundSize: '32px 32px',
         }}
         aria-hidden="true"
       />
       <div
-        className="absolute -top-32 -right-24 w-96 h-96 bg-electric/20 rounded-full blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -bottom-32 -left-24 w-80 h-80 bg-teal/15 rounded-full blur-3xl pointer-events-none"
+        className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-navy-light/40 to-transparent"
         aria-hidden="true"
       />
 
       <div className="container-main relative z-10">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl"
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : { duration: 0.45, ease: [0.16, 1, 0.3, 1] }
+          }
+          className="max-w-4xl min-w-0"
         >
-          <motion.nav variants={itemVariants} aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-2 text-xs sm:text-sm text-slate-400">
+          <nav aria-label="Breadcrumb" className="mb-4">
+            <ol className="flex items-center gap-2 font-[family-name:var(--font-body)] text-xs text-slate-300 sm:text-sm">
               <li>
-                <Link href="/" className="hover:text-white transition-colors duration-150">
+                <Link
+                  href="/"
+                  className="transition-[color] duration-150 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+                >
                   Beranda
                 </Link>
               </li>
-              <li aria-hidden="true" className="text-slate-600">
+              <li aria-hidden="true" className="text-slate-500">
                 /
               </li>
-              <li className="text-white font-medium" aria-current="page">
+              <li className="font-medium text-white" aria-current="page">
                 Galeri Kegiatan
               </li>
             </ol>
-          </motion.nav>
+          </nav>
 
-          <motion.div variants={itemVariants} className="mb-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-electric/15 text-blue-300 border border-electric/35">
-              <Camera className="w-3.5 h-3.5 text-teal" />
-              <span>Arsip Visual Resmi • DOC-GAL/2026</span>
-            </div>
-          </motion.div>
+          <p className="mb-3 inline-flex items-center gap-2 font-[family-name:var(--font-body)] text-sm font-medium text-slate-300">
+            <Camera className="h-3.5 w-3.5 shrink-0 text-teal" aria-hidden="true" />
+            <span>Arsip Visual Resmi • DOC-GAL/2026</span>
+          </p>
 
-          <motion.h1
-            variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.18] mb-6"
-          >
+          <h1 className="mb-4 max-w-3xl min-w-0 font-[family-name:var(--font-heading)] text-3xl font-semibold leading-[1.15] tracking-tight text-balance text-white sm:text-4xl md:text-[2.75rem] lg:text-5xl">
             Galeri Kegiatan PERIKLINDO
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-base sm:text-lg text-slate-300 leading-relaxed mb-10 max-w-3xl"
-          >
+          <p className="mb-8 max-w-prose font-[family-name:var(--font-body)] text-base leading-relaxed text-slate-300 sm:mb-10 sm:text-lg">
             Dokumentasi pameran PEVS di JIExpo Kemayoran, audiensi kementerian,
             seminar industri, dan kunjungan pabrik anggota. Setiap foto merujuk
             kegiatan nyata asosiasi, bukan ilustrasi generik.
-          </motion.p>
+          </p>
         </motion.div>
 
-        <motion.div
-          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-slate-800"
-        >
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <Images className="w-4 h-4 text-electric mb-2" aria-hidden="true" />
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-white">
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-t border-white/15 pt-6 sm:grid-cols-4">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Dokumentasi terkurasi
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               {total}
-            </p>
-            <p className="text-xs text-slate-400 font-medium">Dokumentasi terkurasi</p>
+            </dd>
           </div>
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <Camera className="w-4 h-4 text-teal mb-2" aria-hidden="true" />
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-teal">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Kategori kegiatan
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               {categories}
-            </p>
-            <p className="text-xs text-slate-400 font-medium">Kategori kegiatan</p>
+            </dd>
           </div>
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <MapPin className="w-4 h-4 text-blue-300 mb-2" aria-hidden="true" />
-            <p className="font-[family-name:var(--font-heading)] text-lg font-extrabold text-white">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Panggung utama PEVS
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               JIExpo
-            </p>
-            <p className="text-xs text-slate-400 font-medium">Panggung utama PEVS</p>
+            </dd>
           </div>
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <CalendarDays className="w-4 h-4 text-amber-300 mb-2" aria-hidden="true" />
-            <p className="font-[family-name:var(--font-heading)] text-lg font-extrabold text-white">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Arsip tahun berjalan
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               2026
-            </p>
-            <p className="text-xs text-slate-400 font-medium">Arsip tahun berjalan</p>
+            </dd>
           </div>
-        </motion.div>
+        </dl>
       </div>
     </section>
   );

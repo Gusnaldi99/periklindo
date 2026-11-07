@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { ArrowLeft, CalendarDays, Clock, ExternalLink, Quote, User } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Clock, ExternalLink, User } from 'lucide-react';
 import { estimateReadMinutes, formatDateId } from '@/lib/content';
 import type { NewsPost } from '@/types';
 import NewsCard from '@/components/shared/NewsCard';
@@ -25,10 +25,9 @@ function renderContent(content: string) {
       return (
         <blockquote
           key={index}
-          className="relative my-8 rounded-2xl border border-electric/20 bg-electric/5 px-6 py-5"
+          className="my-8 border-l-2 border-electric bg-slate-50 px-5 py-4 sm:px-6"
         >
-          <Quote className="absolute -top-3 left-5 w-6 h-6 text-electric" aria-hidden="true" />
-          <p className="text-base sm:text-lg text-navy font-semibold leading-relaxed italic">
+          <p className="font-[family-name:var(--font-heading)] text-base font-semibold leading-relaxed text-navy sm:text-lg">
             {quote}
           </p>
         </blockquote>
@@ -36,7 +35,10 @@ function renderContent(content: string) {
     }
 
     return (
-      <p key={index} className="text-[17px] leading-[1.8] text-slate-700 mb-6">
+      <p
+        key={index}
+        className="mb-6 font-[family-name:var(--font-body)] text-[17px] leading-[1.8] text-slate-700"
+      >
         {trimmed}
       </p>
     );
@@ -48,57 +50,71 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
 
   return (
     <article id="artikel-utama" className="bg-white">
-      <header className="relative bg-navy text-white overflow-hidden border-b border-navy-light">
+      <header className="relative overflow-x-clip border-b border-navy-light bg-navy text-white">
         <div
-          className="absolute inset-0 opacity-[0.04] pointer-events-none"
+          className="pointer-events-none absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)',
-            backgroundSize: '28px 28px',
+              'radial-gradient(circle at 1px 1px, var(--color-slate-100) 1px, transparent 0)',
+            backgroundSize: '32px 32px',
           }}
           aria-hidden="true"
         />
+        <div
+          className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-navy-light/40 to-transparent"
+          aria-hidden="true"
+        />
         <div className="container-main relative z-10 py-12 md:py-16">
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex flex-wrap items-center gap-2 text-xs sm:text-sm text-slate-400">
+          <nav aria-label="Breadcrumb" className="mb-4">
+            <ol className="flex flex-wrap items-center gap-2 font-[family-name:var(--font-body)] text-xs text-slate-300 sm:text-sm">
               <li>
-                <Link href="/" className="hover:text-white transition-colors duration-150">
+                <Link
+                  href="/"
+                  className="transition-[color] duration-150 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+                >
                   Beranda
                 </Link>
               </li>
-              <li aria-hidden="true">/</li>
+              <li aria-hidden="true" className="text-slate-500">
+                /
+              </li>
               <li>
-                <Link href="/berita" className="hover:text-white transition-colors duration-150">
+                <Link
+                  href="/berita"
+                  className="transition-[color] duration-150 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+                >
                   Berita
                 </Link>
               </li>
-              <li aria-hidden="true">/</li>
-              <li className="text-white font-medium line-clamp-1" aria-current="page">
+              <li aria-hidden="true" className="text-slate-500">
+                /
+              </li>
+              <li className="line-clamp-1 font-medium text-white" aria-current="page">
                 {post.title}
               </li>
             </ol>
           </nav>
 
-          <span className="inline-flex items-center text-[10px] font-extrabold uppercase tracking-wider bg-electric text-white px-2.5 py-1 rounded-md mb-4">
+          <p className="mb-3 font-[family-name:var(--font-body)] text-sm font-medium text-teal">
             {CATEGORY_LABEL[post.category]}
-          </span>
-          <h1 className="max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.18] text-white mb-6">
+          </p>
+          <h1 className="mb-6 max-w-4xl min-w-0 break-words font-[family-name:var(--font-heading)] text-3xl font-semibold leading-[1.15] tracking-tight text-balance text-white sm:text-4xl lg:text-5xl">
             {post.title}
           </h1>
-          <p className="max-w-3xl text-base sm:text-lg text-slate-300 leading-relaxed mb-8">
+          <p className="mb-8 max-w-3xl font-[family-name:var(--font-body)] text-base leading-relaxed text-slate-300 sm:text-lg">
             {post.excerpt}
           </p>
-          <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-slate-400">
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-2 font-[family-name:var(--font-body)] text-xs text-slate-300 sm:text-sm">
             <span className="inline-flex items-center gap-1.5">
-              <User className="w-4 h-4 text-teal" />
+              <User className="h-4 w-4 shrink-0 text-teal" aria-hidden="true" />
               {post.author}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <CalendarDays className="w-4 h-4 text-electric" />
+              <CalendarDays className="h-4 w-4 shrink-0 text-electric" aria-hidden="true" />
               {formatDateId(post.publishedAt)}
             </span>
             <span className="inline-flex items-center gap-1.5">
-              <Clock className="w-4 h-4" />
+              <Clock className="h-4 w-4 shrink-0" aria-hidden="true" />
               {readMinutes} menit baca
             </span>
           </div>
@@ -106,7 +122,7 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
       </header>
 
       <div className="container-main py-10 md:py-14">
-        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 mb-10">
+        <div className="relative mb-10 aspect-[16/9] min-w-0 overflow-hidden border border-slate-200 bg-slate-100">
           <Image
             src={post.thumbnailUrl}
             alt={post.title}
@@ -117,7 +133,7 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
           />
         </div>
 
-        <div className="max-w-3xl mx-auto">
+        <div className="mx-auto max-w-3xl">
           {renderContent(post.content)}
 
           {post.externalUrl ? (
@@ -125,27 +141,28 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
               href={post.externalUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-2 mb-10 text-sm font-bold text-electric hover:text-electric-hover"
+              className="mb-10 mt-2 inline-flex min-h-[44px] items-center gap-2 font-[family-name:var(--font-body)] text-sm font-semibold text-electric transition-[color] duration-150 hover:text-electric-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
             >
               Baca liputan asli di {post.sourceName ?? 'sumber'}
-              <ExternalLink className="w-4 h-4" />
+              <ExternalLink className="h-4 w-4" aria-hidden="true" />
             </a>
           ) : null}
 
           <Link
             href="/berita"
-            className="inline-flex items-center gap-2 text-sm font-bold text-navy hover:text-electric min-h-[44px]"
+            className="inline-flex min-h-[44px] items-center gap-2 font-[family-name:var(--font-body)] text-sm font-semibold text-navy transition-[color] duration-150 hover:text-electric focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
           >
-            <ArrowLeft className="w-4 h-4" />
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             Kembali ke arsip berita
           </Link>
         </div>
 
         {related.length > 0 ? (
-          <section className="mt-16 pt-12 border-t border-slate-200">
-            <h2 className="text-2xl font-extrabold text-navy mb-2">Berita terkait</h2>
-            <span className="block h-0.5 w-12 rounded-full bg-gradient-to-r from-electric to-teal mb-8" />
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <section className="mt-16 border-t border-slate-200 pt-12">
+            <h2 className="mb-8 font-[family-name:var(--font-heading)] text-2xl font-semibold text-navy">
+              Berita terkait
+            </h2>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-[repeat(3,minmax(0,1fr))]">
               {related.map((item) => (
                 <NewsCard key={item.id} post={item} preferInternal />
               ))}

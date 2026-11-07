@@ -1,0 +1,193 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "restyle",
+  "scope": "page",
+  "theme": "custom",
+  "axes": "light/roman-serif/chromatic-blue",
+  "hero": "navy claim + quiet secretariat facts",
+  "nav": "frozen",
+  "footer": "frozen",
+  "imagery": "map embed existing",
+  "photos": [],
+  "entry": "kontak",
+  "fingerprint": "contact-restyle-2026-11-06",
+  "sections": [
+   "ContactHero",
+   "ContactForm",
+   "SecretariatMapCard"
+  ],
+  "signature": "secretariat channel under Source Serif + real WhatsApp handoff",
+  "waived": [
+   "19",
+   "44c",
+   "49b",
+   "58",
+   "63",
+   "77",
+   "78",
+   "81"
+  ],
+  "prompt": "PERIKLINDO official secretariat contact channel",
+  "date": "2026-11-06"
+ },
+ {
+  "mode": "redesign",
+  "depth": "restyle",
+  "scope": "page",
+  "theme": "custom",
+  "shape": "keep-the-layout",
+  "hero": "navy claim + quiet helpdesk facts",
+  "signature": "official FAQ index under Source Serif claim",
+  "prompt": "PERIKLINDO faq institutional helpdesk keep-the-layout",
+  "axes": "light/roman-serif/chromatic-blue",
+  "imagery": "existing project assets",
+  "sections": [
+   "FaqHero",
+   "FaqAccordionList",
+   "FaqContactPrompt"
+  ],
+  "waived": [
+   "10a",
+   "19",
+   "26b",
+   "44c",
+   "58",
+   "63",
+   "78",
+   "81"
+  ],
+  "entry": "08-faq",
+  "date": "2026-11-06",
+  "nav": "frozen",
+  "footer": "frozen"
+ },
+ {
+  "mode": "redesign",
+  "depth": "restyle",
+  "scope": "page",
+  "theme": "custom",
+  "shape": "keep-the-layout",
+  "hero": "navy claim + quiet archive facts",
+  "signature": "documentary archive under Source Serif claim",
+  "prompt": "PERIKLINDO gallery institutional documentary keep-the-layout",
+  "axes": "light/roman-serif/chromatic-blue",
+  "imagery": "existing project assets",
+  "sections": [
+   "GalleryHero",
+   "GalleryGrid",
+   "GalleryLightboxModal"
+  ],
+  "waived": [
+   "26b",
+   "39b",
+   "44c",
+   "58",
+   "63",
+   "81",
+   "83"
+  ],
+  "entry": "07-galeri",
+  "date": "2026-11-06",
+  "nav": "frozen",
+  "footer": "frozen"
+ },
+ {
+  "mode": "redesign",
+  "depth": "restyle",
+  "scope": "page",
+  "theme": "custom",
+  "shape": "keep-the-layout",
+  "hero": "navy claim + featured story",
+  "signature": "featured warta story under Source Serif claim",
+  "prompt": "PERIKLINDO news archive institutional editorial",
+  "axes": "light/roman-serif/chromatic-blue",
+  "imagery": "existing project assets",
+  "sections": [
+   "NewsHero",
+   "NewsFilterBar",
+   "ReadingProgressBar",
+   "NewsArticleContent"
+  ],
+  "waived": [
+   "3",
+   "10a",
+   "44c",
+   "49b",
+   "58",
+   "63",
+   "77",
+   "78",
+   "81"
+  ],
+  "entry": "06-berita",
+  "date": "2026-11-06",
+  "nav": "frozen",
+  "footer": "frozen"
+ },
+ {
+  "mode": "redesign",
+  "depth": "restyle",
+  "scope": "page",
+  "theme": "custom",
+  "shape": "keep-the-layout",
+  "hero": "navy claim + quiet hierarchy facts",
+  "signature": "quiet hierarchy facts under Source Serif claim",
+  "prompt": "PERIKLINDO struktur organisasi institutional restyle",
+  "axes": "light/roman-serif/chromatic-blue",
+  "imagery": "existing project assets",
+  "sections": [
+   "OrgHero",
+   "OrgChartInteractive",
+   "OrgOfficialDiagramModal",
+   "OrgDutiesAccordion",
+   "OrgCta"
+  ],
+  "waived": [
+   "3",
+   "10a",
+   "49b",
+   "58",
+   "63",
+   "77",
+   "78",
+   "81"
+  ],
+  "entry": "struktur-organisasi",
+  "date": "2026-11-06",
+  "nav": "frozen",
+  "footer": "frozen"
+ },
+ {
+  "mode": "redesign",
+  "depth": "restyle",
+  "scope": "page",
+  "theme": "custom",
+  "shape": "keep-the-layout",
+  "hero": "navy split claim + PEVS plane",
+  "signature": "quiet facts under Source Serif claim",
+  "prompt": "PERIKLINDO home keep-the-layout polish",
+  "axes": "light/roman-serif/chromatic-blue",
+  "imagery": "existing project assets",
+  "sections": [
+   "HeroSection",
+   "LeadershipMessage",
+   "MemberShowcase",
+   "PevsSpotlight",
+   "StrategicPillars",
+   "LatestNews",
+   "SocialMediaFeed",
+   "CtaSection"
+  ],
+  "waived": [
+   "19",
+   "58",
+   "63",
+   "26b",
+   "48",
+   "7b"
+  ],
+  "entry": "home",
+  "date": "2026-11-06"
+ }
+]

@@ -2,19 +2,6 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'motion/react';
-import {
-  Sparkles,
-  Calendar,
-  MapPin,
-  CheckCircle2,
-  ExternalLink,
-  ShieldCheck,
-  Zap,
-  Users,
-  Coins,
-  ArrowRight,
-} from 'lucide-react';
 import ScrollReveal from '@/components/shared/ScrollReveal';
 
 export default function PevsSpotlight() {
@@ -34,103 +21,96 @@ export default function PevsSpotlight() {
   ];
 
   return (
-    <section id="pevs" className="py-16 md:py-24 bg-white border-b border-slate-200 overflow-hidden">
+    <section id="pevs" className="overflow-x-clip border-b border-slate-200 bg-white py-16 md:py-24">
       <div className="container-main">
-        {/* Top Header */}
         <ScrollReveal>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold bg-emerald-100 text-teal border border-emerald-200 mb-3">
-                <Sparkles className="w-3.5 h-3.5 text-teal" />
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl min-w-0">
+              <p className="mb-3 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500">
                 Ajang Tahunan Resmi Asosiasi &bull; Kolaborasi Dyandra Promosindo
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-navy tracking-tight leading-tight">
+              </p>
+              <h2 className="font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight text-navy text-balance md:text-4xl">
                 PERIKLINDO Electric Vehicle Show (PEVS)
               </h2>
-              <p className="text-sm sm:text-base text-slate-600 mt-2 leading-relaxed">
+              <p className="mt-3 font-[family-name:var(--font-body)] text-base leading-relaxed text-slate-600">
                 Pameran akbar kendaraan listrik terbesar di Indonesia yang diselenggarakan
                 setiap tahun di JIExpo Kemayoran, menjadi barometer utama kemajuan teknologi
                 dan percepatan adopsi mobilitas bersih nasional.
               </p>
             </div>
 
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700">
-                <MapPin className="w-4 h-4 text-electric" />
-                <span>JIExpo Kemayoran, Jakarta</span>
-              </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700">
-                <Calendar className="w-4 h-4 text-emerald-600" />
-                <span>Penyelenggaraan Tahunan</span>
-              </div>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 font-[family-name:var(--font-body)] text-sm text-slate-600">
+              <p>
+                <span className="block text-xs font-medium text-slate-500">Lokasi</span>
+                JIExpo Kemayoran, Jakarta
+              </p>
+              <p>
+                <span className="block text-xs font-medium text-slate-500">Jadwal</span>
+                Penyelenggaraan Tahunan
+              </p>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* 2-Column Spotlight Showcase */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-14">
-          {/* Visual Showcase (7 Cols) */}
-          <ScrollReveal delay={150} className="lg:col-span-7">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
-              {/* Card 1: Main Stage & Leadership Opening */}
-              <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-lg aspect-[4/3] sm:col-span-2">
+        <div className="mb-14 grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-12">
+          <ScrollReveal delay={120} className="min-w-0 lg:col-span-7">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5">
+              <div className="group relative aspect-[4/3] overflow-hidden border border-slate-200 bg-navy sm:col-span-2">
                 <Image
                   src="/assets/news/pevs-2026-game-changer.jpg"
                   alt="Pidato Pembukaan PEVS 2026 oleh Ketua Umum Dr. Moeldoko"
                   fill
                   sizes="(max-width: 1024px) 100vw, 55vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/30 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4 text-white">
-                  <span className="inline-block text-[10px] font-extrabold uppercase tracking-widest bg-electric px-2.5 py-1 rounded-md mb-1.5 shadow-xs">
+                <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/25 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-4 text-white sm:p-5">
+                  <p className="mb-1.5 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
                     Opening Ceremony
-                  </span>
-                  <h4 className="text-base sm:text-lg font-bold leading-snug text-white">
+                  </p>
+                  <h4 className="font-[family-name:var(--font-heading)] text-base font-semibold leading-snug text-white sm:text-lg">
                     Moeldoko Tegaskan Kendaraan Listrik Sebagai Game Changer Ekonomi Indonesia
                   </h4>
-                  <p className="text-xs text-slate-300 mt-1 line-clamp-2">
+                  <p className="mt-1 line-clamp-2 font-[family-name:var(--font-body)] text-xs text-slate-300">
                     Mewadahi peluncuran produk baru dari merek global, demo teknologi baterai,
                     dan komitmen penurunan emisi gas buang.
                   </p>
                 </div>
               </div>
 
-              {/* Card 2: Innovation & Commercial Fleet */}
-              <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-md aspect-[4/3]">
+              <div className="relative aspect-[4/3] overflow-hidden border border-slate-200 bg-navy">
                 <Image
                   src="/assets/news/pevs-2026-mab-moeldoko.jpg"
                   alt="Pameran Kendaraan Listrik Komersial & Command Center MAB di PEVS"
                   fill
                   sizes="(max-width: 1024px) 50vw, 30vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <span className="text-[10px] font-bold text-cyan-300 block mb-0.5">
+                <div className="absolute inset-x-0 bottom-0 p-3 text-white">
+                  <p className="mb-0.5 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
                     Solusi Industri & Komersial
-                  </span>
-                  <p className="text-xs font-bold leading-snug line-clamp-2">
+                  </p>
+                  <p className="line-clamp-2 font-[family-name:var(--font-heading)] text-xs font-semibold leading-snug">
                     Bus Listrik MAB & Sistem Monitoring Command Center
                   </p>
                 </div>
               </div>
 
-              {/* Card 3: Keynote & Conference */}
-              <div className="group relative rounded-2xl overflow-hidden bg-slate-900 border border-slate-200 shadow-md aspect-[4/3]">
+              <div className="relative aspect-[4/3] overflow-hidden border border-slate-200 bg-navy">
                 <Image
                   src="/assets/news/pevs-2026-pidato-moeldoko.jpg"
                   alt="Konferensi PEVC dan Diskusi Ekosistem Elektrifikasi"
                   fill
                   sizes="(max-width: 1024px) 50vw, 30vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-navy/90 via-transparent to-transparent" />
-                <div className="absolute bottom-3 left-3 right-3 text-white">
-                  <span className="text-[10px] font-bold text-emerald-300 block mb-0.5">
+                <div className="absolute inset-x-0 bottom-0 p-3 text-white">
+                  <p className="mb-0.5 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
                     Konferensi PEVC
-                  </span>
-                  <p className="text-xs font-bold leading-snug line-clamp-2">
+                  </p>
+                  <p className="line-clamp-2 font-[family-name:var(--font-heading)] text-xs font-semibold leading-snug">
                     Harmonisasi Regulasi Bersama Kementerian & Perguruan Tinggi
                   </p>
                 </div>
@@ -138,92 +118,67 @@ export default function PevsSpotlight() {
             </div>
           </ScrollReveal>
 
-          {/* Highlights & Scope (5 Cols) */}
-          <ScrollReveal delay={250} className="lg:col-span-5">
+          <ScrollReveal delay={200} className="min-w-0 lg:col-span-5">
             <div className="space-y-4">
-              {highlights.map((item, idx) => (
+              {highlights.map((item) => (
                 <div
-                  key={idx}
-                  className="p-5 bg-slate-50 rounded-2xl border border-slate-200 hover:border-electric/40 hover:shadow-md transition-all duration-200"
+                  key={item.title}
+                  className="border border-slate-200 bg-slate-50 p-5"
                 >
-                  <div className="flex items-start gap-3.5">
-                    <div className="w-8 h-8 rounded-xl bg-electric/10 text-electric flex items-center justify-center shrink-0 mt-0.5">
-                      <Zap className="w-4 h-4 text-electric" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-bold text-navy leading-snug mb-1">
-                        {item.title}
-                      </h4>
-                      <p className="text-xs text-slate-600 leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </div>
-                  </div>
+                  <h4 className="mb-1.5 font-[family-name:var(--font-heading)] text-sm font-semibold leading-snug text-navy">
+                    {item.title}
+                  </h4>
+                  <p className="font-[family-name:var(--font-body)] text-xs leading-relaxed text-slate-600">
+                    {item.desc}
+                  </p>
                 </div>
               ))}
 
               <div className="pt-2">
                 <Link
                   href="/berita?kategori=Kegiatan"
-                  className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-navy text-white text-xs sm:text-sm font-bold hover:bg-navy-light active:scale-[0.98] transition-all min-h-[44px] shadow-sm shadow-navy/20"
+                  className="inline-flex min-h-[44px] items-center justify-center bg-navy px-6 py-3.5 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-[background-color,opacity] duration-150 hover:bg-navy-light active:opacity-90"
                 >
-                  <span>Lihat Dokumentasi & Liputan PEVS</span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  Lihat Dokumentasi & Liputan PEVS
                 </Link>
               </div>
             </div>
           </ScrollReveal>
         </div>
 
-        {/* 4 Quick Impact Counters */}
-        <ScrollReveal delay={300}>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-navy text-white rounded-2xl border border-slate-800 shadow-xl">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-cyan-300 shrink-0">
-                <Users className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
-                  100K+
-                </p>
-                <p className="text-[11px] text-slate-400 font-medium">Pengunjung Tiap Edisi</p>
-              </div>
+        <ScrollReveal delay={240}>
+          <div className="grid grid-cols-2 gap-6 border border-navy/20 bg-navy p-6 text-white md:grid-cols-4 sm:p-8">
+            <div className="min-w-0">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white">
+                100K+
+              </p>
+              <p className="mt-1 font-[family-name:var(--font-body)] text-xs text-slate-400">
+                Pengunjung Tiap Edisi
+              </p>
             </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-emerald-400 shrink-0">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
-                  130+
-                </p>
-                <p className="text-[11px] text-slate-400 font-medium">Exhibitor & Merek Peserta</p>
-              </div>
+            <div className="min-w-0">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white">
+                130+
+              </p>
+              <p className="mt-1 font-[family-name:var(--font-body)] text-xs text-slate-400">
+                Exhibitor & Merek Peserta
+              </p>
             </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-amber-400 shrink-0">
-                <Coins className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
-                  Rp 1+ T
-                </p>
-                <p className="text-[11px] text-slate-400 font-medium">Transaksi B2B & Retail</p>
-              </div>
+            <div className="min-w-0">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white">
+                Rp 1+ T
+              </p>
+              <p className="mt-1 font-[family-name:var(--font-body)] text-xs text-slate-400">
+                Transaksi B2B & Retail
+              </p>
             </div>
-
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-yellow-300 shrink-0">
-                <Sparkles className="w-5 h-5" />
-              </div>
-              <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
-                  Tahunan
-                </p>
-                <p className="text-[11px] text-slate-400 font-medium">Agenda Resmi Nasional</p>
-              </div>
+            <div className="min-w-0">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white">
+                Tahunan
+              </p>
+              <p className="mt-1 font-[family-name:var(--font-body)] text-xs text-slate-400">
+                Agenda Resmi Nasional
+              </p>
             </div>
           </div>
         </ScrollReveal>
@@ -231,4 +186,3 @@ export default function PevsSpotlight() {
     </section>
   );
 }
-

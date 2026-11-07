@@ -2,16 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'motion/react';
-import {
-  Newspaper,
-  Calendar,
-  Clock,
-  ArrowRight,
-  ExternalLink,
-  PlayCircle,
-  TrendingUp,
-} from 'lucide-react';
+import { PlayCircle } from 'lucide-react';
 import type { NewsPost } from '@/types';
 import SectionHeader from '@/components/shared/SectionHeader';
 import ScrollReveal from '@/components/shared/ScrollReveal';
@@ -42,16 +33,14 @@ export default function LatestNews({ posts }: LatestNewsProps) {
   const isFeaturedExternal = Boolean(featuredPost.externalUrl);
 
   return (
-    <section className="py-16 md:py-24 bg-white border-b border-slate-200">
+    <section className="border-b border-slate-200 bg-white py-16 md:py-24">
       <div className="container-main">
-        {/* Top Header */}
         <ScrollReveal>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold bg-blue-100 text-electric border border-blue-200 mb-3">
-                <Newspaper className="w-3.5 h-3.5 text-electric" />
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl min-w-0">
+              <p className="mb-3 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500">
                 Warta & Publikasi Kebijakan
-              </div>
+              </p>
               <SectionHeader
                 title="Warta Terkini & Analisis Regulasi Industri"
                 subtitle="Dokumentasi agenda asosiasi, dinamika kebijakan insentif kendaraan listrik, dan liputan strategis dari ajang PEVS nasional."
@@ -60,155 +49,123 @@ export default function LatestNews({ posts }: LatestNewsProps) {
 
             <Link
               href="/berita"
-              className="group inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-electric hover:text-electric-hover transition-colors min-h-[44px]"
+              className="inline-flex min-h-[44px] items-center font-[family-name:var(--font-body)] text-sm font-semibold text-navy underline-offset-4 transition-[opacity] duration-150 hover:opacity-80 hover:underline"
             >
-              <span>Arsip Berita Lengkap</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              Arsip Berita Lengkap
             </Link>
           </div>
         </ScrollReveal>
 
-        {/* Magazine Editorial Grid: 7 Cols Lead Hero (Left) : 5 Cols Analytical List (Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* ================= LEFT: 1 HEROIC FEATURED CARD (7 Cols) ================= */}
-          <ScrollReveal delay={100} className="lg:col-span-7 h-full">
+        <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+          <ScrollReveal delay={80} className="h-full min-w-0 lg:col-span-7">
             <a
               href={featuredHref}
               target={isFeaturedExternal ? '_blank' : undefined}
               rel={isFeaturedExternal ? 'noopener noreferrer' : undefined}
-              className="group flex flex-col h-full bg-slate-50 border border-slate-200 rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl hover:border-electric/50 transition-all duration-300"
+              className="group flex h-full flex-col overflow-hidden border border-slate-200 bg-slate-50 transition-[border-color] duration-150 hover:border-slate-300"
             >
-              {/* High-Resolution Lead Image */}
-              <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-slate-900">
+              <div className="relative aspect-[16/10] w-full min-w-0 overflow-hidden bg-navy sm:aspect-[16/9]">
                 <Image
                   src={featuredPost.thumbnailUrl}
                   alt={featuredPost.title}
                   fill
                   sizes="(max-width: 1024px) 100vw, 60vw"
                   priority
-                  className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  className="object-cover"
                 />
 
-                {/* Badges on Top */}
-                <div className="absolute top-4 left-4 z-10 flex flex-wrap items-center gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-electric text-white shadow-md">
+                <div className="absolute left-4 top-4 z-10 flex flex-wrap gap-2">
+                  <span className="bg-electric px-2.5 py-1 font-[family-name:var(--font-body)] text-xs font-semibold text-white">
                     Sorotan Utama
                   </span>
-                  <span className="px-3 py-1 rounded-full text-xs font-bold bg-navy/90 text-white backdrop-blur-md border border-white/20">
+                  <span className="border border-white/20 bg-navy/90 px-2.5 py-1 font-[family-name:var(--font-body)] text-xs font-medium text-white">
                     {featuredPost.sourceName ?? featuredPost.category}
                   </span>
                 </div>
 
-                {featuredPost.mediaType === 'video' && (
-                  <div className="absolute inset-0 flex items-center justify-center bg-navy/30 group-hover:bg-navy/40 transition-colors">
-                    <PlayCircle className="w-16 h-16 text-white drop-shadow-lg group-hover:scale-110 transition-transform" />
+                {featuredPost.mediaType === 'video' ? (
+                  <div className="absolute inset-0 flex items-center justify-center bg-navy/30">
+                    <PlayCircle className="h-14 w-14 text-white" aria-hidden="true" />
                   </div>
-                )}
+                ) : null}
               </div>
 
-              {/* Lead Card Body */}
-              <div className="p-6 sm:p-8 flex flex-col justify-between flex-1">
-                <div>
-                  {/* Meta Bar */}
-                  <div className="flex items-center gap-4 text-xs text-slate-500 font-medium mb-3">
-                    <span className="flex items-center gap-1.5">
-                      <Calendar className="w-3.5 h-3.5 text-slate-400" />
-                      {formatNewsDate(featuredPost.publishedAt)}
-                    </span>
-                    <span>&bull;</span>
-                    <span className="flex items-center gap-1.5">
-                      <Clock className="w-3.5 h-3.5 text-slate-400" />
-                      4 menit baca
-                    </span>
-                    <span>&bull;</span>
-                    <span className="text-slate-600 font-semibold">
-                      Oleh {featuredPost.author}
-                    </span>
+              <div className="flex flex-1 flex-col justify-between gap-4 p-6 pb-7 sm:p-8 sm:pb-9">
+                <div className="min-w-0">
+                  <div className="mb-3 flex flex-wrap gap-x-4 gap-y-1 font-[family-name:var(--font-body)] text-xs text-slate-600">
+                    <span>{formatNewsDate(featuredPost.publishedAt)}</span>
+                    <span>4 menit baca</span>
+                    <span>Oleh {featuredPost.author}</span>
                   </div>
 
-                  {/* Title */}
-                  <h3 className="text-xl sm:text-2xl font-black text-navy leading-snug mb-4 group-hover:text-electric transition-colors">
+                  <h3 className="mb-4 font-[family-name:var(--font-heading)] text-xl font-semibold leading-snug text-navy sm:text-2xl">
                     {featuredPost.title}
                   </h3>
 
-                  {/* Excerpt */}
-                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed line-clamp-3 mb-6">
+                  <p className="mb-6 max-w-[65ch] line-clamp-3 font-[family-name:var(--font-body)] text-sm leading-relaxed text-slate-600">
                     {featuredPost.excerpt}
                   </p>
                 </div>
 
-                {/* Read Link */}
-                <div className="pt-4 border-t border-slate-200 flex items-center justify-between text-xs sm:text-sm font-bold text-electric">
-                  <span className="flex items-center gap-1.5">
-                    Baca Liputan Khusus
-                    {isFeaturedExternal && <ExternalLink className="w-3.5 h-3.5 ml-1" />}
-                  </span>
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1.5" />
-                </div>
+                <p className="border-t border-slate-200 pt-4 font-[family-name:var(--font-body)] text-sm font-semibold text-navy">
+                  Baca Liputan Khusus
+                </p>
               </div>
             </a>
           </ScrollReveal>
 
-          {/* ================= RIGHT: 3 ANALYTICAL HORIZONTAL CARDS (5 Cols) ================= */}
-          <div className="lg:col-span-5 flex flex-col gap-4 sm:gap-5">
+          <div className="flex flex-col gap-4 sm:gap-5 lg:col-span-5">
             {supportingPosts.map((post, idx) => {
               const href = post.externalUrl ?? `/berita/${post.slug}`;
               const isExternal = Boolean(post.externalUrl);
 
               return (
-                <ScrollReveal key={post.id} delay={150 + idx * 100}>
+                <ScrollReveal key={post.id} delay={120 + idx * 80}>
                   <a
                     href={href}
                     target={isExternal ? '_blank' : undefined}
                     rel={isExternal ? 'noopener noreferrer' : undefined}
-                    className="group flex flex-col sm:flex-row gap-4 p-4 sm:p-4.5 bg-slate-50 border border-slate-200 rounded-2xl hover:bg-white hover:border-electric/40 hover:shadow-lg transition-all duration-200"
+                    className="group flex flex-col gap-4 border border-slate-200 bg-slate-50 p-4 pb-5 transition-[border-color,background-color] duration-150 hover:border-slate-300 hover:bg-white sm:flex-row sm:p-5"
                   >
-                    {/* Thumbnail 16:9 */}
-                    <div className="relative aspect-[16/10] sm:aspect-square sm:w-28 sm:h-28 shrink-0 rounded-xl overflow-hidden bg-slate-900">
+                    <div className="relative aspect-[16/10] w-full shrink-0 overflow-hidden bg-navy sm:aspect-square sm:h-28 sm:w-28">
                       <Image
                         src={post.thumbnailUrl}
                         alt={post.title}
                         fill
                         sizes="(max-width: 640px) 100vw, 120px"
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="object-cover"
                       />
-                      {post.mediaType === 'video' && (
+                      {post.mediaType === 'video' ? (
                         <div className="absolute inset-0 flex items-center justify-center bg-navy/30">
-                          <PlayCircle className="w-7 h-7 text-white" />
+                          <PlayCircle className="h-7 w-7 text-white" aria-hidden="true" />
                         </div>
-                      )}
+                      ) : null}
                     </div>
 
-                    {/* Content Details */}
-                    <div className="flex flex-col justify-between flex-1">
+                    <div className="flex min-w-0 flex-1 flex-col justify-between">
                       <div>
-                        {/* Meta Category & Time */}
-                        <div className="flex items-center gap-2 mb-1.5">
-                          <span className="text-[10px] font-black uppercase tracking-wider text-electric bg-blue-100 px-2 py-0.5 rounded-md">
+                        <div className="mb-1.5 flex flex-wrap items-center gap-x-3 gap-y-1">
+                          <span className="font-[family-name:var(--font-body)] text-xs font-medium text-slate-600">
                             {post.sourceName ?? post.category}
                           </span>
-                          <span className="text-[11px] text-slate-400 font-medium">
+                          <span className="font-[family-name:var(--font-body)] text-xs text-slate-600">
                             3 menit baca
                           </span>
                         </div>
 
-                        {/* Title */}
-                        <h4 className="text-xs sm:text-sm font-bold text-navy leading-snug line-clamp-2 group-hover:text-electric transition-colors mb-1.5">
+                        <h4 className="mb-1.5 line-clamp-2 font-[family-name:var(--font-heading)] text-sm font-semibold leading-snug text-navy">
                           {post.title}
                         </h4>
 
-                        {/* Short snippet */}
-                        <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                        <p className="line-clamp-2 font-[family-name:var(--font-body)] text-xs leading-relaxed text-slate-500">
                           {post.excerpt}
                         </p>
                       </div>
 
-                      {/* Date & Arrow Slide */}
-                      <div className="flex items-center justify-between pt-2 mt-2 border-t border-slate-200/70 text-[11px] text-slate-400 font-medium">
+                      <div className="mt-2 flex items-center justify-between border-t border-slate-200/70 pt-2 font-[family-name:var(--font-body)] text-xs text-slate-600">
                         <span>{formatNewsDate(post.publishedAt)}</span>
-                        <span className="flex items-center gap-1 font-bold text-electric group-hover:translate-x-1 transition-transform">
-                          <span>{post.mediaType === 'video' ? 'Tonton' : 'Baca'}</span>
-                          <ArrowRight className="w-3 h-3" />
+                        <span className="font-semibold text-navy">
+                          {post.mediaType === 'video' ? 'Tonton' : 'Baca'}
                         </span>
                       </div>
                     </div>

@@ -44,28 +44,13 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* 1. Asymmetrical Editorial Hero with Live Telemetry */}
       <HeroSection />
-
-      {/* 2. Institutional Leadership Statement & National Strategy */}
       <LeadershipMessage />
-
-      {/* 3. Industry Consortium Showcase with Capsule Pills & Infinite Marquee */}
       <MemberShowcase members={memberBrands} />
-
-      {/* 4. Flagship Spotlight: PEVS (PERIKLINDO Electric Vehicle Show) */}
       <PevsSpotlight />
-
-      {/* 5. Strategic Pillars (Advokasi Regulasi, Akselerasi Pasar, Hilirisasi Baterai) */}
       <StrategicPillars />
-
-      {/* 6. Magazine-Style Editorial News Digest */}
       <LatestNews posts={newsPosts} />
-
-      {/* 7. Real Documentation Social & Field Activities */}
       <SocialMediaFeed posts={socialPosts} />
-
-      {/* 8. Dual-Track Institutional Gateway (B2B vs Secretariat) */}
       <CtaSection />
     </>
   );

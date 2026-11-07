@@ -1,0 +1,18 @@
+{
+  "mode": "redesign",
+  "depth": "restyle",
+  "scope": "page",
+  "theme": "custom",
+  "axes": "light/roman-serif/chromatic-blue",
+  "hero": "navy claim + quiet secretariat facts",
+  "nav": "frozen",
+  "footer": "frozen",
+  "imagery": "map embed existing",
+  "photos": [],
+  "entry": "kontak",
+  "fingerprint": "contact-restyle-2026-11-06",
+  "sections": ["ContactHero", "ContactForm", "SecretariatMapCard"],
+  "signature": "secretariat channel under Source Serif + real WhatsApp handoff",
+  "waived": ["19", "44c", "49b", "58", "63", "77", "78", "81"],
+  "prompt": "PERIKLINDO official secretariat contact channel"
+}

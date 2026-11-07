@@ -46,10 +46,10 @@ export default function GalleryGrid({ items }: GalleryGridProps) {
   }, [items]);
 
   return (
-    <section id="arsip-galeri" className="py-16 md:py-20 lg:py-24 bg-slate-50">
+    <section id="arsip-galeri" className="overflow-x-clip bg-slate-50 py-16 md:py-20 lg:py-24">
       <div className="container-main">
         <div
-          className="flex items-center gap-2 overflow-x-auto pb-4 mb-10 scrollbar-none"
+          className="scrollbar-none mb-10 flex items-center gap-1 overflow-x-auto border-b border-slate-200 pb-px"
           role="tablist"
           aria-label="Filter kategori galeri"
         >
@@ -63,24 +63,22 @@ export default function GalleryGrid({ items }: GalleryGridProps) {
                 aria-selected={isActive}
                 onClick={() => setActiveFilter(filter)}
                 className={cn(
-                  'relative whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold min-h-[44px] flex items-center gap-2 transition-colors duration-150',
-                  isActive
-                    ? 'text-white'
-                    : 'bg-white text-slate-600 hover:text-navy border border-slate-200'
+                  'relative inline-flex min-h-[44px] shrink-0 items-center gap-2 whitespace-nowrap px-3.5 py-2.5 font-[family-name:var(--font-body)] text-sm font-medium transition-[color,opacity] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-80 sm:px-4',
+                  isActive ? 'text-navy' : 'text-slate-500 hover:text-navy'
                 )}
               >
                 {isActive ? (
                   <motion.span
                     layoutId={shouldReduceMotion ? undefined : 'gallery-filter-active'}
-                    className="absolute inset-0 rounded-xl bg-navy -z-10"
+                    className="absolute inset-x-0 -bottom-px h-0.5 bg-navy"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
                   />
                 ) : null}
                 <span className="relative z-10">{filter}</span>
                 <span
                   className={cn(
-                    'relative z-10 text-[11px] px-2 py-0.5 rounded-full font-extrabold',
-                    isActive ? 'bg-white/20 text-white' : 'bg-slate-100 text-slate-600'
+                    'relative z-10 font-[family-name:var(--font-body)] text-xs tabular-nums',
+                    isActive ? 'text-slate-500' : 'text-slate-400'
                   )}
                 >
                   {counts[filter] ?? 0}
@@ -90,78 +88,64 @@ export default function GalleryGrid({ items }: GalleryGridProps) {
           })}
         </div>
 
-        <motion.div
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
-              <motion.button
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: -8 }}
+            transition={{ duration: 0.24, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-1 gap-6 sm:grid-cols-[repeat(2,minmax(0,1fr))] lg:grid-cols-[repeat(3,minmax(0,1fr))]"
+          >
+            {filteredItems.map((item) => (
+              <button
                 key={item.id}
                 type="button"
-                layout
-                initial={
-                  shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 16 }
-                }
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={
-                  shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 8 }
-                }
-                transition={
-                  shouldReduceMotion
-                    ? { duration: 0.12 }
-                    : {
-                        type: 'spring',
-                        stiffness: 260,
-                        damping: 25,
-                        delay: index * 0.05,
-                      }
-                }
-                whileHover={shouldReduceMotion ? undefined : { y: -6 }}
                 onClick={() =>
                   setActiveIndex(items.findIndex((entry) => entry.id === item.id))
                 }
-                className="group text-left bg-white border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-electric/30 transition-shadow duration-200"
+                className="group min-w-0 overflow-hidden border border-slate-200 bg-white text-left transition-[border-color,opacity] duration-150 hover:border-navy/40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90"
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                <div className="relative aspect-[4/3] min-w-0 overflow-hidden bg-slate-100">
                   <Image
                     src={item.imageUrl}
                     alt={item.title}
                     fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent opacity-80" />
-                  <span className="absolute top-3 left-3 text-[10px] font-extrabold uppercase tracking-wider bg-electric text-white px-2.5 py-1 rounded-md">
+                </div>
+                <div className="min-w-0 p-4 sm:p-5">
+                  <p className="mb-2 font-[family-name:var(--font-body)] text-xs font-medium text-slate-600">
                     {item.category}
-                  </span>
-                  <div className="absolute bottom-3 left-3 right-3 text-white">
-                    <p className="text-sm font-bold leading-snug line-clamp-2">
-                      {item.title}
-                    </p>
-                    <div className="mt-1.5 flex flex-wrap items-center gap-3 text-[11px] text-slate-200">
-                      <span className="inline-flex items-center gap-1">
-                        <CalendarDays className="w-3 h-3" />
-                        {formatDateId(item.date, 'short')}
+                  </p>
+                  <p className="mb-3 min-w-0 break-words font-[family-name:var(--font-heading)] text-base font-semibold leading-snug text-navy sm:text-lg">
+                    {item.title}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 font-[family-name:var(--font-body)] text-xs text-slate-500">
+                    <span className="inline-flex items-center gap-1.5">
+                      <CalendarDays className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                      {formatDateId(item.date, 'short')}
+                    </span>
+                    {item.location ? (
+                      <span className="inline-flex items-center gap-1.5">
+                        <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                        {item.location}
                       </span>
-                      {item.location ? (
-                        <span className="inline-flex items-center gap-1">
-                          <MapPin className="w-3 h-3" />
-                          {item.location}
-                        </span>
-                      ) : null}
-                    </div>
+                    ) : null}
                   </div>
                 </div>
-              </motion.button>
+              </button>
             ))}
-          </AnimatePresence>
-        </motion.div>
+          </motion.div>
+        </AnimatePresence>
 
         {filteredItems.length === 0 ? (
-          <p className="text-center text-sm text-slate-500 py-16">
-            Belum ada dokumentasi pada kategori ini.
-          </p>
+          <div className="border border-dashed border-slate-300 bg-white px-6 py-16 text-center">
+            <p className="font-[family-name:var(--font-body)] text-sm text-slate-500">
+              Belum ada dokumentasi pada kategori ini.
+            </p>
+          </div>
         ) : null}
       </div>
 

@@ -35,31 +35,31 @@ export const metadata: Metadata = {
 export default function TentangKamiPage() {
   return (
     <>
-      {/* 1. Hero with Breadcrumb & Key Metrics */}
+      {/* 1. AboutHero — institutional profile + quiet facts */}
       <AboutHero />
 
-      {/* 2. Founding Members & Inception Story */}
+      {/* 2. FoundersSection */}
       <FoundersSection />
 
-      {/* 3. Vision & Mission Cards */}
+      {/* 3. VisionMissionSection */}
       <VisionMissionSection />
 
-      {/* 4. Strategic Objectives & 4 Pillars */}
+      {/* 4. StrategicObjectives */}
       <StrategicObjectives />
 
-      {/* 5. Historical Milestones Timeline (2019 - Present) */}
+      {/* 5. HistoryTimeline */}
       <HistoryTimeline />
 
-      {/* 6. Organizational Core Values */}
+      {/* 6. CoreValuesSection */}
       <CoreValuesSection />
 
-      {/* 7. Leadership & Executive Board Preview */}
+      {/* 7. LeadershipSpotlight */}
       <LeadershipSpotlight />
 
-      {/* 8. Legal Basis & Secretariat Headquarters */}
+      {/* 8. LegalAndContactSection */}
       <LegalAndContactSection />
 
-      {/* 9. Membership & Collaboration CTA */}
+      {/* 9. AboutCta */}
       <AboutCta />
     </>
   );

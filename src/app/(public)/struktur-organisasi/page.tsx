@@ -38,19 +38,19 @@ export const metadata: Metadata = {
 export default function StrukturOrganisasiPage() {
   return (
     <>
-      {/* 1. Header with Breadcrumbs & Summary Stats */}
+      {/* 1. Hero — breadcrumb, claim, quiet hierarchy facts */}
       <OrgHero />
 
-      {/* 2. Interactive Organization Hierarchy (Cards reveal 1 by 1 on scroll) */}
+      {/* 2. Interactive hierarchy — filters, tiers, member cards */}
       <OrgChartInteractive />
 
-      {/* 3. Official Visual Diagram Preview & Lightbox Modal */}
+      {/* 3. Official diagram preview + lightbox modal */}
       <OrgOfficialDiagramModal />
 
-      {/* 4. Functional Duties & Scope for the 6 Divisions */}
+      {/* 4. Duties accordion for six divisions */}
       <OrgDutiesAccordion />
 
-      {/* 5. Institutional Partnerships CTA */}
+      {/* 5. Institutional partnership CTA */}
       <OrgCta />
     </>
   );

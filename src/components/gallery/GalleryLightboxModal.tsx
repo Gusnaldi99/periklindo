@@ -5,7 +5,6 @@ import Image from 'next/image';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { CalendarDays, ChevronLeft, ChevronRight, MapPin, X } from 'lucide-react';
 import { formatDateId } from '@/lib/content';
-import { cn } from '@/lib/utils';
 import type { GalleryItem } from '@/types';
 
 interface GalleryLightboxModalProps {
@@ -54,39 +53,39 @@ export default function GalleryLightboxModal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: shouldReduceMotion ? 0 : 0.22 }}
-          className="fixed inset-0 z-[80] bg-navy/90 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-navy/92 p-3 sm:p-6"
           onClick={onClose}
           role="dialog"
           aria-modal="true"
           aria-label={`Pratinjau ${item.title}`}
         >
           <motion.div
-            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.95, y: 12 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, scale: 0.96, y: 8 }}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 8 }}
             transition={
               shouldReduceMotion
                 ? { duration: 0.12 }
-                : { type: 'spring', stiffness: 320, damping: 28 }
+                : { duration: 0.28, ease: [0.16, 1, 0.3, 1] }
             }
-            className="relative w-full max-w-5xl max-h-[94vh] bg-navy-light rounded-2xl overflow-hidden shadow-2xl border border-white/10 flex flex-col"
+            className="relative flex max-h-[94vh] w-full max-w-5xl flex-col overflow-hidden border border-white/15 bg-navy-light"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="flex items-center justify-between gap-3 px-4 sm:px-5 py-3 border-b border-white/10">
-              <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-blue-300">
+            <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3 sm:px-5">
+              <p className="min-w-0 font-[family-name:var(--font-body)] text-sm font-medium text-teal">
                 {item.category}
               </p>
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 min-h-[40px] min-w-[40px]"
+                className="inline-flex h-10 w-10 min-h-[40px] min-w-[40px] items-center justify-center bg-white/10 text-white transition-[background-color,opacity] duration-150 hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90"
                 aria-label="Tutup pratinjau"
               >
-                <X className="w-4 h-4" />
+                <X className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
 
-            <div className="relative bg-black min-h-[240px] sm:min-h-[420px] flex-1">
+            <div className="relative min-h-[240px] flex-1 bg-slate-900 sm:min-h-[420px]">
               <Image
                 src={item.imageUrl}
                 alt={item.title}
@@ -103,42 +102,42 @@ export default function GalleryLightboxModal({
                     onClick={() =>
                       onNavigate((activeIndex - 1 + items.length) % items.length)
                     }
-                    className="absolute left-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-full bg-navy/70 text-white border border-white/20 hover:bg-navy min-h-[44px] min-w-[44px]"
+                    className="absolute left-3 top-1/2 inline-flex h-11 w-11 min-h-[44px] min-w-[44px] -translate-y-1/2 items-center justify-center border border-white/20 bg-navy/70 text-white transition-[background-color,opacity] duration-150 hover:bg-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90"
                     aria-label="Foto sebelumnya"
                   >
-                    <ChevronLeft className="w-5 h-5" />
+                    <ChevronLeft className="h-5 w-5" aria-hidden="true" />
                   </button>
                   <button
                     type="button"
                     onClick={() => onNavigate((activeIndex + 1) % items.length)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 inline-flex items-center justify-center w-11 h-11 rounded-full bg-navy/70 text-white border border-white/20 hover:bg-navy min-h-[44px] min-w-[44px]"
+                    className="absolute right-3 top-1/2 inline-flex h-11 w-11 min-h-[44px] min-w-[44px] -translate-y-1/2 items-center justify-center border border-white/20 bg-navy/70 text-white transition-[background-color,opacity] duration-150 hover:bg-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90"
                     aria-label="Foto berikutnya"
                   >
-                    <ChevronRight className="w-5 h-5" />
+                    <ChevronRight className="h-5 w-5" aria-hidden="true" />
                   </button>
                 </>
               ) : null}
             </div>
 
-            <div className="px-5 sm:px-6 py-5 bg-navy text-white">
-              <h2 className="text-lg sm:text-xl font-extrabold text-white mb-2">
+            <div className="bg-navy px-5 py-5 text-white sm:px-6">
+              <h2 className="mb-2 min-w-0 break-words font-[family-name:var(--font-heading)] text-lg font-semibold text-white sm:text-xl">
                 {item.title}
               </h2>
-              <p className="text-sm text-slate-300 leading-relaxed mb-4">
+              <p className="mb-4 font-[family-name:var(--font-body)] text-sm leading-relaxed text-slate-300">
                 {item.description}
               </p>
-              <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
+              <div className="flex flex-wrap items-center gap-x-4 gap-y-2 font-[family-name:var(--font-body)] text-xs text-slate-400">
                 <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="w-3.5 h-3.5 text-electric" />
+                  <CalendarDays className="h-3.5 w-3.5 shrink-0 text-electric" aria-hidden="true" />
                   {formatDateId(item.date)}
                 </span>
                 {item.location ? (
                   <span className="inline-flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 text-teal" />
+                    <MapPin className="h-3.5 w-3.5 shrink-0 text-teal" aria-hidden="true" />
                     {item.location}
                   </span>
                 ) : null}
-                <span className={cn('ml-auto font-mono text-slate-500')}>
+                <span className="ml-auto tabular-nums text-slate-500">
                   {activeIndex + 1} / {items.length}
                 </span>
               </div>

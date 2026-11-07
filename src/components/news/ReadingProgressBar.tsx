@@ -29,7 +29,7 @@ export default function ReadingProgressBar() {
 
   return (
     <div
-      className="fixed top-0 inset-x-0 z-[60] h-1 bg-navy/10"
+      className="fixed inset-x-0 top-0 z-[60] h-1 bg-navy/10"
       role="progressbar"
       aria-label="Progres membaca artikel"
       aria-valuemin={0}
@@ -37,7 +37,7 @@ export default function ReadingProgressBar() {
       aria-valuenow={Math.round(progress * 100)}
     >
       <motion.div
-        className="h-full origin-left bg-gradient-to-r from-electric to-teal"
+        className="h-full origin-left bg-electric motion-reduce:transition-none"
         animate={{ scaleX: progress }}
         initial={false}
         transition={

@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-06",
+  "route": "/kontak",
+  "mode": "redesign",
+  "depth": "restyle",
+  "theme": "custom",
+  "preserved": [
+    "ContactHero → ContactForm + SecretariatMapCard order",
+    "Suspense around ContactForm",
+    "CATEGORIES ids/labels/descriptions",
+    "Form fields, validation, WhatsApp href composition",
+    "Map embed URL and secretariat contact facts",
+    "Navbar/Footer/FloatingWhatsApp/public layout frozen",
+    "copy: verbatim"
+  ],
+  "introduced": [
+    "Institutional quiet hero matching FAQ/About",
+    "Fact strip instead of info cards",
+    "Sentence-case captions (no tracked eyebrows)",
+    "Submit opens WhatsApp after validation (Floor 70)",
+    "focus-visible + active states on form controls"
+  ],
+  "typeLock": "prepare/artifacts/02-type-lock.md",
+  "axes": "light/roman-serif/chromatic-blue"
+}

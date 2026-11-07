@@ -101,27 +101,6 @@ export default function ContactForm() {
     return next;
   }, [errors, touched]);
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const nextErrors = validate(values);
-    setErrors(nextErrors);
-    setTouched({
-      name: true,
-      email: true,
-      company: true,
-      phone: true,
-      category: true,
-      message: true,
-    });
-    if (Object.keys(nextErrors).length > 0) return;
-
-    setSubmitting(true);
-    window.setTimeout(() => {
-      setSubmitting(false);
-      setSubmitted(true);
-    }, 650);
-  };
-
   const whatsappHref = useMemo(() => {
     const categoryLabel =
       CATEGORIES.find((category) => category.id === values.category)?.label ?? 'Umum';
@@ -136,34 +115,68 @@ export default function ContactForm() {
     return `https://wa.me/6287789703728?text=${encodeURIComponent(text)}`;
   }, [values]);
 
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const nextErrors = validate(values);
+    setErrors(nextErrors);
+    setTouched({
+      name: true,
+      email: true,
+      company: true,
+      phone: true,
+      category: true,
+      message: true,
+    });
+    if (Object.keys(nextErrors).length > 0) return;
+
+    // Real channel: open the composed WhatsApp message (no fake setTimeout success).
+    setSubmitting(true);
+    window.open(whatsappHref, '_blank', 'noopener,noreferrer');
+    setSubmitting(false);
+    setSubmitted(true);
+  };
+
   const fieldClass = (key: keyof FormState) =>
     cn(
-      'w-full rounded-xl border bg-white px-4 py-3 text-sm text-navy outline-none transition-[box-shadow,border-color] duration-200',
-      'focus:border-electric focus:ring-4 focus:ring-electric/15',
-      visibleErrors[key] ? 'border-red-400 ring-4 ring-red-100' : 'border-slate-200'
+      'w-full border bg-slate-50 px-4 py-3 font-[family-name:var(--font-body)] text-sm text-navy outline-none',
+      'transition-[border-color,box-shadow,background-color] duration-150',
+      'hover:bg-white',
+      'focus-visible:border-electric focus-visible:bg-white focus-visible:ring-4 focus-visible:ring-electric/15',
+      visibleErrors[key] ? 'border-red-400 ring-4 ring-red-100' : 'border-slate-500'
     );
 
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-sm h-full">
-      <p className="text-[11px] font-extrabold uppercase tracking-[0.16em] text-electric mb-2">
+    <div className="h-full border border-slate-200 bg-white p-6 sm:p-8">
+      <p className="mb-2 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500">
         Formulir Resmi
       </p>
-      <h2 className="text-2xl font-extrabold text-navy mb-2">Kirim pesan ke sekretariat</h2>
-      <p className="text-sm text-slate-500 mb-8">
+      <h2 className="mb-2 font-[family-name:var(--font-heading)] text-2xl font-semibold tracking-tight text-navy sm:text-[1.75rem]">
+        Kirim pesan ke sekretariat
+      </h2>
+      <p className="mb-8 font-[family-name:var(--font-body)] text-sm leading-relaxed text-slate-500">
         Pilih kategori kepentingan agar pesan diteruskan ke bidang yang tepat.
       </p>
 
-      <form onSubmit={handleSubmit} noValidate className="space-y-5">
+      <form
+        onSubmit={handleSubmit}
+        noValidate
+        data-endpoint="https://wa.me/6287789703728"
+        className="space-y-5"
+      >
         <fieldset>
-          <legend className="text-xs font-bold text-navy mb-3">Kategori kepentingan</legend>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <legend className="mb-3 font-[family-name:var(--font-body)] text-xs font-semibold text-navy">
+            Kategori kepentingan
+          </legend>
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {CATEGORIES.map((category) => {
               const selected = values.category === category.id;
               return (
                 <label
                   key={category.id}
                   className={cn(
-                    'cursor-pointer rounded-xl border p-3.5 transition-colors duration-150',
+                    'cursor-pointer border p-3.5 transition-[border-color,background-color,box-shadow] duration-150',
+                    'focus-within:outline focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-electric',
+                    'active:bg-slate-50',
                     selected
                       ? 'border-electric bg-electric/5 ring-2 ring-electric/20'
                       : 'border-slate-200 hover:border-slate-300'
@@ -180,8 +193,10 @@ export default function ContactForm() {
                     }}
                     className="sr-only"
                   />
-                  <span className="block text-sm font-bold text-navy">{category.label}</span>
-                  <span className="block text-xs text-slate-500 mt-0.5">
+                  <span className="block font-[family-name:var(--font-body)] text-sm font-semibold text-navy">
+                    {category.label}
+                  </span>
+                  <span className="mt-0.5 block font-[family-name:var(--font-body)] text-xs text-slate-500">
                     {category.description}
                   </span>
                 </label>
@@ -189,13 +204,17 @@ export default function ContactForm() {
             })}
           </div>
           {visibleErrors.category ? (
-            <p className="text-xs text-red-600 mt-2">{visibleErrors.category}</p>
+            <p className="mt-2 font-[family-name:var(--font-body)] text-xs text-red-600">
+              {visibleErrors.category}
+            </p>
           ) : null}
         </fieldset>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <label className="block">
-            <span className="text-xs font-bold text-navy">Nama lengkap</span>
+            <span className="font-[family-name:var(--font-body)] text-xs font-semibold text-navy">
+              Nama lengkap
+            </span>
             <input
               type="text"
               value={values.name}
@@ -203,13 +222,19 @@ export default function ContactForm() {
               onChange={(event) => setField('name', event.target.value)}
               className={cn(fieldClass('name'), 'mt-1.5')}
               autoComplete="name"
+              aria-invalid={Boolean(visibleErrors.name)}
+              aria-required="true"
             />
             {visibleErrors.name ? (
-              <p className="text-xs text-red-600 mt-1.5">{visibleErrors.name}</p>
+              <p className="mt-1.5 font-[family-name:var(--font-body)] text-xs text-red-600">
+                {visibleErrors.name}
+              </p>
             ) : null}
           </label>
           <label className="block">
-            <span className="text-xs font-bold text-navy">Email</span>
+            <span className="font-[family-name:var(--font-body)] text-xs font-semibold text-navy">
+              Email
+            </span>
             <input
               type="email"
               value={values.email}
@@ -217,13 +242,19 @@ export default function ContactForm() {
               onChange={(event) => setField('email', event.target.value)}
               className={cn(fieldClass('email'), 'mt-1.5')}
               autoComplete="email"
+              aria-invalid={Boolean(visibleErrors.email)}
+              aria-required="true"
             />
             {visibleErrors.email ? (
-              <p className="text-xs text-red-600 mt-1.5">{visibleErrors.email}</p>
+              <p className="mt-1.5 font-[family-name:var(--font-body)] text-xs text-red-600">
+                {visibleErrors.email}
+              </p>
             ) : null}
           </label>
           <label className="block">
-            <span className="text-xs font-bold text-navy">Perusahaan / instansi</span>
+            <span className="font-[family-name:var(--font-body)] text-xs font-semibold text-navy">
+              Perusahaan / instansi
+            </span>
             <input
               type="text"
               value={values.company}
@@ -231,13 +262,18 @@ export default function ContactForm() {
               onChange={(event) => setField('company', event.target.value)}
               className={cn(fieldClass('company'), 'mt-1.5')}
               autoComplete="organization"
+              aria-invalid={Boolean(visibleErrors.company)}
             />
             {visibleErrors.company ? (
-              <p className="text-xs text-red-600 mt-1.5">{visibleErrors.company}</p>
+              <p className="mt-1.5 font-[family-name:var(--font-body)] text-xs text-red-600">
+                {visibleErrors.company}
+              </p>
             ) : null}
           </label>
           <label className="block">
-            <span className="text-xs font-bold text-navy">Nomor telepon / WhatsApp</span>
+            <span className="font-[family-name:var(--font-body)] text-xs font-semibold text-navy">
+              Nomor telepon / WhatsApp
+            </span>
             <input
               type="tel"
               value={values.phone}
@@ -245,39 +281,50 @@ export default function ContactForm() {
               onChange={(event) => setField('phone', event.target.value)}
               className={cn(fieldClass('phone'), 'mt-1.5')}
               autoComplete="tel"
+              aria-invalid={Boolean(visibleErrors.phone)}
             />
             {visibleErrors.phone ? (
-              <p className="text-xs text-red-600 mt-1.5">{visibleErrors.phone}</p>
+              <p className="mt-1.5 font-[family-name:var(--font-body)] text-xs text-red-600">
+                {visibleErrors.phone}
+              </p>
             ) : null}
           </label>
         </div>
 
         <label className="block">
-          <span className="text-xs font-bold text-navy">Uraian keperluan</span>
+          <span className="font-[family-name:var(--font-body)] text-xs font-semibold text-navy">
+            Uraian keperluan
+          </span>
           <textarea
             value={values.message}
             onBlur={() => setTouched((current) => ({ ...current, message: true }))}
             onChange={(event) => setField('message', event.target.value)}
             rows={5}
-            className={cn(fieldClass('message'), 'mt-1.5 resize-y min-h-[120px]')}
+            className={cn(fieldClass('message'), 'mt-1.5 min-h-[120px] resize-y')}
+            aria-invalid={Boolean(visibleErrors.message)}
+            aria-required="true"
           />
           {visibleErrors.message ? (
-            <p className="text-xs text-red-600 mt-1.5">{visibleErrors.message}</p>
+            <p className="mt-1.5 font-[family-name:var(--font-body)] text-xs text-red-600">
+              {visibleErrors.message}
+            </p>
           ) : (
-            <p className="text-xs text-slate-400 mt-1.5">Minimal 20 karakter.</p>
+            <p className="mt-1.5 font-[family-name:var(--font-body)] text-xs text-slate-600">
+              Minimal 20 karakter.
+            </p>
           )}
         </label>
 
-        <div className="flex flex-col sm:flex-row gap-3 pt-2">
+        <div className="flex flex-col gap-3 pt-2 sm:flex-row">
           <button
             type="submit"
             disabled={submitting}
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-electric text-white text-sm font-bold hover:bg-electric-hover disabled:opacity-70 min-h-[44px] shadow-md shadow-electric/30"
+            className="inline-flex min-h-[44px] items-center justify-center gap-2 bg-electric px-5 py-3 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-[background-color,opacity] duration-150 hover:bg-electric-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90 disabled:opacity-70"
           >
             {submitting ? (
-              <LoaderCircle className="w-4 h-4 animate-spin" />
+              <LoaderCircle className="h-4 w-4 animate-spin motion-reduce:animate-none" />
             ) : (
-              <Send className="w-4 h-4" />
+              <Send className="h-4 w-4" aria-hidden="true" />
             )}
             {submitting ? 'Mengirim…' : 'Kirim pesan'}
           </button>
@@ -285,7 +332,7 @@ export default function ContactForm() {
             href={whatsappHref}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-slate-200 text-navy text-sm font-bold hover:bg-slate-50 min-h-[44px]"
+            className="inline-flex min-h-[44px] items-center justify-center gap-2 border border-slate-200 px-5 py-3 font-[family-name:var(--font-body)] text-sm font-semibold text-navy transition-[background-color,opacity] duration-150 hover:bg-slate-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90"
           >
             Lanjutkan via WhatsApp
           </a>
@@ -298,12 +345,16 @@ export default function ContactForm() {
             initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0 }}
-            className="mt-6 flex items-start gap-3 rounded-xl border border-teal/30 bg-teal/10 px-4 py-3"
+            className="mt-6 flex items-start gap-3 border border-teal/30 bg-teal/10 px-4 py-3"
+            role="status"
+            aria-live="polite"
           >
-            <CheckCircle2 className="w-5 h-5 text-teal shrink-0 mt-0.5" />
+            <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-teal" aria-hidden="true" />
             <div>
-              <p className="text-sm font-bold text-navy">Pesan siap ditindaklanjuti</p>
-              <p className="text-xs text-slate-600 mt-0.5">
+              <p className="font-[family-name:var(--font-body)] text-sm font-semibold text-navy">
+                Pesan siap ditindaklanjuti
+              </p>
+              <p className="mt-0.5 font-[family-name:var(--font-body)] text-xs text-slate-600">
                 Terima kasih, {values.name}. Tim sekretariat akan merespons pada jam operasional.
                 Anda juga dapat mengirim salinan yang sama melalui WhatsApp.
               </p>

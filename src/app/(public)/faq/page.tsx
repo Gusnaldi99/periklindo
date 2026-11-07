@@ -26,6 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default function FaqPage() {
+  // Frozen section order (room 08): FaqHero → FaqAccordionList → FaqContactPrompt.
   return (
     <>
       <FaqHero />

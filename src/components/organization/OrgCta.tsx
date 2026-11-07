@@ -4,39 +4,39 @@ import ScrollReveal from '@/components/shared/ScrollReveal';
 
 export default function OrgCta() {
   return (
-    <section className="bg-navy py-16 md:py-24 text-white relative overflow-hidden border-t border-navy-light">
-      {/* Background ambient lighting */}
+    <section className="relative overflow-x-clip border-t border-navy-light bg-navy py-16 text-white md:py-24">
       <div
-        className="absolute inset-0 opacity-15 pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.03]"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 50% 50%, #0066FF 0%, transparent 65%)',
+            'radial-gradient(circle at 1px 1px, var(--color-slate-100) 1px, transparent 0)',
+          backgroundSize: '32px 32px',
         }}
         aria-hidden="true"
       />
 
       <div className="container-main relative z-10">
         <ScrollReveal>
-          <div className="max-w-3xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-blue-500/20 text-blue-300 border border-blue-500/30 mb-5">
-              <ShieldCheck className="w-3.5 h-3.5 text-teal" />
-              <span>Kemitraan & Hubungan Kelembagaan Nasional</span>
-            </div>
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="mb-5 inline-flex items-center gap-2 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              <ShieldCheck className="h-3.5 w-3.5 text-teal" aria-hidden="true" />
+              <span>Kemitraan &amp; Hubungan Kelembagaan Nasional</span>
+            </p>
 
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white tracking-tight mb-4 leading-tight">
+            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-2xl font-semibold leading-tight tracking-tight text-balance text-white sm:text-3xl md:text-4xl">
               Kemitraan Strategis Bersama Pengurus PERIKLINDO
             </h2>
 
-            <p className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-2xl mx-auto">
+            <p className="mx-auto mb-8 max-w-2xl font-[family-name:var(--font-body)] text-base leading-relaxed text-slate-300 sm:text-lg">
               Perusahaan pabrikan, lembaga kementerian, asosiasi industri mitra, perguruan tinggi, dan media pers dapat mengajukan audiensi resmi, kerja sama riset, atau permohonan narasumber kepada sekretariat dewan pengurus.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-4">
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <Link
                 href="/kontak"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-electric text-white font-semibold text-sm sm:text-base hover:bg-electric-hover hover:shadow-lg hover:shadow-electric/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-150 min-h-[44px]"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 bg-electric px-6 py-3.5 font-[family-name:var(--font-body)] text-sm font-semibold text-white transition-[background-color,opacity] duration-150 hover:bg-electric-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90 sm:text-base"
               >
-                <Mail className="w-4 h-4" />
+                <Mail className="h-4 w-4" aria-hidden="true" />
                 <span>Kirim Permohonan Audiensi</span>
               </Link>
 
@@ -44,17 +44,17 @@ export default function OrgCta() {
                 href="https://wa.me/6287789703728?text=Halo%20Sekretariat%20PERIKLINDO,%20kami%20ingin%20mengajukan%20komunikasi%20dengan%20pengurus."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg bg-teal text-white font-semibold text-sm sm:text-base hover:bg-teal-hover hover:shadow-lg hover:shadow-teal/30 hover:-translate-y-0.5 active:scale-[0.98] transition-all duration-150 min-h-[44px]"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 bg-navy-light px-6 py-3.5 font-[family-name:var(--font-body)] text-sm font-semibold text-white ring-1 ring-white/25 transition-[background-color,opacity] duration-150 hover:bg-navy focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90 sm:text-base"
               >
-                <MessageSquare className="w-4 h-4" />
+                <MessageSquare className="h-4 w-4" aria-hidden="true" />
                 <span>Kontak Sekretariat via WhatsApp</span>
               </a>
 
               <Link
                 href="/tentang-kami"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg border border-slate-700 text-slate-300 hover:text-white hover:bg-white/10 active:scale-[0.98] transition-all duration-150 min-h-[44px] text-sm sm:text-base font-semibold"
+                className="inline-flex min-h-[44px] items-center justify-center gap-2 border border-white/25 px-6 py-3.5 font-[family-name:var(--font-body)] text-sm font-semibold text-slate-300 transition-[background-color,border-color,color,opacity] duration-150 hover:border-white/45 hover:bg-white/5 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric active:opacity-90 sm:text-base"
               >
-                <Info className="w-4 h-4" />
+                <Info className="h-4 w-4" aria-hidden="true" />
                 <span>Tentang Asosiasi</span>
               </Link>
             </div>

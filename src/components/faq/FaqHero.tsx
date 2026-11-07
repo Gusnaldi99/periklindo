@@ -2,130 +2,108 @@
 
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
-import { CircleHelp, Scale, Users2, Zap } from 'lucide-react';
+import { CircleHelp } from 'lucide-react';
 import { faqItems } from '@/data/mock-data';
 
 export default function FaqHero() {
   const shouldReduceMotion = useReducedMotion();
   const categories = new Set(faqItems.map((item) => item.category)).size;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? { duration: 0 }
-        : { staggerChildren: 0.08, delayChildren: 0.04 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion
-        ? { duration: 0.1 }
-        : { duration: 0.5, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
   return (
-    <section className="relative bg-navy text-white overflow-hidden py-14 sm:py-18 md:py-20 lg:py-24 border-b border-navy-light">
+    <section className="relative overflow-x-clip border-b border-navy-light bg-navy py-12 text-white sm:py-14 md:py-16 lg:py-18">
       <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
+        className="pointer-events-none absolute inset-0 opacity-[0.035]"
         style={{
           backgroundImage:
-            'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)',
-          backgroundSize: '28px 28px',
+            'radial-gradient(circle at 1px 1px, var(--color-slate-100) 1px, transparent 0)',
+          backgroundSize: '32px 32px',
         }}
         aria-hidden="true"
       />
       <div
-        className="absolute -top-24 -right-16 w-80 h-80 bg-electric/20 rounded-full blur-3xl pointer-events-none"
+        className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-gradient-to-l from-navy-light/40 to-transparent"
         aria-hidden="true"
       />
 
       <div className="container-main relative z-10">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-          className="max-w-4xl"
+          initial={shouldReduceMotion ? false : { opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={
+            shouldReduceMotion
+              ? { duration: 0 }
+              : { duration: 0.45, ease: [0.16, 1, 0.3, 1] }
+          }
+          className="max-w-4xl min-w-0"
         >
-          <motion.nav variants={itemVariants} aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex items-center gap-2 text-xs sm:text-sm text-slate-400">
+          <nav aria-label="Breadcrumb" className="mb-4">
+            <ol className="flex items-center gap-2 font-[family-name:var(--font-body)] text-xs text-slate-300 sm:text-sm">
               <li>
-                <Link href="/" className="hover:text-white transition-colors duration-150">
+                <Link
+                  href="/"
+                  className="transition-[color] duration-150 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-electric"
+                >
                   Beranda
                 </Link>
               </li>
-              <li aria-hidden="true" className="text-slate-600">
+              <li aria-hidden="true" className="text-slate-500">
                 /
               </li>
-              <li className="text-white font-medium" aria-current="page">
+              <li className="font-medium text-white" aria-current="page">
                 FAQ
               </li>
             </ol>
-          </motion.nav>
+          </nav>
 
-          <motion.div variants={itemVariants} className="mb-5">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-electric/15 text-blue-300 border border-electric/35">
-              <CircleHelp className="w-3.5 h-3.5 text-teal" />
-              <span>Pusat Bantuan • FAQ-DESK/2026</span>
-            </div>
-          </motion.div>
+          <p className="mb-3 inline-flex items-center gap-2 font-[family-name:var(--font-body)] text-sm font-medium text-slate-300">
+            <CircleHelp className="h-3.5 w-3.5 shrink-0 text-teal" aria-hidden="true" />
+            <span>Pusat Bantuan • FAQ-DESK/2026</span>
+          </p>
 
-          <motion.h1
-            variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.18] mb-6"
-          >
+          <h1 className="mb-4 max-w-3xl min-w-0 font-[family-name:var(--font-heading)] text-3xl font-semibold leading-[1.15] tracking-tight text-balance text-white sm:text-4xl md:text-[2.75rem] lg:text-5xl">
             Pertanyaan yang Sering Diajukan
-          </motion.h1>
-          <motion.p
-            variants={itemVariants}
-            className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl"
-          >
+          </h1>
+
+          <p className="mb-8 max-w-prose font-[family-name:var(--font-body)] text-base leading-relaxed text-slate-300 sm:mb-10 sm:text-lg">
             Ringkasan resmi seputar PERIKLINDO, prosedur keanggotaan, pameran PEVS,
             serta regulasi dan insentif kendaraan listrik berbasis baterai.
-          </motion.p>
+          </p>
         </motion.div>
 
-        <motion.div
-          initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.28, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 pt-8 border-t border-slate-800"
-        >
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <CircleHelp className="w-4 h-4 text-electric mb-2" />
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-white">
+        <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-t border-white/15 pt-6 sm:grid-cols-4">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Entri FAQ aktif
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               {faqItems.length}
-            </p>
-            <p className="text-xs text-slate-400">Entri FAQ aktif</p>
+            </dd>
           </div>
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <Users2 className="w-4 h-4 text-teal mb-2" />
-            <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-teal">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Kelompok topik
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               {categories}
-            </p>
-            <p className="text-xs text-slate-400">Kelompok topik</p>
+            </dd>
           </div>
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <Zap className="w-4 h-4 text-amber-300 mb-2" />
-            <p className="font-[family-name:var(--font-heading)] text-lg font-extrabold text-white">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Pameran &amp; konferensi
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               PEVS
-            </p>
-            <p className="text-xs text-slate-400">Pameran & konferensi</p>
+            </dd>
           </div>
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <Scale className="w-4 h-4 text-blue-300 mb-2" />
-            <p className="font-[family-name:var(--font-heading)] text-lg font-extrabold text-white">
+          <div className="min-w-0">
+            <dt className="mb-1 font-[family-name:var(--font-body)] text-xs font-medium text-slate-300">
+              Landasan KBLBB
+            </dt>
+            <dd className="font-[family-name:var(--font-heading)] text-2xl font-semibold text-white sm:text-[1.75rem]">
               Perpres 55
-            </p>
-            <p className="text-xs text-slate-400">Landasan KBLBB</p>
+            </dd>
           </div>
-        </motion.div>
+        </dl>
       </div>
     </section>
   );

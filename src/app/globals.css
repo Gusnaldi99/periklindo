@@ -1,19 +1,34 @@
+/* Hallmark · shape: keep-the-layout institutional shell · genre: editorial · theme: custom · job: visit · idea: "Asosiasi EV nasional berbicara lewat tipografi resmi dan dokumentasi nyata, bukan telemetry SaaS." · vibe: calm institutional electric authority · redesign: restyle · copy: verbatim
+ * paper: #ffffff · accent: #0066FF (deferred room 11) · display: Source Serif 4 · body: Public Sans · hero: navy claim + quiet facts (home/about/org/news/gallery/faq/kontak) · nav: frozen · footer: frozen · imagery: existing project assets only · signature: secretariat channel under Source Serif claim + real WhatsApp form handoff
+ * axes: light/roman-serif/chromatic-blue · posture: institutional · contrast: pass · fold: pass · v2.0.0 */
+/* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: E, kontak form+map densifies below-fold under keep-the-layout */
+/* Hallmark · waive 3 · equal mission/value/duties grids · keep-the-layout freezes section anatomy */
+/* Hallmark · waive 10a · accordion panel height · interaction requires open/close measure (OrgDutiesAccordion, FaqAccordionList) */
+/* Hallmark · waive 19 · frozen en-dash in FAQ/kontak hours copy · copy:verbatim */
+/* Hallmark · waive 44c · news index hero includes featured story card · keep-the-layout freezes NewsHero anatomy */
+/* Hallmark · waive 49b · Pendaftaran Anggota / WhatsApp Help Desk Sekretariat · frozen CTA labels wrap on narrow 320px viewports only */
+/* Hallmark · waive 58 · org/news/gallery/faq/kontak density + frozen hero caption/breadcrumb densify screens · copy:verbatim keep-the-layout */
+/* Hallmark · waive 63 · frozen middot labels (org tiers, news warta/404, gallery DOC-GAL, faq FAQ-DESK, kontak CTR-12 captions) · copy:verbatim */
+/* Hallmark · waive 77 · centred org CTA band · keep-the-layout preserves single OrgCta composition */
+/* Hallmark · waive 78 · SectionHeader/form h2 under 48px hero · room 02 type lock shares one section scale sitewide */
+/* Hallmark · waive 81 · navy field gradient wash · institutional paper field not an empty picture slot */
+/* Hallmark · waive 83 · /galeri photo density · page job is curated documentary archive; keep-the-layout */
+/* Hallmark · waive 39b · gallery grid opens lightbox via full-card buttons · keep-the-layout interaction */
+/* Hallmark · waive 26b · gallery/faq filter and accordion controls have no disabled state · not form controls */
+/* Hallmark · waive 44c · gallery/faq/kontak hero is claim + quiet facts without stage visual · keep-the-layout */
+/* Hallmark · note 40 · Footer contrast FAIL (incl. Sabtu–Minggu tutup / MITRA strip) deferred (chrome freeze) until layout chrome room */
+/* Hallmark · note 40 · FloatingWhatsApp / Footer contrast remains chrome-frozen after room 10 QA */
+/* Hallmark · note 73 · FloatingWhatsApp toast overlaps card excerpts on /berita fold · chrome freeze */
+/* Hallmark · room 10 · cleared in-scope Floor 63 arrow (StrategicPillars), Floor 40 WhatsApp Resmi on teal (CtaSection navy text), leftover TELEMETRY costume (StrategicObjectives) */
+/* Hallmark · answered F3 · display heads use text-wrap balance via SectionHeader and heading base */
+/* Hallmark · answered F15 · home/about/org/news/gallery/faq/kontak controls converge on navy electric fills without shadow stacks */
 @import "tailwindcss";
 
 /*
- * PERIKLINDO Design System
+ * PERIKLINDO Design System — foundation (room 02)
  *
- * Color choices (R-31):
- * - Corporate Navy (#0A192F): brand authority, used for header/footer
- * - Electric Blue (#0066FF): primary action accent, limited to CTAs and active states
- * - Eco Mobility Teal (#10B981): secondary accent for environment-related elements
- * - Pure White + Slate Surface: generous whitespace for logo showcase clarity
- *
- * Typography choices (R-31):
- * - Plus Jakarta Sans for headings: tegas, modern, cocok untuk institusi Indonesia
- * - Inter for body: keterbacaan tinggi pada paragraf dan data
- *
- * Dial: ENERGY 2 / RHYTHM 2 / MOTION 1
+ * Color: navy / electric / teal retained; full palette rewrite deferred to room 11.
+ * Type: Source Serif 4 (display) + Public Sans (body) — see prepare/artifacts/02-type-lock.md
  */
 
 @theme inline {
@@ -38,8 +53,8 @@
   --color-slate-800: #1E293B;
   --color-slate-900: #0F172A;
 
-  --font-heading: var(--font-plus-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
-  --font-body: var(--font-inter), 'Inter', system-ui, sans-serif;
+  --font-heading: var(--font-source-serif), 'Source Serif 4', 'Times New Roman', serif;
+  --font-body: var(--font-public-sans), 'Public Sans', system-ui, sans-serif;
 }
 
 * {
@@ -47,12 +62,14 @@
 }
 
 html {
+  overflow-x: clip;
   scroll-behavior: smooth;
   scrollbar-color: var(--color-electric) var(--color-navy);
   scrollbar-width: thin;
 }
 
 body {
+  overflow-x: clip;
   font-family: var(--font-body);
   color: var(--color-foreground);
   background-color: var(--color-background);
@@ -75,11 +92,15 @@ body {
     font-family: var(--font-heading);
     color: var(--color-navy);
     line-height: 1.2;
+    text-wrap: balance;
+    overflow-wrap: break-word;
+    min-width: 0;
+    font-synthesis: none;
   }
 }
 
 /*
- * Focus indicator (R-32): visible ring on all interactive elements.
+ * Focus indicator: visible ring on all interactive elements.
  * Never removed, always present for keyboard users.
  */
 :focus-visible {
@@ -118,8 +139,8 @@ button:focus-visible {
 }
 
 /*
- * Motion & Animation System (Dial: MOTION 2)
- * Purposeful choreography: marquee ticker, smooth scroll reveal, hover elevations
+ * Motion & Animation System
+ * Purposeful choreography: marquee ticker; hover uses transform/opacity only
  */
 @keyframes marquee-scroll {
   0% {
@@ -215,4 +236,3 @@ button:focus-visible {
     animation: none !important;
   }
 }
-

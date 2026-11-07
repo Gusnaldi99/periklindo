@@ -10,6 +10,10 @@ interface ScrollRevealProps {
   threshold?: number;
 }
 
+/**
+ * Progressive reveal: content is visible by default (Floor 62).
+ * Only below-fold nodes hide briefly for motion when JS + motion are available.
+ */
 export default function ScrollReveal({
   children,
   className = '',
@@ -17,19 +21,24 @@ export default function ScrollReveal({
   direction = 'up',
   threshold = 0.15,
 }: ScrollRevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
-    // If user prefers reduced motion, show immediately without animation
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      requestAnimationFrame(() => {
-        setIsVisible(true);
-      });
+      setIsVisible(true);
       return;
+    }
+
+    const rect = element.getBoundingClientRect();
+    const viewportBottom = window.innerHeight * (1 - threshold);
+    const alreadyInView = rect.top < viewportBottom && rect.bottom > 0;
+
+    if (!alreadyInView) {
+      setIsVisible(false);
     }
 
     const observer = new IntersectionObserver(
@@ -72,11 +81,12 @@ export default function ScrollReveal({
     <div
       ref={ref}
       style={{
+        transitionProperty: 'opacity, transform',
         transitionDuration: '700ms',
         transitionDelay: `${delay}ms`,
         transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
       }}
-      className={`transition-all ${getDirectionClasses()} ${className}`}
+      className={`${getDirectionClasses()} ${className}`}
     >
       {children}
     </div>

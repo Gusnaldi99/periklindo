@@ -1,12 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { motion } from 'motion/react';
-import {
-  Share2,
-  ExternalLink,
-  Calendar,
-} from 'lucide-react';
+import { Share2 } from 'lucide-react';
 import type { SocialMediaPost } from '@/types';
 import SectionHeader from '@/components/shared/SectionHeader';
 import ScrollReveal from '@/components/shared/ScrollReveal';
@@ -44,13 +39,13 @@ function LinkedInIcon({ className = 'w-4 h-4' }: { className?: string }) {
 function getPlatformIcon(platform: SocialMediaPost['platform']) {
   switch (platform) {
     case 'Instagram':
-      return <InstagramIcon className="w-4 h-4 text-pink-400" />;
+      return <InstagramIcon className="w-3.5 h-3.5" />;
     case 'YouTube':
-      return <YouTubeIcon className="w-4 h-4 text-red-500" />;
+      return <YouTubeIcon className="w-3.5 h-3.5" />;
     case 'LinkedIn':
-      return <LinkedInIcon className="w-4 h-4 text-sky-400" />;
+      return <LinkedInIcon className="w-3.5 h-3.5" />;
     default:
-      return <Share2 className="w-4 h-4 text-white" />;
+      return <Share2 className="w-3.5 h-3.5" />;
   }
 }
 
@@ -58,16 +53,14 @@ export default function SocialMediaFeed({ posts }: SocialMediaFeedProps) {
   const activePosts = posts.filter((p) => p.isActive).slice(0, 4);
 
   return (
-    <section className="py-16 md:py-24 bg-white border-b border-slate-200">
+    <section className="border-b border-slate-200 bg-white py-16 md:py-24">
       <div className="container-main">
-        {/* Header */}
         <ScrollReveal>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold bg-blue-100 text-electric border border-blue-200 mb-3">
-                <Share2 className="w-3.5 h-3.5 text-electric" />
+          <div className="mb-12 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl min-w-0">
+              <p className="mb-3 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500">
                 Dokumentasi Kegiatan Nyata & Media
-              </div>
+              </p>
               <SectionHeader
                 title="Aktivitas Lapangan & Kanal Media Resmi"
                 subtitle="Dokumentasi agenda asosiasi, audiensi kementerian, siaran langsung konferensi, dan edukasi publik yang dikurasi dari kanal resmi PERIKLINDO."
@@ -79,91 +72,77 @@ export default function SocialMediaFeed({ posts }: SocialMediaFeedProps) {
                 href="https://instagram.com/periklindo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:text-pink-600 hover:border-pink-300 transition-all shadow-2xs"
+                className="inline-flex items-center gap-1.5 border border-slate-200 bg-slate-50 px-3.5 py-2 font-[family-name:var(--font-body)] text-xs font-semibold text-slate-700 transition-[border-color,color] duration-150 hover:border-slate-300 hover:text-navy"
               >
-                <InstagramIcon className="w-3.5 h-3.5 text-pink-500" />
+                <InstagramIcon className="h-3.5 w-3.5" />
                 <span>Instagram</span>
               </a>
               <a
                 href="https://youtube.com/@periklindo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:text-red-600 hover:border-red-300 transition-all shadow-2xs"
+                className="inline-flex items-center gap-1.5 border border-slate-200 bg-slate-50 px-3.5 py-2 font-[family-name:var(--font-body)] text-xs font-semibold text-slate-700 transition-[border-color,color] duration-150 hover:border-slate-300 hover:text-navy"
               >
-                <YouTubeIcon className="w-3.5 h-3.5 text-red-500" />
+                <YouTubeIcon className="h-3.5 w-3.5" />
                 <span>YouTube</span>
               </a>
               <a
                 href="https://linkedin.com/company/periklindo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-bold text-slate-700 hover:text-blue-600 hover:border-blue-300 transition-all shadow-2xs"
+                className="inline-flex items-center gap-1.5 border border-slate-200 bg-slate-50 px-3.5 py-2 font-[family-name:var(--font-body)] text-xs font-semibold text-slate-700 transition-[border-color,color] duration-150 hover:border-slate-300 hover:text-navy"
               >
-                <LinkedInIcon className="w-3.5 h-3.5 text-blue-600" />
+                <LinkedInIcon className="h-3.5 w-3.5" />
                 <span>LinkedIn</span>
               </a>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* 4-Column Grid of Real Documentation Photos with Overlay Captions */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {activePosts.map((post, index) => {
-            const formattedDate = new Date(post.postedAt).toLocaleDateString(
-              'id-ID',
-              {
-                day: 'numeric',
-                month: 'short',
-                year: 'numeric',
-              }
-            );
+            const formattedDate = new Date(post.postedAt).toLocaleDateString('id-ID', {
+              day: 'numeric',
+              month: 'short',
+              year: 'numeric',
+            });
 
             return (
-              <ScrollReveal
-                key={post.id}
-                delay={index * 100}
-                className="h-full"
-              >
+              <ScrollReveal key={post.id} delay={index * 80} className="h-full min-w-0">
                 <a
                   href={post.externalUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group relative flex flex-col h-full bg-slate-900 border border-slate-200 rounded-2xl overflow-hidden shadow-xs hover:shadow-2xl hover:border-electric/50 transition-all duration-300"
+                  className="group relative flex h-full flex-col overflow-hidden border border-slate-200 bg-navy transition-[border-color] duration-150 hover:border-slate-400"
                 >
-                  {/* Visual Media with Real Photos */}
-                  <div className="relative aspect-square w-full overflow-hidden bg-slate-950">
+                  <div className="relative aspect-square w-full min-w-0 overflow-hidden bg-navy">
                     <Image
                       src={post.mediaUrl}
                       alt={post.caption}
                       fill
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      className="object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
+                      className="object-cover"
                     />
 
-                    {/* Gradient Overlay for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/40 to-transparent" />
 
-                    {/* Platform Badge on Top Right */}
-                    <div className="absolute top-3.5 right-3.5 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-navy/85 text-white backdrop-blur-md border border-white/20 shadow-md">
+                    <div className="absolute right-3 top-3 z-10 flex items-center gap-1.5 border border-white/20 bg-navy/85 px-2.5 py-1 font-[family-name:var(--font-body)] text-xs font-medium text-white">
                       {getPlatformIcon(post.platform)}
                       <span>{post.platform}</span>
                     </div>
 
-                    {/* Overlay Caption & Meta at Bottom */}
-                    <div className="absolute inset-x-0 bottom-0 p-5 z-10 flex flex-col justify-end text-white">
-                      <div className="flex items-center gap-1.5 text-[11px] text-cyan-300 font-semibold mb-2">
-                        <Calendar className="w-3.5 h-3.5" />
-                        <span>{formattedDate}</span>
-                      </div>
+                    <div className="absolute inset-x-0 bottom-0 z-10 flex flex-col justify-end p-5 text-white">
+                      <p className="mb-2 font-[family-name:var(--font-body)] text-xs text-slate-300">
+                        {formattedDate}
+                      </p>
 
-                      <p className="text-xs sm:text-sm text-slate-100 font-medium leading-snug line-clamp-3 mb-3 group-hover:text-white transition-colors">
+                      <p className="mb-3 line-clamp-3 font-[family-name:var(--font-body)] text-sm font-medium leading-snug text-slate-100">
                         {post.caption}
                       </p>
 
-                      <div className="flex items-center justify-between pt-2 border-t border-white/20 text-[11px] font-bold text-cyan-300 group-hover:text-white transition-colors">
-                        <span>Buka Dokumentasi</span>
-                        <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
-                      </div>
+                      <p className="border-t border-white/20 pt-2 font-[family-name:var(--font-body)] text-xs font-semibold text-white">
+                        Buka Dokumentasi
+                      </p>
                     </div>
                   </div>
                 </a>

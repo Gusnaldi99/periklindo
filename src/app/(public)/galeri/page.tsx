@@ -33,6 +33,7 @@ export const metadata: Metadata = {
 };
 
 export default function GaleriPage() {
+  // Frozen section order (room 07): GalleryHero → GalleryGrid (+ lightbox).
   return (
     <>
       <GalleryHero />

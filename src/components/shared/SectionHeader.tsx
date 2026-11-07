@@ -12,8 +12,8 @@ interface SectionHeaderProps {
 }
 
 /**
- * Consistent section title treatment.
- * Optional eyebrow badge plus a short accent line for left-aligned headers.
+ * Section title via type scale + spacing.
+ * Optional parent-passed label kept as body-face caption (no tracked caps / gradient rule).
  */
 export default function SectionHeader({
   title,
@@ -27,42 +27,42 @@ export default function SectionHeader({
 
   return (
     <motion.div
-      initial={shouldReduceMotion ? false : { opacity: 0, y: 12 }}
+      initial={shouldReduceMotion ? false : { opacity: 0, y: 10 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
-      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+      transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={cn(isCenter ? 'text-center' : '', className)}
     >
       {eyebrow ? (
         <p
           className={cn(
-            'inline-flex items-center px-2.5 py-1 mb-3 rounded-md text-[11px] font-bold uppercase tracking-[0.16em]',
-            'text-electric bg-electric/10 border border-electric/15'
+            'mb-3 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500',
+            isCenter && 'mx-auto'
           )}
         >
           {eyebrow}
         </p>
       ) : null}
 
-      <h2 className="text-2xl md:text-3xl font-bold mb-2">{title}</h2>
+      <h2
+        className={cn(
+          'min-w-0 break-words text-balance font-[family-name:var(--font-heading)] text-3xl font-semibold tracking-tight text-navy md:text-4xl',
+          subtitle ? 'mb-3' : 'mb-0'
+        )}
+      >
+        {title}
+      </h2>
 
-      {align === 'left' ? (
-        <span
-          className="block h-0.5 w-12 rounded-full bg-gradient-to-r from-electric to-teal mb-3"
-          aria-hidden="true"
-        />
-      ) : null}
-
-      {subtitle && (
+      {subtitle ? (
         <p
           className={cn(
-            'text-slate-500 text-base md:text-lg max-w-2xl leading-relaxed',
+            'max-w-2xl font-[family-name:var(--font-body)] text-base leading-relaxed text-slate-600 md:text-lg',
             isCenter && 'mx-auto'
           )}
         >
           {subtitle}
         </p>
-      )}
+      ) : null}
     </motion.div>
   );
 }

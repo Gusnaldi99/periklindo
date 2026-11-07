@@ -1,13 +1,10 @@
 'use client';
 
-import { motion, useReducedMotion } from 'motion/react';
-import { Target, Scale, ShoppingBag, Cpu, Globe2, CheckCircle2, Sparkles, Activity } from 'lucide-react';
+import { Scale, ShoppingBag, Cpu, Globe2, CheckCircle2 } from 'lucide-react';
 import SectionHeader from '@/components/shared/SectionHeader';
-import { cn } from '@/lib/utils';
+import ScrollReveal from '@/components/shared/ScrollReveal';
 
 export default function StrategicObjectives() {
-  const shouldReduceMotion = useReducedMotion();
-
   const objectives = [
     {
       code: 'PLR-01',
@@ -75,142 +72,92 @@ export default function StrategicObjectives() {
     },
   ];
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: shouldReduceMotion
-        ? { duration: 0 }
-        : { staggerChildren: 0.12, delayChildren: 0.1 },
-    },
-  };
-
-  const cardVariants = {
-    hidden: shouldReduceMotion
-      ? { opacity: 0 }
-      : { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: shouldReduceMotion
-        ? { duration: 0.1 }
-        : { duration: 0.55, ease: [0.16, 1, 0.3, 1] as const },
-    },
-  };
-
   return (
-    <section id="tujuan-strategis" className="py-16 md:py-20 lg:py-24 bg-slate-50 border-b border-slate-200 scroll-mt-20">
+    <section
+      id="tujuan-strategis"
+      className="scroll-mt-20 border-b border-slate-200 bg-slate-50 py-16 md:py-20 lg:py-24"
+    >
       <div className="container-main">
-        {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-60px' }}
-          transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-3xl mb-12 lg:mb-16"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md text-xs font-semibold bg-blue-100 text-electric mb-3">
-            <Target className="w-3.5 h-3.5" />
-            Arah Kebijakan & Target Nasional
+        <ScrollReveal>
+          <div className="mb-12 max-w-3xl min-w-0 lg:mb-16">
+            <p className="mb-3 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500">
+              Arah Kebijakan & Target Nasional
+            </p>
+            <SectionHeader
+              title="Tujuan Strategis & Pilar Fokus"
+              subtitle="Empat pilar komitmen objektif berstandar industri otomotif yang dijalankan PERIKLINDO untuk memastikan ekosistem kendaraan listrik tumbuh mandiri, aman, dan berkesinambungan."
+            />
           </div>
-          <SectionHeader
-            title="Tujuan Strategis & Pilar Fokus"
-            subtitle="Empat pilar komitmen objektif berstandar industri otomotif yang dijalankan PERIKLINDO untuk memastikan ekosistem kendaraan listrik tumbuh mandiri, aman, dan berkesinambungan."
-          />
-        </motion.div>
+        </ScrollReveal>
 
-        {/* 4 Pillars Automotive Engineering Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-40px' }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          {objectives.map((obj) => {
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8">
+          {objectives.map((obj, index) => {
             const Icon = obj.icon;
             return (
-              <motion.div
-                key={obj.code}
-                variants={cardVariants}
-                whileHover={shouldReduceMotion ? {} : { y: -5 }}
-                className="group h-full bg-white border border-slate-200/90 rounded-2xl p-6 sm:p-8 hover:border-electric/60 hover:shadow-xl transition-all duration-300 ease-out flex flex-col justify-between relative overflow-hidden"
-              >
-                {/* Engineering corner crosshairs */}
-                <span className="absolute top-3 left-3 text-[10px] font-mono text-slate-300 group-hover:text-electric transition-colors">
-                  +
-                </span>
-                <span className="absolute top-3 right-3 text-[10px] font-mono text-slate-300 group-hover:text-electric transition-colors">
-                  +
-                </span>
-
-                <div>
-                  {/* Top Bar with Tag and Code */}
-                  <div className="flex items-center justify-between gap-3 mb-4">
-                    <span className="text-xs font-semibold text-electric bg-blue-50 px-3 py-1 rounded-full border border-blue-100">
-                      {obj.tag}
-                    </span>
-                    <span className="text-xs font-mono font-bold text-slate-400 group-hover:text-navy transition-colors">
-                      {obj.code}
-                    </span>
-                  </div>
-
-                  {/* Icon & Title */}
-                  <div className="flex items-center gap-3.5 mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-slate-100 text-navy flex items-center justify-center shrink-0 group-hover:bg-electric group-hover:text-white transition-colors duration-200 shadow-sm">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <h3 className="text-xl font-bold text-navy group-hover:text-electric transition-colors duration-150 font-[family-name:var(--font-heading)]">
-                      {obj.title}
-                    </h3>
-                  </div>
-
-                  <p className="text-sm text-slate-600 leading-relaxed mb-6">
-                    {obj.description}
-                  </p>
-
-                  {/* Progress / National Metric Telemetry Box */}
-                  <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100 mb-6">
-                    <div className="flex items-center justify-between text-xs mb-1.5">
-                      <span className="text-slate-500 font-medium flex items-center gap-1.5">
-                        <Activity className="w-3.5 h-3.5 text-electric" />
-                        {obj.metricLabel}
+              <ScrollReveal key={obj.code} delay={index * 70} className="h-full min-w-0">
+                <article className="flex h-full flex-col justify-between border border-slate-200 bg-white p-6 sm:p-8">
+                  <div>
+                    <div className="mb-4 flex items-center justify-between gap-3">
+                      <span className="font-[family-name:var(--font-body)] text-xs font-medium text-electric">
+                        {obj.tag}
                       </span>
-                      <span className="font-bold text-navy font-mono">
-                        {obj.metricValue}
+                      <span className="font-[family-name:var(--font-body)] text-xs font-semibold text-slate-500">
+                        {obj.code}
                       </span>
                     </div>
-                    {/* Visual Progress Bar */}
-                    <div className="w-full h-2 bg-slate-200 rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-gradient-to-r from-electric to-teal rounded-full transition-all duration-500"
-                        style={{ width: `${obj.metricPercent}%` }}
-                      />
-                    </div>
-                  </div>
 
-                  {/* Key Action Initiatives */}
-                  <div className="space-y-2.5 pt-4 border-t border-slate-100">
-                    <p className="text-[11px] font-bold uppercase tracking-wider text-slate-500 font-mono">
-                      Inisiatif Kunci Strategis:
+                    <div className="mb-3 flex items-center gap-3.5">
+                      <Icon className="h-5 w-5 shrink-0 text-navy" aria-hidden="true" />
+                      <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold text-navy">
+                        {obj.title}
+                      </h3>
+                    </div>
+
+                    <p className="mb-6 font-[family-name:var(--font-body)] text-sm leading-relaxed text-slate-600">
+                      {obj.description}
                     </p>
-                    {obj.items.map((item, idx) => (
-                      <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700">
-                        <CheckCircle2 className="w-4 h-4 text-teal shrink-0 mt-0.5" />
-                        <span>{item}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
 
-                <div className="mt-6 pt-3 text-[11px] text-slate-400 font-mono border-t border-slate-50 flex items-center justify-between">
-                  <span>TELEMETRY: TARGET_AKTIF</span>
-                  <span className="text-emerald-600 font-semibold">&bull; MONITORING BERKALA</span>
-                </div>
-              </motion.div>
+                    <div className="mb-6 border border-slate-100 bg-slate-50 p-3.5">
+                      <div className="mb-1.5 flex items-center justify-between gap-3 font-[family-name:var(--font-body)] text-xs">
+                        <span className="font-medium text-slate-500">{obj.metricLabel}</span>
+                        <span className="font-semibold text-navy">{obj.metricValue}</span>
+                      </div>
+                      <div
+                        className="h-1.5 w-full overflow-hidden bg-slate-200"
+                        role="progressbar"
+                        aria-valuenow={obj.metricPercent}
+                        aria-valuemin={0}
+                        aria-valuemax={100}
+                        aria-label={obj.metricLabel}
+                      >
+                        <div
+                          className="h-full bg-electric"
+                          style={{ width: `${obj.metricPercent}%` }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2.5 border-t border-slate-100 pt-4">
+                      <p className="font-[family-name:var(--font-body)] text-[11px] font-semibold text-slate-500">
+                        Inisiatif Kunci Strategis:
+                      </p>
+                      {obj.items.map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-start gap-2.5 font-[family-name:var(--font-body)] text-xs text-slate-700 sm:text-sm"
+                        >
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-teal" aria-hidden="true" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                </article>
+              </ScrollReveal>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

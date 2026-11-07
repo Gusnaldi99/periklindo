@@ -58,6 +58,7 @@ export default async function NewsDetailPage({ params }: NewsDetailPageProps) {
 
   const related = getRelatedNews(post.slug);
 
+  // Detail wiring frozen: ReadingProgressBar + NewsArticleContent (+ related).
   return (
     <>
       <ReadingProgressBar />

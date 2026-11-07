@@ -35,6 +35,7 @@ export const metadata: Metadata = {
 export default function BeritaPage() {
   const featured = newsPosts.find((post) => post.isFeatured) ?? newsPosts[0];
 
+  // Section order frozen: NewsHero → NewsFilterBar (room 06 keep-the-layout).
   return (
     <>
       <NewsHero featured={featured} />

@@ -2,16 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'motion/react';
-import {
-  Quote,
-  ShieldCheck,
-  Scale,
-  BatteryCharging,
-  Zap,
-  ArrowRight,
-  Sparkles,
-} from 'lucide-react';
+import { Scale, BatteryCharging, Zap } from 'lucide-react';
 import ScrollReveal from '@/components/shared/ScrollReveal';
 
 export default function LeadershipMessage() {
@@ -34,118 +25,83 @@ export default function LeadershipMessage() {
   ];
 
   return (
-    <section className="relative py-16 md:py-24 bg-white border-b border-slate-200 overflow-hidden">
-      {/* Subtle background circuit pattern */}
-      <div
-        className="absolute inset-0 opacity-[0.025] pointer-events-none"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 1px 1px, #0A192F 1px, transparent 0)',
-          backgroundSize: '24px 24px',
-        }}
-        aria-hidden="true"
-      />
-
+    <section className="relative overflow-x-clip border-b border-slate-200 bg-white py-16 md:py-24">
       <div className="container-main relative z-10">
-        {/* Section Tag */}
         <ScrollReveal>
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold bg-blue-50 text-electric border border-blue-200 mb-6">
-            <Sparkles className="w-3.5 h-3.5 text-electric" />
+          <p className="mb-6 font-[family-name:var(--font-body)] text-sm font-medium text-slate-500">
             Pesan Otoritas Kepemimpinan & Arah Kebijakan
-          </div>
+          </p>
         </ScrollReveal>
 
-        {/* Master Editorial Card */}
-        <ScrollReveal delay={100}>
-          <div className="bg-gradient-to-br from-slate-900 via-navy to-slate-950 text-white rounded-3xl border border-slate-800 shadow-2xl overflow-hidden p-6 sm:p-8 lg:p-12 relative">
-            {/* Ambient Background Glows */}
-            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-electric/15 blur-3xl pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-              {/* Leader Photo Column (5 Cols) */}
-              <div className="lg:col-span-5 flex flex-col items-center text-center">
-                <div className="relative group">
-                  {/* Outer Ring Glow */}
-                  <div className="absolute -inset-2 bg-gradient-to-tr from-amber-400 via-electric to-emerald-400 rounded-3xl opacity-30 blur-md group-hover:opacity-50 transition-opacity" />
-
-                  {/* Photo Frame with subtle chamfered corners */}
-                  <div className="relative w-64 sm:w-72 lg:w-80 h-80 sm:h-92 bg-gradient-to-b from-slate-800 to-slate-900 rounded-2xl overflow-hidden border border-white/20 shadow-2xl flex items-center justify-center p-3">
+        <ScrollReveal delay={80}>
+          <div className="overflow-hidden border border-navy/15 bg-navy text-white">
+            <div className="grid grid-cols-1 items-center gap-10 p-6 sm:p-8 lg:grid-cols-12 lg:gap-12 lg:p-12">
+              {/* Leader photo */}
+              <div className="flex flex-col items-center text-center lg:col-span-5">
+                <div className="relative w-64 overflow-hidden border border-white/20 bg-navy-light sm:w-72 lg:w-80">
+                  <div className="relative flex aspect-[4/5] items-end justify-center px-3 pt-4">
                     <Image
                       src="/assets/org/moeldoko.png"
                       alt="Jenderal TNI (Purn.) Dr. Moeldoko - Ketua Umum PERIKLINDO"
                       width={320}
                       height={400}
-                      className="max-h-full w-auto object-contain drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500"
+                      className="h-full w-auto max-h-[22rem] object-contain"
                       priority
                     />
-
-                    {/* Verified Official Ribbon */}
-                    <div className="absolute bottom-3 inset-x-3 bg-navy/90 backdrop-blur-md border border-white/15 rounded-xl py-2 px-3 text-center shadow-lg">
-                      <div className="flex items-center justify-center gap-1.5 text-emerald-400 text-xs font-bold mb-0.5">
-                        <ShieldCheck className="w-3.5 h-3.5" />
-                        <span>Pucuk Pimpinan Tertinggi</span>
-                      </div>
-                      <p className="text-[11px] text-slate-300 font-medium">
-                        Periode Kepengurusan Aktif
-                      </p>
-                    </div>
+                  </div>
+                  <div className="border-t border-white/15 bg-navy/95 px-3 py-2.5 text-center">
+                    <p className="font-[family-name:var(--font-body)] text-xs font-semibold text-white">
+                      Pucuk Pimpinan Tertinggi
+                    </p>
+                    <p className="mt-0.5 font-[family-name:var(--font-body)] text-[11px] text-slate-400">
+                      Periode Kepengurusan Aktif
+                    </p>
                   </div>
                 </div>
 
-                {/* Identity & Rank */}
                 <div className="mt-6">
-                  <h3 className="text-xl sm:text-2xl font-black text-white font-[family-name:var(--font-heading)] leading-snug">
+                  <h3 className="font-[family-name:var(--font-heading)] text-xl font-semibold leading-snug text-white sm:text-2xl">
                     Jenderal TNI (Purn.) Dr. Moeldoko
                   </h3>
-                  <p className="text-xs sm:text-sm font-semibold text-cyan-300 mt-1 uppercase tracking-wider">
-                    Ketua Umum PERIKLINDO &bull; Founder PT MAB
+                  <p className="mt-1 font-[family-name:var(--font-body)] text-sm font-medium text-slate-300">
+                    Ketua Umum PERIKLINDO
+                  </p>
+                  <p className="mt-0.5 font-[family-name:var(--font-body)] text-sm text-slate-400">
+                    Founder PT MAB
                   </p>
                 </div>
               </div>
 
-              {/* Quote & Mandate Column (7 Cols) */}
-              <div className="lg:col-span-7 flex flex-col justify-between">
-                {/* Quote Icon & Headline */}
+              {/* Quote & directives */}
+              <div className="flex flex-col justify-between lg:col-span-7 min-w-0">
                 <div className="mb-6">
-                  <div className="w-12 h-12 rounded-2xl bg-electric/20 border border-electric/40 flex items-center justify-center text-electric mb-4 shadow-lg shadow-electric/20">
-                    <Quote className="w-6 h-6 text-cyan-300" />
-                  </div>
-
-                  <blockquote className="text-lg sm:text-xl md:text-2xl font-medium text-slate-100 leading-snug italic mb-4">
-                    &ldquo;Kendaraan listrik bukan sekadar inovasi transportasi, melainkan{' '}
-                    <span className="text-cyan-300 font-extrabold not-italic">
-                      game changer
-                    </span>{' '}
-                    bagi kedaulatan industri dan transformasi energi nasional. Indonesia
+                  <blockquote className="mb-4 font-[family-name:var(--font-heading)] text-lg font-medium leading-snug text-slate-100 sm:text-xl md:text-2xl">
+                    &ldquo;Kendaraan listrik bukan sekadar inovasi transportasi, melainkan game
+                    changer bagi kedaulatan industri dan transformasi energi nasional. Indonesia
                     tidak boleh hanya menjadi pasar produk impor, melainkan harus berdiri
                     sebagai pusat rantai pasok dan manufaktur EV berdaya saing global.&rdquo;
                   </blockquote>
 
-                  <p className="text-xs text-slate-400 leading-relaxed">
+                  <p className="font-[family-name:var(--font-body)] text-xs leading-relaxed text-slate-400">
                     Disampaikan pada pembukaan{' '}
-                    <strong className="text-slate-200">PERIKLINDO Electric Vehicle Show (PEVS) 2026</strong>{' '}
+                    <strong className="font-semibold text-slate-200">
+                      PERIKLINDO Electric Vehicle Show (PEVS) 2026
+                    </strong>{' '}
                     di JIExpo Kemayoran, menyoroti urgensi efisiensi biaya rumah tangga,
                     pengurangan subsidi BBM Rp264 triliun, dan akselerasi hilirisasi baterai.
                   </p>
                 </div>
 
-                {/* 3 Strategic Directives */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 my-6 pt-6 border-t border-white/10">
-                  {leadershipPillars.map((pillar, idx) => {
+                <div className="my-6 grid grid-cols-1 gap-4 border-t border-white/10 pt-6 sm:grid-cols-3">
+                  {leadershipPillars.map((pillar) => {
                     const Icon = pillar.icon;
                     return (
-                      <div
-                        key={idx}
-                        className="bg-white/5 border border-white/10 rounded-xl p-3.5 backdrop-blur-xs hover:bg-white/10 transition-colors"
-                      >
-                        <div className="w-7 h-7 rounded-lg bg-electric/25 flex items-center justify-center text-cyan-300 mb-2">
-                          <Icon className="w-4 h-4" />
-                        </div>
-                        <h4 className="text-xs font-bold text-white mb-1 leading-tight">
+                      <div key={pillar.title} className="min-w-0 border border-white/10 p-3.5">
+                        <Icon className="mb-2 h-4 w-4 text-slate-300" aria-hidden="true" />
+                        <h4 className="mb-1 font-[family-name:var(--font-heading)] text-sm font-semibold leading-tight text-white">
                           {pillar.title}
                         </h4>
-                        <p className="text-[11px] text-slate-400 leading-relaxed">
+                        <p className="font-[family-name:var(--font-body)] text-xs leading-relaxed text-slate-400">
                           {pillar.desc}
                         </p>
                       </div>
@@ -153,17 +109,15 @@ export default function LeadershipMessage() {
                   })}
                 </div>
 
-                {/* Bottom Navigation Link */}
-                <div className="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-white/10 text-xs text-slate-300">
+                <div className="flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-4 font-[family-name:var(--font-body)] text-xs text-slate-300">
                   <span className="text-slate-400">
                     Didukung Sekretaris Jenderal & 6 Jajaran Bidang Eksekutif.
                   </span>
                   <Link
                     href="/struktur-organisasi"
-                    className="group inline-flex items-center gap-1.5 font-bold text-cyan-300 hover:text-white transition-colors"
+                    className="font-semibold text-white underline-offset-4 transition-[opacity] duration-150 hover:opacity-80 hover:underline"
                   >
-                    <span>Lihat Struktur Kepengurusan Lengkap</span>
-                    <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                    Lihat Struktur Kepengurusan Lengkap
                   </Link>
                 </div>
               </div>
@@ -174,4 +128,3 @@ export default function LeadershipMessage() {
     </section>
   );
 }
-
