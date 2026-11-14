@@ -6,18 +6,19 @@ import { galleryItems } from '@/data/mock-data';
 export const metadata: Metadata = {
   title: 'Galeri Kegiatan',
   description:
-    'Arsip visual resmi PERIKLINDO: pameran PEVS di JIExpo Kemayoran, audiensi pemerintah, seminar industri, dan kunjungan pabrik anggota.',
+    'Dokumentasi asli kegiatan PERIKLINDO. Arsip PEVS tersedia; kategori PEVC, audiensi, rapat, kunjungan industri, dan kerja sama akan dilengkapi setelah aset resmi diunggah.',
   keywords: [
     'Galeri PERIKLINDO',
     'PEVS 2026',
+    'PEVC',
     'Dokumentasi kendaraan listrik',
     'Audiensi KBLBB',
-    'Kunjungan pabrik EV',
+    'Kunjungan industri EV',
   ],
   openGraph: {
     title: 'Galeri Kegiatan | PERIKLINDO',
     description:
-      'Dokumentasi pameran PEVS, audiensi kementerian, seminar, dan kunjungan pabrik industri kendaraan listrik Indonesia.',
+      'Dokumentasi asli PEVS PERIKLINDO di JIExpo Kemayoran. Kategori lain menyusul setelah aset resmi tersedia.',
     type: 'website',
     locale: 'id_ID',
     url: '/galeri',

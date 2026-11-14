@@ -92,9 +92,9 @@ export default function GalleryHero() {
             variants={itemVariants}
             className="text-base sm:text-lg text-slate-300 leading-relaxed mb-10 max-w-3xl"
           >
-            Dokumentasi pameran PEVS di JIExpo Kemayoran, audiensi kementerian,
-            seminar industri, dan kunjungan pabrik anggota. Setiap foto merujuk
-            kegiatan nyata asosiasi, bukan ilustrasi generik.
+            Arsip visual resmi PERIKLINDO. Saat ini dokumentasi PEVS di JIExpo
+            Kemayoran telah tersedia; kategori lain akan diunggah setelah aset
+            foto asli diterima—tanpa memakai ulang foto dari kegiatan berbeda.
           </motion.p>
         </motion.div>
 

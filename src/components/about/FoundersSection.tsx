@@ -210,10 +210,10 @@ export default function FoundersSection() {
                 Status Keabsahan Kelembagaan
               </span>
               <span className="text-sm font-bold text-navy block mb-0.5">
-                Akta Notaris & SK Kemenkumham
+                Berbadan Hukum SK Kemenkumham RI
               </span>
-              <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 inline-block">
-                Terverifikasi Sah Sejak 2021
+              <span className="text-xs font-semibold text-amber-700 bg-amber-50 px-2.5 py-0.5 rounded-full border border-amber-200 inline-block">
+                Nomor SK & akta belum dipublikasikan
               </span>
             </div>
           </div>

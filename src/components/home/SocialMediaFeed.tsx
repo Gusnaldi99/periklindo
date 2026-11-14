@@ -140,8 +140,8 @@ export default function SocialMediaFeed({ posts }: SocialMediaFeedProps) {
                       className="object-cover group-hover:scale-108 transition-transform duration-500 ease-out"
                     />
 
-                    {/* Gradient Overlay for Text Readability */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/35 to-transparent opacity-85 group-hover:opacity-95 transition-opacity" />
+                    {/* Gradient Overlay for Text Readability — taller fade so 5-line captions stay legible */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/55 to-transparent opacity-90 group-hover:opacity-95 transition-opacity" />
 
                     {/* Platform Badge on Top Right */}
                     <div className="absolute top-3.5 right-3.5 z-10 flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-navy/85 text-white backdrop-blur-md border border-white/20 shadow-md">
@@ -150,17 +150,17 @@ export default function SocialMediaFeed({ posts }: SocialMediaFeedProps) {
                     </div>
 
                     {/* Overlay Caption & Meta at Bottom */}
-                    <div className="absolute inset-x-0 bottom-0 p-5 z-10 flex flex-col justify-end text-white">
+                    <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 z-10 flex flex-col justify-end text-white">
                       <div className="flex items-center gap-1.5 text-[11px] text-cyan-300 font-semibold mb-2">
                         <Calendar className="w-3.5 h-3.5" />
                         <span>{formattedDate}</span>
                       </div>
 
-                      <p className="text-xs sm:text-sm text-slate-100 font-medium leading-snug line-clamp-3 mb-3 group-hover:text-white transition-colors">
+                      <p className="text-xs sm:text-sm text-slate-100 font-medium leading-relaxed line-clamp-4 sm:line-clamp-5 mb-3 group-hover:text-white transition-colors">
                         {post.caption}
                       </p>
 
-                      <div className="flex items-center justify-between pt-2 border-t border-white/20 text-[11px] font-bold text-cyan-300 group-hover:text-white transition-colors">
+                      <div className="flex items-center justify-between shrink-0 pt-2.5 border-t border-white/20 text-[11px] font-bold text-cyan-300 group-hover:text-white transition-colors">
                         <span>Buka Dokumentasi</span>
                         <ExternalLink className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
                       </div>

@@ -8,6 +8,13 @@ export interface MemberBrand {
   order: number;
 }
 
+export type NewsCategory =
+  | 'Kegiatan PERIKLINDO'
+  | 'Industri EV'
+  | 'Kebijakan & Regulasi'
+  | 'Kerja Sama'
+  | 'Siaran Pers Resmi';
+
 export interface NewsPost {
   id: string;
   title: string;
@@ -15,7 +22,7 @@ export interface NewsPost {
   excerpt: string;
   content: string;
   thumbnailUrl: string;
-  category: 'Siaran Pers' | 'Regulasi' | 'Kegiatan' | 'Industri EV';
+  category: NewsCategory;
   publishedAt: string;
   author: string;
   isFeatured?: boolean;
@@ -39,17 +46,58 @@ export interface OrgMember {
   fullName: string;
   position: string;
   positionEn?: string;
-  level: 'Pimpinan Inti' | 'Dewan Penasihat' | 'Ketua Bidang' | 'Sekretariat';
-  category?: 'chairman' | 'secretariat' | 'treasury' | 'advisor' | 'vice-chairman';
+  level: 'Dewan Pembina' | 'Dewan Pengawas' | 'Dewan Penasihat' | 'Pimpinan Inti' | 'Ketua Bidang' | 'Sekretariat';
+  category?: 'chairman' | 'secretariat' | 'treasury' | 'advisor' | 'vice-chairman' | 'pembina' | 'pengawas';
   photoUrl: string;
   order: number;
   description?: string;
 }
 
+export interface ContactChannel {
+  label: string;
+  number: string;
+  waUrl: string;
+}
+
+export interface ContactInfo {
+  address: {
+    building: string;
+    street: string;
+    district: string;
+    city: string;
+    postalCode: string;
+    full: string;
+  };
+  email: string;
+  phone: {
+    secretariat: ContactChannel;
+    registration: ContactChannel;
+  };
+  officeHours: {
+    days: string;
+    hours: string;
+    note: string;
+  };
+  socialMedia: {
+    instagram: string;
+    youtube: string;
+    linkedin: string;
+  };
+}
+
+export type GalleryCategory =
+  | 'PEVS (Pameran)'
+  | 'PEVC (Konferensi)'
+  | 'Audiensi Pemerintah'
+  | 'Rapat Organisasi'
+  | 'Kunjungan Industri'
+  | 'Kerja Sama Nasional/Internasional'
+  | 'Kegiatan Lainnya';
+
 export interface GalleryItem {
   id: string;
   title: string;
-  category: 'Pameran PEVS' | 'Audiensi Pemerintah' | 'Seminar' | 'Kunjungan Pabrik';
+  category: GalleryCategory;
   imageUrl: string;
   date: string;
   location?: string;

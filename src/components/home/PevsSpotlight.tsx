@@ -175,7 +175,7 @@ export default function PevsSpotlight() {
           </ScrollReveal>
         </div>
 
-        {/* 4 Quick Impact Counters */}
+        {/* Impact strip — angka PEVS dimatikan sampai laporan Dyandra (R03). */}
         <ScrollReveal delay={300}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 sm:p-8 bg-gradient-to-r from-slate-900 to-navy text-white rounded-2xl border border-slate-800 shadow-xl">
             <div className="flex items-center gap-3">
@@ -183,10 +183,12 @@ export default function PevsSpotlight() {
                 <Users className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
-                  100K+
+                <p className="text-sm sm:text-base font-black font-[family-name:var(--font-heading)] text-white leading-snug">
+                  Berskala Nasional
                 </p>
-                <p className="text-[11px] text-slate-400 font-medium">Pengunjung Tiap Edisi</p>
+                <p className="text-[11px] text-slate-400 font-medium">
+                  Pameran EV tahunan
+                </p>
               </div>
             </div>
 
@@ -195,10 +197,12 @@ export default function PevsSpotlight() {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
-                  130+
+                <p className="text-sm sm:text-base font-black font-[family-name:var(--font-heading)] text-white leading-snug">
+                  Industri & Merek
                 </p>
-                <p className="text-[11px] text-slate-400 font-medium">Exhibitor & Merek Peserta</p>
+                <p className="text-[11px] text-slate-400 font-medium">
+                  Exhibitor anggota & mitra
+                </p>
               </div>
             </div>
 
@@ -207,10 +211,12 @@ export default function PevsSpotlight() {
                 <Coins className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
-                  Rp 1+ T
+                <p className="text-sm sm:text-base font-black font-[family-name:var(--font-heading)] text-white leading-snug">
+                  Forum Bisnis
                 </p>
-                <p className="text-[11px] text-slate-400 font-medium">Transaksi B2B & Retail</p>
+                <p className="text-[11px] text-slate-400 font-medium">
+                  Transaksi B2B & retail
+                </p>
               </div>
             </div>
 
@@ -219,10 +225,12 @@ export default function PevsSpotlight() {
                 <Sparkles className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xl sm:text-2xl font-black font-[family-name:var(--font-heading)] text-white">
+                <p className="text-sm sm:text-base font-black font-[family-name:var(--font-heading)] text-white leading-snug">
                   Tahunan
                 </p>
-                <p className="text-[11px] text-slate-400 font-medium">Agenda Resmi Nasional</p>
+                <p className="text-[11px] text-slate-400 font-medium">
+                  Agenda resmi nasional
+                </p>
               </div>
             </div>
           </div>

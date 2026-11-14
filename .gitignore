@@ -40,7 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# scratch files
+# scratch & local working files
 scratch_*
+scratch/
+_analysis/
+client-want/
+.hallmark/
+temp/
+tmp/
 
-_analysis
+prepare

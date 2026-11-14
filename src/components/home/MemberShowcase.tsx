@@ -2,12 +2,11 @@
 
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
-import { motion, AnimatePresence } from 'motion/react';
+import { LayoutGroup, motion, AnimatePresence } from 'motion/react';
 import { Building2, Sparkles, ArrowRight, ShieldCheck } from 'lucide-react';
 import type { MemberBrand } from '@/types';
 import { memberBrands as defaultMembers } from '@/data/mock-data';
 import MemberLogoCard from '@/components/shared/MemberLogoCard';
-import SectionHeader from '@/components/shared/SectionHeader';
 import ScrollReveal from '@/components/shared/ScrollReveal';
 
 interface MemberShowcaseProps {
@@ -27,7 +26,6 @@ type Category = (typeof categories)[number];
 export default function MemberShowcase({ members = defaultMembers }: MemberShowcaseProps) {
   const [selectedCategory, setSelectedCategory] = useState<Category>('Semua');
 
-  // Compute category counts dynamically
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {
       Semua: members.length,
@@ -51,42 +49,64 @@ export default function MemberShowcase({ members = defaultMembers }: MemberShowc
   }, [members, selectedCategory]);
 
   return (
-    <section id="anggota" className="py-16 md:py-24 bg-slate-50 border-b border-slate-200 overflow-hidden">
-      <div className="container-main">
-        {/* Section Header */}
+    <section
+      id="anggota"
+      className="relative py-16 md:py-24 bg-[#06152F] border-b border-white/10 overflow-hidden"
+    >
+      {/* Soft glass atmosphere */}
+      <div
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(8,123,235,0.12),transparent_55%)]"
+        aria-hidden="true"
+      />
+
+      <div className="container-main relative z-10">
         <ScrollReveal>
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md text-xs font-bold bg-blue-100 text-electric border border-blue-200 mb-3">
-                <Building2 className="w-3.5 h-3.5 text-electric" />
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-white/5 text-[#DCEBFA] border border-white/10 backdrop-blur-md mb-4">
+                <Building2 className="w-3.5 h-3.5 text-[#087BEB]" />
                 Konsorsium Industri Terakreditasi
               </div>
-              <SectionHeader
-                title="Anggota & Ekosistem Industri EV Nasional"
-                subtitle="Jajaran pabrikan otomotif terkemuka, inisiator bus listrik, manufaktur roda dua, pengembang baterai berstandar global, dan operator SPKLU yang bersinergi dalam PERIKLINDO."
+              <h2 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                Anggota & Ekosistem Industri EV Nasional
+              </h2>
+              <span
+                className="block h-0.5 w-12 rounded-full bg-gradient-to-r from-[#087BEB] to-[#00C8F5] mb-3"
+                aria-hidden="true"
               />
+              <p className="text-slate-400 text-base md:text-lg max-w-2xl leading-relaxed">
+                Jajaran pabrikan otomotif terkemuka, inisiator bus listrik, manufaktur
+                roda dua, pengembang baterai berstandar global, dan operator SPKLU yang
+                bersinergi dalam PERIKLINDO.
+              </p>
             </div>
 
-            <div className="hidden lg:flex items-center gap-2 p-3 bg-white rounded-2xl border border-slate-200 shadow-xs shrink-0">
-              <ShieldCheck className="w-5 h-5 text-emerald-600" />
+            <div className="hidden lg:flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md shrink-0">
+              <ShieldCheck className="w-5 h-5 text-emerald-400" />
               <div className="text-xs">
-                <p className="font-extrabold text-navy leading-none">25+ Anggota Resmi</p>
-                <p className="text-[11px] text-slate-500 font-medium">Terverifikasi Anggaran Dasar</p>
+                <p className="font-extrabold text-white leading-none">25+ Anggota Resmi</p>
+                <p className="text-[11px] text-slate-400 font-medium mt-1">
+                  Terverifikasi Anggaran Dasar
+                </p>
               </div>
             </div>
           </div>
         </ScrollReveal>
 
-        {/* 1. Seamless Double-Track Marquee Carousel */}
-        <ScrollReveal delay={120} className="mb-14">
-          <div className="group relative w-full overflow-hidden py-3">
-            {/* Soft fade gradients on left & right edges for seamless illusion */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 sm:w-28 bg-gradient-to-r from-slate-50 via-slate-50/80 to-transparent z-10" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 sm:w-28 bg-gradient-to-l from-slate-50 via-slate-50/80 to-transparent z-10" />
+        {/* Infinite LTR marquee — pause on hover */}
+        <ScrollReveal delay={120} className="mb-12">
+          <div className="group relative w-full overflow-hidden py-4 rounded-2xl bg-white/[0.03] border border-white/10 backdrop-blur-sm touch-pan-y">
+            <div
+              className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-24 bg-gradient-to-r from-[#06152F] via-[#06152F]/80 to-transparent z-10"
+              aria-hidden="true"
+            />
+            <div
+              className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-24 bg-gradient-to-l from-[#06152F] via-[#06152F]/80 to-transparent z-10"
+              aria-hidden="true"
+            />
 
-            {/* Double-Track Marquee */}
             <div className="flex w-max select-none">
-              <div className="flex shrink-0 items-center gap-4 sm:gap-6 pr-4 sm:pr-6 animate-marquee-track hover:[animation-play-state:paused] group-hover:[animation-play-state:paused]">
+              <div className="flex shrink-0 items-center gap-3 sm:gap-5 pr-3 sm:pr-5 animate-marquee-track group-hover:[animation-play-state:paused]">
                 {members.map((member) => (
                   <MemberLogoCard
                     key={`m1-${member.id}`}
@@ -96,7 +116,7 @@ export default function MemberShowcase({ members = defaultMembers }: MemberShowc
                 ))}
               </div>
               <div
-                className="flex shrink-0 items-center gap-4 sm:gap-6 pr-4 sm:pr-6 animate-marquee-track hover:[animation-play-state:paused] group-hover:[animation-play-state:paused]"
+                className="flex shrink-0 items-center gap-3 sm:gap-5 pr-3 sm:pr-5 animate-marquee-track group-hover:[animation-play-state:paused]"
                 aria-hidden="true"
               >
                 {members.map((member) => (
@@ -111,91 +131,102 @@ export default function MemberShowcase({ members = defaultMembers }: MemberShowc
           </div>
         </ScrollReveal>
 
-        {/* 2. Capsule Pills Category Filter with Dynamic Counts */}
+        {/* Glass category filters */}
         <ScrollReveal delay={180}>
-          <div
-            className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none"
-            role="tablist"
-            aria-label="Filter kategori anggota industri"
-          >
-            {categories.map((category) => {
-              const isActive = selectedCategory === category;
-              const count = categoryCounts[category] ?? 0;
+          <LayoutGroup>
+            <div
+              className="flex items-center gap-2 overflow-x-auto pb-4 mb-8 scrollbar-none"
+              role="tablist"
+              aria-label="Filter kategori anggota industri"
+            >
+              {categories.map((category) => {
+                const isActive = selectedCategory === category;
+                const count = categoryCounts[category] ?? 0;
 
-              return (
-                <button
-                  key={category}
-                  type="button"
-                  role="tab"
-                  aria-selected={isActive}
-                  onClick={() => setSelectedCategory(category)}
-                  className={`relative whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 min-h-[44px] flex items-center gap-2 ${
-                    isActive
-                      ? 'text-white shadow-md shadow-navy/20 -translate-y-0.5'
-                      : 'bg-white text-slate-600 hover:text-navy hover:bg-slate-100 border border-slate-200 shadow-2xs'
-                  }`}
-                >
-                  {isActive && (
-                    <motion.div
-                      layoutId="active-member-filter"
-                      className="absolute inset-0 bg-navy rounded-xl -z-10"
-                      transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                    />
-                  )}
-                  <span>{category}</span>
-                  <span
-                    className={`text-[11px] px-2 py-0.5 rounded-full font-extrabold ${
+                return (
+                  <button
+                    key={category}
+                    type="button"
+                    role="tab"
+                    aria-selected={isActive}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`relative whitespace-nowrap px-4 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-colors duration-300 min-h-[44px] flex items-center gap-2 ${
                       isActive
-                        ? 'bg-white/20 text-white'
-                        : 'bg-slate-200 text-slate-700'
+                        ? 'text-white'
+                        : 'bg-white/5 border border-white/10 text-slate-300 hover:bg-white/10 hover:text-white'
                     }`}
                   >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
-          </div>
+                    {isActive && (
+                      <motion.div
+                        layoutId="active-member-filter"
+                        className="absolute inset-0 -z-10 rounded-full bg-[#087BEB] shadow-lg shadow-[#087BEB]/25"
+                        transition={{ type: 'spring', stiffness: 380, damping: 32 }}
+                      />
+                    )}
+                    <span>{category}</span>
+                    <span
+                      className={`text-[11px] px-2 py-0.5 rounded-full font-extrabold ${
+                        isActive
+                          ? 'bg-white/20 text-white'
+                          : 'bg-white/10 text-slate-400'
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </LayoutGroup>
         </ScrollReveal>
 
-        {/* 3. Filtered Grid of Member Logos with AnimatePresence */}
+        {/* Filtered member grid */}
         <AnimatePresence mode="wait">
           <motion.div
             key={selectedCategory}
-            initial={{ opacity: 0, y: 12 }}
+            layout
+            initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.25, ease: 'easeOut' }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5"
           >
             {filteredMembers.map((member) => (
-              <MemberLogoCard key={member.id} member={member} />
+              <motion.div
+                key={member.id}
+                layout
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.25, ease: 'easeOut' }}
+              >
+                <MemberLogoCard member={member} />
+              </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>
 
-        {/* Membership Application Gateway Banner */}
+        {/* Membership CTA */}
         <ScrollReveal delay={250}>
-          <div className="mt-14 p-6 sm:p-8 bg-white border border-slate-200 rounded-2xl shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <div className="mt-14 p-6 sm:p-8 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
             <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-electric mb-1">
+              <div className="flex items-center gap-2 text-xs font-bold text-[#087BEB] mb-1">
                 <Sparkles className="w-3.5 h-3.5" />
                 Registrasi Keanggotaan Terbuka
               </div>
-              <h4 className="text-base sm:text-lg font-bold text-navy">
+              <h4 className="text-base sm:text-lg font-bold text-white">
                 Perusahaan Anda bergerak di rantai pasok industri kendaraan listrik?
               </h4>
-              <p className="text-xs sm:text-sm text-slate-500 mt-0.5">
+              <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
                 Bergabunglah bersama asosiasi resmi untuk memperoleh advokasi regulasi,
                 jejaring B2B, dan kepesertaan pameran PEVS.
               </p>
             </div>
             <Link
               href="/kontak"
-              className="group inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-navy text-white text-xs sm:text-sm font-bold hover:bg-navy-light active:scale-[0.98] transition-all min-h-[44px] whitespace-nowrap shadow-sm"
+              className="group inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#087BEB] text-white text-xs sm:text-sm font-bold hover:bg-[#0669c9] active:scale-[0.98] transition-all duration-300 min-h-[44px] whitespace-nowrap shadow-lg shadow-[#087BEB]/25"
             >
               <span>Ajukan Keanggotaan</span>
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
             </Link>
           </div>
         </ScrollReveal>

@@ -1,0 +1,37 @@
+---
+description: Reminder gap revisi PERIKLINDO vs koreksi client — selalu sadar apa yang masih kurang
+alwaysApply: true
+---
+
+# PERIKLINDO — Outstanding Revision Reminder
+
+Baca status terkini di `prepare/revision/STATUS_YANG_MASIH_KURANG.md` dan checklist `prepare/revision/00_DATA_YANG_BELUM_DARI_CLIENT.md`.
+
+## Progress (per 14 Nov 2026)
+
+- **R01** (polish beranda) ✅ sudah dijalankan user
+- **R06** (galeri / form / QA) ✅ sudah dijalankan user
+- **R03** (verifikasi klaim) 🔄 user bilang sedang jalan — hormati kerja itu, jangan dobel-kerjakan tanpa diminta
+- **R02 / R04 / R05** belum
+
+## Setiap sesi relevan (homepage, org, berita, galeri, kontak, launch)
+
+Ingatkan user secara singkat bila relevan, terutama:
+
+1. **Dewan Pengawas masih kosong** — tunggu SK dari Agistya, lalu **R02** (jangan mengarang nama)
+2. **Legalitas** — nomor SK Kemenkumham / akta / AD/ART verbatim belum dari client (`site-claims.ts` slot null)
+3. **Anggota `26+`** — `SHOW_MEMBER_COUNT = false` sampai konfirmasi; jangan nyalakan sembarangan
+4. **Galeri** — aset non-PEVS masih lemah / reuse; minta foto asli sebelum klaim dokumentasi lengkap
+5. **Mitra kementerian** — nama OK, logo resmi belum / `allowOfficialLogos` false
+6. **Domain** `.or.id` vs email `.com` belum dikonfirmasi
+7. **R04** backend Firebase+R2 dan **R05** Prioritas 4 belum — sebutkan hanya jika user bahas launch/fitur lanjut
+
+## Larangan
+
+- Jangan mengarang data kepengurusan, nomor SK, visi-misi, angka PEVS, atau logo mitra
+- Jangan mengulangi Round 1 (`prepare/prompts/01`–`06`) kecuali regresi jelas
+- Untuk kerja baru yang menutup gap: pakai `prepare/revision/R0x`, bukan prompt lama
+
+## Setelah user selesai satu scope
+
+Update `prepare/revision/STATUS_YANG_MASIH_KURANG.md` (centang progress) agar reminder tetap akurat.

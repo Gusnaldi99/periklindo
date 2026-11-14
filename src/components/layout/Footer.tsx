@@ -174,14 +174,15 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-3">
                 <Phone className="w-4 h-4 text-teal shrink-0 mt-0.5" aria-hidden="true" />
-                <div className="space-y-1">
+                <div className="space-y-2">
                   <a
                     href="https://wa.me/6287789703728"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="block hover:text-white transition-colors duration-150"
                   >
-                    Sekretariat: +62 877-8970-3728
+                    <span className="text-xs text-slate-400 block font-medium">WhatsApp Layanan Sekretariat & Informasi:</span>
+                    <span className="font-semibold text-white hover:text-teal">+62 877-8970-3728</span>
                   </a>
                   <a
                     href="https://wa.me/6281299787588"
@@ -189,7 +190,8 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="block hover:text-white transition-colors duration-150"
                   >
-                    Pendaftaran: +62 812-9978-7588
+                    <span className="text-xs text-slate-400 block font-medium">WhatsApp Pendaftaran Anggota Baru:</span>
+                    <span className="font-semibold text-white hover:text-teal">+62 812-9978-7588</span>
                   </a>
                 </div>
               </li>
@@ -243,8 +245,8 @@ export default function Footer() {
                   whileHover={shouldReduceMotion ? undefined : { y: -2, color: '#0066FF' }}
                   transition={{ duration: 0.15 }}
                   className={cn(
-                    'inline-flex items-center justify-center w-10 h-10 rounded-full border border-white/10 text-slate-400',
-                    'hover:border-electric/40 hover:bg-white/5 min-w-[40px] min-h-[40px]'
+                    'inline-flex items-center justify-center w-11 h-11 rounded-full border border-white/10 text-slate-400',
+                    'hover:border-electric/40 hover:bg-white/5 min-w-[44px] min-h-[44px]'
                   )}
                 >
                   <Icon className="w-4 h-4" aria-hidden="true" />
@@ -260,7 +262,7 @@ export default function Footer() {
               viewport={{ once: true }}
               whileHover={shouldReduceMotion ? undefined : { y: -2 }}
               aria-label="Kembali ke atas"
-              className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-electric text-white shadow-md shadow-electric/30 hover:bg-electric-hover min-w-[40px] min-h-[40px] transition-colors duration-150"
+              className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-electric text-white shadow-md shadow-electric/30 hover:bg-electric-hover min-w-[44px] min-h-[44px] transition-colors duration-150"
             >
               <ArrowUp className="w-4 h-4" aria-hidden="true" />
             </motion.button>

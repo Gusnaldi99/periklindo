@@ -34,7 +34,7 @@ export default function FaqContactPrompt() {
                 liputan media, dan kemitraan PEVS pada hari kerja pukul 08.00–17.00 WIB.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex flex-col sm:flex-row flex-wrap gap-3">
               <Link
                 href="/kontak"
                 className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-electric text-white text-sm font-bold hover:bg-electric-hover min-h-[44px] shadow-md shadow-electric/30"
@@ -50,7 +50,16 @@ export default function FaqContactPrompt() {
                 className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-teal text-white text-sm font-bold hover:bg-teal-hover min-h-[44px] shadow-md shadow-teal/30"
               >
                 <MessageCircle className="w-4 h-4" />
-                WhatsApp Sekretariat
+                WA Sekretariat +62 877-8970-3728
+              </a>
+              <a
+                href="https://wa.me/6281299787588"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl border border-white/20 text-white text-sm font-bold hover:bg-white/10 min-h-[44px]"
+              >
+                <MessageCircle className="w-4 h-4" />
+                WA Pendaftaran +62 812-9978-7588
               </a>
             </div>
           </div>

@@ -79,7 +79,7 @@ export default function GalleryLightboxModal({
               <button
                 type="button"
                 onClick={onClose}
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/10 text-white hover:bg-white/20 min-h-[40px] min-w-[40px]"
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-white/10 text-white hover:bg-white/20 min-h-[44px] min-w-[44px]"
                 aria-label="Tutup pratinjau"
               >
                 <X className="w-4 h-4" />
@@ -89,7 +89,7 @@ export default function GalleryLightboxModal({
             <div className="relative bg-black min-h-[240px] sm:min-h-[420px] flex-1">
               <Image
                 src={item.imageUrl}
-                alt={item.title}
+                alt={`${item.title}${item.location ? ` — ${item.location}` : ''}`}
                 fill
                 sizes="100vw"
                 className="object-contain"

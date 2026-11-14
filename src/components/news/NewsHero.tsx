@@ -7,18 +7,12 @@ import { ArrowRight, CalendarDays, Clock, Newspaper } from 'lucide-react';
 import { estimateReadMinutes, formatDateId } from '@/lib/content';
 import type { NewsPost } from '@/types';
 
-const CATEGORY_LABEL: Record<NewsPost['category'], string> = {
-  'Siaran Pers': 'Siaran Pers',
-  Regulasi: 'Regulasi',
-  Kegiatan: 'Kegiatan Asosiasi',
-  'Industri EV': 'Teknologi EV',
-};
-
 interface NewsHeroProps {
   featured: NewsPost;
+  supporting: NewsPost[];
 }
 
-export default function NewsHero({ featured }: NewsHeroProps) {
+export default function NewsHero({ featured, supporting }: NewsHeroProps) {
   const shouldReduceMotion = useReducedMotion();
   const readMinutes = estimateReadMinutes(featured);
 
@@ -50,72 +44,115 @@ export default function NewsHero({ featured }: NewsHeroProps) {
               /
             </li>
             <li className="text-white font-medium" aria-current="page">
-              Berita & Artikel
+              Berita & Publikasi
             </li>
           </ol>
         </nav>
 
         <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-electric/15 text-blue-300 border border-electric/35 mb-5">
           <Newspaper className="w-3.5 h-3.5 text-teal" />
-          <span>Warta Industri • NEWS-IDX/2026</span>
+          <span>Layout Editorial • Berita & Publikasi Resmi</span>
         </div>
 
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.18] mb-3">
-          Berita & Artikel
+          Berita & Publikasi
         </h1>
         <p className="text-base sm:text-lg text-slate-300 max-w-2xl mb-10">
-          Liputan kegiatan asosiasi, siaran pers, dinamika regulasi KBLBB, dan
-          perkembangan teknologi kendaraan listrik nasional.
+          Liputan kegiatan PERIKLINDO, dinamika industri EV, kebijakan & regulasi,
+          kerja sama, serta siaran pers resmi.
         </p>
 
-        <motion.article
+        <motion.div
           initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="grid grid-cols-1 lg:grid-cols-12 gap-0 rounded-3xl overflow-hidden border border-white/10 bg-navy-light/80 shadow-2xl"
+          className="grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 lg:items-stretch"
         >
-          <div className="relative lg:col-span-7 aspect-[16/10] lg:aspect-auto lg:min-h-[420px]">
-            <Image
-              src={featured.thumbnailUrl}
-              alt={featured.title}
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 58vw"
-              className="object-cover"
-            />
-          </div>
-
-          <div className="lg:col-span-5 p-6 sm:p-8 lg:p-10 flex flex-col justify-center">
-            <div className="flex flex-wrap items-center gap-2 mb-4">
-              <span className="text-[10px] font-extrabold uppercase tracking-wider bg-electric text-white px-2.5 py-1 rounded-md">
-                {CATEGORY_LABEL[featured.category]}
-              </span>
-              <span className="inline-flex items-center gap-1 text-xs text-slate-400">
-                <CalendarDays className="w-3.5 h-3.5" />
-                {formatDateId(featured.publishedAt)}
-              </span>
-              <span className="inline-flex items-center gap-1 text-xs text-slate-400">
-                <Clock className="w-3.5 h-3.5" />
-                {readMinutes} mnt baca
-              </span>
+          <article className="lg:col-span-7 rounded-3xl overflow-hidden border border-white/10 bg-navy-light/80 shadow-2xl flex flex-col h-full">
+            <div className="relative aspect-[16/9] shrink-0">
+              <Image
+                src={featured.thumbnailUrl}
+                alt={featured.title}
+                fill
+                priority
+                sizes="(max-width: 1024px) 100vw, 58vw"
+                className="object-cover object-center"
+              />
             </div>
+            <div className="p-6 sm:p-8 flex flex-col flex-1">
+              <div className="flex flex-wrap items-center gap-2 mb-4">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider bg-electric text-white px-2.5 py-1 rounded-md">
+                  {featured.category}
+                </span>
+                {featured.sourceName ? (
+                  <span className="text-[10px] font-bold uppercase tracking-wider bg-white/10 text-slate-200 px-2.5 py-1 rounded-md">
+                    {featured.sourceName}
+                  </span>
+                ) : null}
+                <span className="inline-flex items-center gap-1 text-xs text-slate-400">
+                  <CalendarDays className="w-3.5 h-3.5" />
+                  {formatDateId(featured.publishedAt)}
+                </span>
+                <span className="inline-flex items-center gap-1 text-xs text-slate-400">
+                  <Clock className="w-3.5 h-3.5" />
+                  {readMinutes} mnt baca
+                </span>
+              </div>
 
-            <h2 className="text-xl sm:text-2xl lg:text-[1.7rem] font-extrabold text-white leading-snug mb-4">
-              {featured.title}
-            </h2>
-            <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-8 line-clamp-4">
-              {featured.excerpt}
-            </p>
+              <h2 className="text-xl sm:text-2xl lg:text-[1.75rem] font-extrabold text-white leading-snug mb-4">
+                {featured.title}
+              </h2>
+              <p className="text-sm sm:text-base text-slate-300 leading-relaxed mb-6 line-clamp-5 sm:line-clamp-6">
+                {featured.excerpt}
+              </p>
 
-            <Link
-              href={`/berita/${featured.slug}`}
-              className="group inline-flex items-center justify-center gap-2 self-start px-5 py-3 rounded-xl bg-electric text-white text-sm font-bold hover:bg-electric-hover shadow-md shadow-electric/30 min-h-[44px] transition-colors duration-150"
-            >
-              Baca artikel unggulan
-              <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
-            </Link>
+              <Link
+                href={`/berita/${featured.slug}`}
+                className="group inline-flex items-center justify-center gap-2 self-start px-5 py-3 rounded-xl bg-electric text-white text-sm font-bold hover:bg-electric-hover shadow-md shadow-electric/30 min-h-[44px] transition-colors duration-150 mt-auto"
+              >
+                Baca Selengkapnya
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </Link>
+            </div>
+          </article>
+
+          <div className="lg:col-span-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-3 sm:gap-4 lg:h-full lg:auto-rows-fr">
+            {supporting.map((post, index) => (
+              <Link
+                key={post.id}
+                href={`/berita/${post.slug}`}
+                className="group flex gap-3.5 rounded-2xl border border-white/10 bg-navy-light/70 p-3.5 hover:border-electric/40 hover:bg-navy-light transition-colors duration-200 min-h-0"
+              >
+                <div className="relative w-[100px] sm:w-[112px] lg:w-[128px] shrink-0 self-stretch min-h-[88px] rounded-xl overflow-hidden bg-slate-800">
+                  <Image
+                    src={post.thumbnailUrl}
+                    alt={post.title}
+                    fill
+                    sizes="128px"
+                    className="object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                    priority={index < 2}
+                  />
+                </div>
+                <div className="min-w-0 flex-1 flex flex-col justify-center gap-1.5 py-0.5">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[10px] font-extrabold uppercase tracking-wider text-electric">
+                      {post.category}
+                    </span>
+                    <span className="text-[11px] text-slate-400">
+                      {formatDateId(post.publishedAt, 'short')}
+                    </span>
+                  </div>
+                  <h3 className="text-sm sm:text-[15px] font-bold text-white leading-snug line-clamp-2 group-hover:text-blue-200 transition-colors">
+                    {post.title}
+                  </h3>
+                  <p className="text-xs text-slate-400 leading-relaxed line-clamp-2 lg:line-clamp-3">
+                    {post.excerpt}
+                  </p>
+                </div>
+              </Link>
+            ))}
           </div>
-        </motion.article>
+        </motion.div>
       </div>
     </section>
   );

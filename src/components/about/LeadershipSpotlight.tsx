@@ -113,7 +113,7 @@ export default function LeadershipSpotlight() {
                     accent.badge
                   )}>
                     <BadgeIcon className="w-3 h-3 shrink-0" />
-                    <span className="truncate max-w-[100px]">{leader.positionEn}</span>
+                    <span className="truncate max-w-[100px]">{leader.position}</span>
                   </div>
                 </div>
 
@@ -160,7 +160,7 @@ export default function LeadershipSpotlight() {
               Ingin melihat susunan lengkap Ketua Bidang dan seluruh dewan pimpinan?
             </h4>
             <p className="text-sm text-slate-300">
-              Kunjungi halaman Struktur Organisasi untuk bagan hierarki interaktif Promosi, Legal, R&D, Data & Informasi, Organisasi, dan Hubungan Masyarakat.
+              Kunjungi halaman Struktur Organisasi untuk bagan hierarki interaktif Dewan Pembina, Dewan Pengawas, Pimpinan Inti, dan enam Ketua Bidang teknis.
             </p>
           </div>
           <Link

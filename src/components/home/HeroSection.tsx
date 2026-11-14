@@ -3,262 +3,310 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'motion/react';
-import {
-  ShieldCheck,
-  Zap,
-  ArrowRight,
-  TrendingUp,
-  Award,
-  Sparkles,
-  ChevronRight,
-  Gauge,
-} from 'lucide-react';
+import { Car, Factory, Leaf, Handshake, ArrowRight, ChevronDown } from 'lucide-react';
+import ScrollReveal from '@/components/shared/ScrollReveal';
 import AnimatedCounter from '@/components/shared/AnimatedCounter';
+import {
+  PENDING_MEMBER_COUNT,
+  SHOW_MEMBER_COUNT,
+} from '@/data/site-claims';
+
+// ─── Glass Stats Pills Data ──────────────────────────────────────────────────
+// Angka anggota dimatikan (SHOW_MEMBER_COUNT) sampai client konfirmasi — PDF Hal. 7.
+const statsPills = [
+  {
+    icon: Car,
+    // TODO(R03): nyalakan kembali setelah reconciliation database anggota.
+    value: SHOW_MEMBER_COUNT ? PENDING_MEMBER_COUNT : null,
+    suffix: SHOW_MEMBER_COUNT ? '+' : '',
+    label: SHOW_MEMBER_COUNT
+      ? 'Anggota Industri'
+      : 'Konsorsium Industri Anggota',
+    iconColor: 'text-sky-300',
+    iconBg: 'bg-sky-500/20',
+  },
+  {
+    icon: Factory,
+    value: null,
+    suffix: '',
+    label: 'Mendukung Ekosistem EV Nasional',
+    iconColor: 'text-blue-300',
+    iconBg: 'bg-blue-500/20',
+  },
+  {
+    icon: Leaf,
+    value: null,
+    suffix: '',
+    label: 'Untuk Masa Depan Lebih Bersih',
+    iconColor: 'text-emerald-300',
+    iconBg: 'bg-emerald-500/20',
+  },
+  {
+    icon: Handshake,
+    value: null,
+    suffix: '',
+    label: 'Kolaborasi untuk Mobilitas Berkelanjutan',
+    iconColor: 'text-amber-300',
+    iconBg: 'bg-amber-500/20',
+  },
+] as const;
+
+// ─── Dual Highlight Cards Data ───────────────────────────────────────────────
+const highlightCards = [
+  {
+    tag: '— PERIKLINDO',
+    title: 'Electric Vehicle Show (PEVS)',
+    description:
+      'Pameran kendaraan listrik, booth industri, dan test drive untuk akselerasi adopsi mobilitas bersih.',
+    cta: 'Pelajari Lebih Lanjut',
+    href: '/berita?kategori=Kegiatan',
+    image: '/assets/news/pevs-2026-mab-moeldoko.jpg',
+    imageAlt:
+      'Booth pameran PEVS dengan kendaraan listrik komersial dan demonstrasi produk di JIExpo Kemayoran',
+    objectPosition: 'object-center',
+  },
+  {
+    tag: '— PERIKLINDO',
+    title: 'EV Conference (PEVC)',
+    description:
+      'Forum strategis di panggung konferensi — dialog kebijakan, pembicara, dan audiens industri EV.',
+    cta: 'Pelajari Lebih Lanjut',
+    href: '/berita?kategori=Kegiatan',
+    image: '/assets/news/pevs-2026-pidato-moeldoko.jpg',
+    imageAlt:
+      'Panggung PERIKLINDO Electric Vehicle Conference (PEVC) — pembicara di podium dengan layar LED',
+    objectPosition: 'object-[center_35%]',
+  },
+];
 
 export default function HeroSection() {
   return (
-    <section className="relative bg-navy text-white overflow-hidden py-16 md:py-20 lg:py-28 border-b border-navy-light">
-      {/* Background Blueprint Grid & Radial Glow */}
-      <div
-        className="absolute inset-0 opacity-[0.04] pointer-events-none"
-        style={{
-          backgroundImage:
-            'radial-gradient(circle at 1px 1px, #FFFFFF 1px, transparent 0)',
-          backgroundSize: '28px 28px',
-        }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -top-32 -left-32 w-96 h-96 rounded-full bg-electric/15 blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute -bottom-32 right-0 w-[500px] h-[500px] rounded-full bg-cyan-500/10 blur-3xl pointer-events-none"
-        aria-hidden="true"
-      />
+    <section className="relative text-white overflow-hidden" aria-label="Hero utama PERIKLINDO">
+      {/* ═══════════════════════════════════════════════════════════════════
+          CINEMATIC HERO BACKGROUND
+      ═══════════════════════════════════════════════════════════════════ */}
+      <div className="relative min-h-[92vh] flex flex-col justify-end">
+        {/* Background Image — EV Ecosystem Panoramic */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/assets/hero/hero-ev-ecosystem.jpg"
+            alt="Ekosistem kendaraan listrik Indonesia — mobil EV, bus listrik 100% Electric, motor listrik, SPKLU, siluet Monas"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+          {/* Dark Navy Gradient Overlay — WCAG AA contrast for text */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to bottom, rgba(6,21,47,0.55) 0%, rgba(6,21,47,0.30) 40%, rgba(6,21,47,0.80) 80%, rgba(6,21,47,0.97) 100%)',
+            }}
+            aria-hidden="true"
+          />
+          {/* Subtle left-side vignette for text legibility */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                'linear-gradient(to right, rgba(6,21,47,0.60) 0%, transparent 60%)',
+            }}
+            aria-hidden="true"
+          />
+        </div>
 
-      <div className="container-main relative z-10">
-        {/* Asymmetrical 12-Column Grid (7 Columns Left : 5 Columns Right) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-          {/* ================= LEFT COLUMN: Editorial Powerhouse (7 Cols) ================= */}
-          <div className="lg:col-span-7">
-            {/* Status & Mandate Pill */}
+        {/* ─── Hero Text Content ─────────────────────────────────────────── */}
+        <div className="container-main relative z-10 pb-14 pt-32 md:pt-40 lg:pt-48">
+          <div className="max-w-3xl">
+            {/* Kicker / Tagline Atas — BI (PDF Hal. 9 & 11) */}
             <motion.div
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45 }}
-              className="inline-flex flex-wrap items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-white/5 border border-white/15 text-emerald-400 mb-6 backdrop-blur-md"
+              transition={{ duration: 0.5 }}
+              className="flex items-center gap-3 mb-5"
             >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+              <span className="h-px w-8 bg-sky-400/70" aria-hidden="true" />
+              <span className="text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase text-sky-300/90">
+                Bersama untuk Masa Depan Berkelanjutan
               </span>
-              <span>Asosiasi Resmi Industri Kendaraan Listrik Indonesia</span>
-              <span className="text-white/30 hidden sm:inline">&bull;</span>
-              <span className="text-slate-300 hidden sm:inline">SK Kemenkumham RI</span>
+              <span className="h-px w-8 bg-sky-400/70" aria-hidden="true" />
             </motion.div>
 
-            {/* Main Institutional Headline */}
+            {/* Main Headline — EN retained per official PDF example */}
             <motion.h1
-              initial={{ opacity: 0, y: 18 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black tracking-tight text-white leading-[1.12] mb-6 font-[family-name:var(--font-heading)]"
+              transition={{ duration: 0.55, delay: 0.1 }}
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] font-black tracking-tight text-white leading-[1.06] mb-5 font-[family-name:var(--font-heading)]"
             >
-              Akselerasi Kedaulatan{' '}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-sky-300 to-emerald-400">
-                Ekosistem Kendaraan Listrik
+              Driving Indonesia&apos;s{' '}
+              <span
+                className="text-transparent bg-clip-text"
+                style={{
+                  backgroundImage: 'linear-gradient(90deg, #38BDF8 0%, #60A5FA 50%, #818CF8 100%)',
+                }}
+              >
+                Electric Mobility
               </span>{' '}
-              Indonesia
+              Future
             </motion.h1>
 
-            {/* Subtitle with Regulatory Anchor */}
+            {/* Sub-headline */}
             <motion.p
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="text-base sm:text-lg text-slate-300 leading-relaxed mb-8 max-w-2xl font-normal"
+              className="text-base sm:text-lg text-slate-200/85 leading-relaxed mb-8 max-w-xl font-normal"
             >
-              Didirikan pada April 2021 untuk mengawal pelaksanaan{' '}
-              <strong className="text-white font-semibold">Perpres No. 55 Tahun 2019</strong>.
-              PERIKLINDO memadukan produsen otomotif roda 4, roda 2, industri baterai
-              nasional, dan jaringan infrastruktur pengisian daya untuk mewujudkan kedaulatan
-              energi bersih Indonesia di kancah global.
+              Bersama membangun ekosistem kendaraan listrik nasional yang inovatif, berdaya saing,
+              dan berkelanjutan.
             </motion.p>
 
-            {/* Dual Action CTAs */}
+            {/* Dual CTA Buttons — Opsi A (PDF Hal. 6) */}
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-4 mb-12"
+              className="flex flex-wrap items-center gap-3"
             >
+              {/* Primary — Electric Blue Pill */}
               <Link
-                href="#anggota"
-                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-electric text-white font-bold text-sm sm:text-base hover:bg-electric-hover active:scale-[0.98] shadow-lg shadow-electric/30 transition-all duration-150 min-h-[48px]"
+                href="/tentang-kami"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-bold text-sm sm:text-base text-white transition-all duration-200 active:scale-[0.98] min-h-[48px]"
+                style={{
+                  backgroundColor: '#087BEB',
+                  boxShadow: '0 4px 24px rgba(8,123,235,0.40)',
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#0668CA';
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.backgroundColor = '#087BEB';
+                }}
               >
-                <span>Jelajahi Anggota Konsorsium</span>
+                <span>Tentang PERIKLINDO</span>
                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Link>
 
+              {/* Secondary — Frosted Glass Pill → #anggota */}
               <Link
-                href="/tentang-kami"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl border border-white/20 text-white font-semibold text-sm sm:text-base hover:bg-white/10 hover:border-white/40 active:scale-[0.98] transition-all duration-150 min-h-[48px] backdrop-blur-xs"
+                href="#anggota"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full font-semibold text-sm sm:text-base text-white border border-white/25 hover:bg-white/10 hover:border-white/40 backdrop-blur-sm transition-all duration-200 active:scale-[0.98] min-h-[48px]"
+                style={{ background: 'rgba(255,255,255,0.08)' }}
               >
-                <span>Visi & Landasan Kebijakan</span>
-                <ChevronRight className="w-4 h-4 text-slate-400" />
+                <span>Jelajahi Anggota</span>
+                <ChevronDown className="w-4 h-4 text-slate-300" />
               </Link>
             </motion.div>
-
-            {/* Live Telemetry / Cockpit Metrics Bar */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-white/10"
-            >
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 backdrop-blur-xs">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-1">
-                  <Award className="w-3.5 h-3.5 text-amber-400" />
-                  <span>Landasan</span>
-                </div>
-                <p className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-black text-white">
-                  <AnimatedCounter end={2021} duration={1400} />
-                </p>
-                <p className="text-[11px] text-slate-400 leading-tight">
-                  Perpres 55/2019
-                </p>
-              </div>
-
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 backdrop-blur-xs">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Produsen</span>
-                </div>
-                <p className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-black text-white">
-                  <AnimatedCounter end={25} suffix="+" duration={1500} />
-                </p>
-                <p className="text-[11px] text-slate-400 leading-tight">
-                  Merek Resmi
-                </p>
-              </div>
-
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 backdrop-blur-xs">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-1">
-                  <TrendingUp className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Target TKDN</span>
-                </div>
-                <p className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-black text-white">
-                  <AnimatedCounter end={60} suffix="%" duration={1600} />
-                </p>
-                <p className="text-[11px] text-slate-400 leading-tight">
-                  Rantai Pasok 2027
-                </p>
-              </div>
-
-              <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 backdrop-blur-xs">
-                <div className="flex items-center gap-1.5 text-slate-400 text-[11px] font-bold uppercase tracking-wider mb-1">
-                  <Zap className="w-3.5 h-3.5 text-yellow-400" />
-                  <span>Emisi Bersih</span>
-                </div>
-                <p className="font-[family-name:var(--font-heading)] text-xl sm:text-2xl font-black text-white">
-                  <AnimatedCounter end={100} suffix="%" duration={1700} />
-                </p>
-                <p className="text-[11px] text-slate-400 leading-tight">
-                  Net Zero 2060
-                </p>
-              </div>
-            </motion.div>
           </div>
+        </div>
+      </div>
 
-          {/* ================= RIGHT COLUMN: Visual Dynamic Showcase (5 Cols) ================= */}
-          <div className="lg:col-span-5 relative">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25, ease: [0.16, 1, 0.3, 1] }}
-              className="relative"
-            >
-              {/* Outer Glow Halo */}
-              <div className="absolute -inset-1.5 bg-gradient-to-tr from-electric via-cyan-500 to-emerald-400 rounded-2xl opacity-30 blur-lg" />
-
-              {/* Visual Card Frame */}
-              <div className="relative rounded-2xl overflow-hidden bg-navy-light border border-white/15 shadow-2xl">
-                {/* Visual Image with Real PEVS Exhibition Documentation */}
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-slate-900">
-                  <Image
-                    src="/assets/news/pevs-2026-game-changer.jpg"
-                    alt="PERIKLINDO Electric Vehicle Show - Momentum Transformasi Industri EV Nasional"
-                    fill
-                    priority
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover object-center transform hover:scale-105 transition-transform duration-700 ease-out"
-                  />
-                  {/* Subtle Top & Bottom Gradient Shadows */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-navy via-navy/20 to-transparent" />
-                </div>
-
-                {/* Micro-telemetry & Floating Cards */}
-                <div className="p-5 sm:p-6 bg-gradient-to-b from-navy/90 to-navy border-t border-white/10 backdrop-blur-md">
-                  <div className="flex items-center justify-between gap-2 mb-3">
-                    <span className="inline-flex items-center gap-1.5 text-xs font-bold text-cyan-300">
-                      <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                      PEVS Flagship Annual Show
-                    </span>
-                    <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded bg-white/10 text-slate-300 border border-white/10">
-                      JIExpo Kemayoran
-                    </span>
+      {/* ═══════════════════════════════════════════════════════════════════
+          4 GLASS STATS PILLS
+      ═══════════════════════════════════════════════════════════════════ */}
+      <div
+        className="relative z-10"
+        style={{ backgroundColor: '#06152F' }}
+      >
+        <div className="container-main py-6">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.45 }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3"
+          >
+            {statsPills.map((pill, idx) => {
+              const Icon = pill.icon;
+              return (
+                <div
+                  key={idx}
+                  className="flex items-center gap-3.5 px-4 py-3.5 rounded-2xl border border-white/[0.12] backdrop-blur-md"
+                  style={{ background: 'rgba(6,21,47,0.60)' }}
+                >
+                  {/* Circular Icon */}
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 ${pill.iconBg}`}
+                    style={{ boxShadow: '0 0 12px rgba(56,189,248,0.15)' }}
+                    aria-hidden="true"
+                  >
+                    <Icon className={`w-5 h-5 ${pill.iconColor}`} />
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold text-white mb-2 leading-snug">
-                    Pusat Pameran & Kolaborasi Industri EV Terbesar di Asia Tenggara
-                  </h3>
-
-                  <p className="text-xs text-slate-400 leading-relaxed mb-4">
-                    Menghubungkan ratusan produsen, kementerian teknis, perbankan, dan ratusan
-                    ribu konsumen dalam satu ekosistem mobilitas bersih terpadu.
-                  </p>
-
-                  <div className="flex items-center justify-between pt-3 border-t border-white/10 text-xs text-slate-300">
-                    <span className="flex items-center gap-1.5 font-medium text-emerald-400">
-                      <ShieldCheck className="w-3.5 h-3.5" />
-                      Kolaborasi Dyandra Promosindo
-                    </span>
-                    <Link
-                      href="#pevs"
-                      className="text-cyan-300 font-bold hover:underline flex items-center gap-1"
+                  <div className="min-w-0">
+                    {pill.value != null && (
+                      <p className="font-black text-xl text-white leading-none font-[family-name:var(--font-heading)]">
+                        <AnimatedCounter end={pill.value} suffix={pill.suffix} />
+                      </p>
+                    )}
+                    <p
+                      className={`text-xs leading-snug font-medium ${
+                        pill.value != null ? 'text-slate-400' : 'text-slate-200 font-semibold'
+                      }`}
                     >
-                      <span>Lihat Sorotan</span>
-                      <ChevronRight className="w-3 h-3" />
+                      {pill.label}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
+        </div>
+
+        {/* ═══════════════════════════════════════════════════════════════════
+            DUAL HIGHLIGHT CARDS — PEVS & PEVC
+        ═══════════════════════════════════════════════════════════════════ */}
+        <div className="container-main pb-14">
+          <div
+            id="kegiatan"
+            className="grid grid-cols-1 md:grid-cols-2 gap-5 scroll-mt-24"
+          >
+            {highlightCards.map((card, idx) => (
+              <ScrollReveal key={idx} delay={idx * 120}>
+                <div className="group relative rounded-2xl overflow-hidden aspect-[16/10] border border-white/10 shadow-2xl">
+                  {/* Background Photo */}
+                  <Image
+                    src={card.image}
+                    alt={card.imageAlt}
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className={`object-cover ${card.objectPosition} transition-transform duration-700 ease-out group-hover:scale-[1.04]`}
+                  />
+
+                  {/* Gradient overlay — heavier at bottom for text legibility */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        'linear-gradient(to top, rgba(6,21,47,0.92) 0%, rgba(6,21,47,0.45) 55%, rgba(6,21,47,0.10) 100%)',
+                    }}
+                    aria-hidden="true"
+                  />
+
+                  {/* Card Content */}
+                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
+                    <span className="text-[11px] font-bold tracking-widest uppercase text-sky-300/80 block mb-1.5">
+                      {card.tag}
+                    </span>
+                    <h3 className="text-lg sm:text-xl font-extrabold text-white leading-snug mb-1">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm text-slate-300/85 mb-4 leading-relaxed">
+                      {card.description}
+                    </p>
+                    <Link
+                      href={card.href}
+                      className="inline-flex items-center gap-1.5 text-sm font-bold text-sky-300 hover:text-white transition-colors duration-150 group/link"
+                      aria-label={`${card.cta} tentang ${card.title}`}
+                    >
+                      <span>{card.cta}</span>
+                      <ArrowRight className="w-3.5 h-3.5 transition-transform duration-150 group-hover/link:translate-x-1" />
                     </Link>
                   </div>
                 </div>
-              </div>
-
-              {/* Floating Status Badge (Top-Left Accent) */}
-              <motion.div
-                animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-                className="absolute -top-4 -left-4 sm:-left-6 z-20 hidden sm:flex items-center gap-2 bg-navy/95 border border-white/20 text-white px-3.5 py-2 rounded-xl shadow-2xl backdrop-blur-md"
-              >
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping" />
-                <span className="text-xs font-bold">
-                  Mandat Perpres 55/2019 Aktif
-                </span>
-              </motion.div>
-
-              {/* Floating Gauge Badge (Bottom-Right Accent) */}
-              <motion.div
-                animate={{ y: [0, 6, 0] }}
-                transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-                className="absolute -bottom-4 -right-4 sm:-right-6 z-20 hidden sm:flex items-center gap-2 bg-white text-navy px-3.5 py-2 rounded-xl shadow-2xl border border-slate-200"
-              >
-                <Gauge className="w-4 h-4 text-electric" />
-                <span className="text-xs font-black">
-                  Ekosistem R4, R2 & Baterai
-                </span>
-              </motion.div>
-            </motion.div>
+              </ScrollReveal>
+            ))}
           </div>
         </div>
       </div>

@@ -1,7 +1,6 @@
 'use client';
 
 import Image from 'next/image';
-import { motion, useReducedMotion } from 'motion/react';
 import { cn } from '@/lib/utils';
 import type { MemberBrand } from '@/types';
 
@@ -11,28 +10,30 @@ interface MemberLogoCardProps {
 }
 
 /**
- * Member logo card styled per DESIGN_v2.md section 3.1:
- * - 16:9 ratio, high-contrast plate so transparent logos stay readable
- * - Hover physics via motion spring
+ * Member logo plate — full-color brand identity, never grayscale.
+ * Compact mode is used inside the infinite marquee track.
  */
 export default function MemberLogoCard({
   member,
   compact = false,
 }: MemberLogoCardProps) {
-  const shouldReduceMotion = useReducedMotion();
-
   const className = cn(
-    'group relative block overflow-hidden rounded-xl border border-slate-200',
+    'group relative block overflow-hidden rounded-xl',
     'aspect-video flex items-center justify-center shrink-0',
-    'bg-[linear-gradient(180deg,#ffffff_0%,#f8fafc_55%,#eef2f7_100%)]',
-    'shadow-sm shadow-slate-200/70',
-    compact ? 'p-3 w-[190px] sm:w-[220px]' : 'p-4 sm:p-5'
+    'bg-white border border-white/20',
+    'shadow-sm shadow-black/10',
+    'transition-all duration-300 ease-out',
+    'hover:scale-105 hover:border-[#087BEB]/50 hover:shadow-md hover:shadow-[#087BEB]/15',
+    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#087BEB]/60',
+    compact
+      ? 'p-3 w-[160px] sm:w-[190px] md:w-[220px]'
+      : 'p-4 sm:p-5'
   );
 
   const inner = (
     <>
       <div
-        className="absolute inset-0 opacity-[0.35] pointer-events-none"
+        className="absolute inset-0 opacity-[0.2] pointer-events-none"
         style={{
           backgroundImage:
             'linear-gradient(#e2e8f0 1px, transparent 1px), linear-gradient(90deg, #e2e8f0 1px, transparent 1px)',
@@ -45,39 +46,34 @@ export default function MemberLogoCard({
         alt={`Logo ${member.name}`}
         width={180}
         height={180}
-        className="relative z-10 object-contain max-h-16 sm:max-h-18 md:max-h-20 max-w-[85%] max-h-[72%] w-auto h-auto drop-shadow-[0_1px_1px_rgba(15,23,42,0.08)]"
+        className="relative z-10 object-contain max-h-14 sm:max-h-16 md:max-h-20 max-w-[85%] w-auto h-auto"
+        draggable={false}
       />
     </>
   );
 
-  const hover = shouldReduceMotion ? undefined : { y: -4, scale: 1.02 };
-
   if (member.websiteUrl) {
     return (
-      <motion.a
+      <a
         href={member.websiteUrl}
         target="_blank"
         rel="noopener noreferrer"
         title={member.name}
         aria-label={`Profil anggota ${member.name}`}
-        whileHover={hover}
-        transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-        className={cn(className, 'hover:shadow-lg hover:shadow-slate-200/80 hover:border-electric/40')}
+        className={className}
       >
         {inner}
-      </motion.a>
+      </a>
     );
   }
 
   return (
-    <motion.div
+    <div
       title={member.name}
       aria-label={`Profil anggota ${member.name}`}
-      whileHover={hover}
-      transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-      className={cn(className, 'hover:shadow-lg hover:shadow-slate-200/80 hover:border-electric/40')}
+      className={className}
     >
       {inner}
-    </motion.div>
+    </div>
   );
 }

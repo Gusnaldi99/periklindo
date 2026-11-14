@@ -32,6 +32,11 @@ export default function Navbar() {
   const [menuPath, setMenuPath] = useState(pathname);
   const shouldReduceMotion = useReducedMotion();
 
+  // Only use hero-transparent mode on the homepage
+  const isHomepage = pathname === '/';
+  // Solid navy glass on scrolled homepage + all other routes
+  const isSolidNav = scrolled || !isHomepage;
+
   if (menuPath !== pathname) {
     setMenuPath(pathname);
     if (mobileOpen) setMobileOpen(false);
@@ -64,10 +69,11 @@ export default function Navbar() {
     <>
       <header
         className={cn(
-          'sticky top-0 z-50 transition-[background-color,box-shadow,backdrop-filter,border-color] duration-300 ease-out',
-          scrolled
-            ? 'bg-navy/85 backdrop-blur-md shadow-[0_8px_30px_rgba(10,25,47,0.28)]'
-            : 'bg-navy'
+          'sticky top-0 z-50 transition-[background-color,box-shadow,backdrop-filter,border-color] duration-300 ease-out border-b',
+          isSolidNav
+            ? 'bg-[#06152F]/90 backdrop-blur-md shadow-[0_8px_30px_rgba(6,21,47,0.35)] border-white/10'
+            : // Soft navy scrim so light hero patches never wash out white logo/links
+              'bg-gradient-to-b from-[#06152F]/75 via-[#06152F]/45 to-transparent backdrop-blur-sm border-transparent'
         )}
       >
         <nav
@@ -76,7 +82,7 @@ export default function Navbar() {
         >
           <Link
             href="/"
-            className="flex items-center gap-2 group focus:outline-none focus:ring-2 focus:ring-electric rounded-md py-1 shrink-0"
+            className="flex items-center gap-2 group focus:outline-none focus-visible:ring-2 focus-visible:ring-electric rounded-md py-1 shrink-0"
             aria-label="Beranda PERIKLINDO"
           >
             <Image
@@ -84,7 +90,11 @@ export default function Navbar() {
               alt="PERIKLINDO"
               width={116}
               height={72}
-              className="h-10 lg:h-12 w-auto object-contain transition-opacity duration-150 group-hover:opacity-90"
+              className={cn(
+                'h-10 lg:h-12 w-auto object-contain transition-opacity duration-150 group-hover:opacity-90',
+                // Extra legibility when transparent over bright hero regions
+                !isSolidNav && 'drop-shadow-[0_1px_10px_rgba(6,21,47,0.9)]'
+              )}
               priority
             />
           </Link>
@@ -99,16 +109,26 @@ export default function Navbar() {
                       href={link.href}
                       className={cn(
                         'relative z-0 inline-flex items-center px-2.5 xl:px-3 py-1.5 text-[13px] xl:text-sm font-medium rounded-full transition-colors duration-150',
-                        isActive
-                          ? 'text-white font-semibold'
-                          : 'text-slate-300 hover:text-white'
+                        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric focus-visible:ring-offset-2',
+                        isSolidNav
+                          ? // Navy glass: light text on dark surface
+                            isActive
+                            ? 'text-white font-semibold'
+                            : 'text-slate-300 hover:text-white hover:bg-white/10 focus-visible:text-white focus-visible:ring-offset-[#06152F]'
+                          : // Homepage top: never raw white-on-light — hover sits on navy/electric pill
+                            isActive
+                            ? 'text-white font-semibold'
+                            : 'text-white/90 hover:text-white hover:bg-[#06152F]/70 focus-visible:text-white focus-visible:bg-[#06152F]/70 focus-visible:ring-offset-transparent'
                       )}
                       aria-current={isActive ? 'page' : undefined}
                     >
                       {isActive && (
                         <motion.span
                           layoutId={shouldReduceMotion ? undefined : 'nav-active'}
-                          className="absolute inset-0 rounded-full bg-white/12 shadow-sm"
+                          className={cn(
+                            'absolute inset-0 rounded-full shadow-sm',
+                            isSolidNav ? 'bg-white/12' : 'bg-[#06152F]/55'
+                          )}
                           transition={springTransition}
                         />
                       )}
@@ -119,10 +139,21 @@ export default function Navbar() {
               })}
             </ul>
 
-            <div className="flex items-center gap-2 pl-3 ml-1 border-l border-white/10">
+            <div
+              className={cn(
+                'flex items-center gap-2 pl-3 ml-1 border-l',
+                isSolidNav ? 'border-white/10' : 'border-white/25'
+              )}
+            >
               <Link
                 href="/kontak"
-                className="inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold text-white border border-white/20 hover:bg-white/10 hover:border-white/40 transition-colors duration-150 min-h-[40px]"
+                className={cn(
+                  'inline-flex items-center gap-1.5 px-3 py-2 rounded-full text-xs font-semibold text-white border transition-colors duration-150 min-h-[44px]',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric',
+                  isSolidNav
+                    ? 'border-white/20 hover:bg-white/10 hover:border-white/40'
+                    : 'border-white/35 bg-[#06152F]/35 hover:bg-[#06152F]/65 hover:border-white/50'
+                )}
               >
                 <Mail className="w-3.5 h-3.5" aria-hidden="true" />
                 <span className="hidden xl:inline">Hubungi Sekretariat</span>
@@ -130,7 +161,7 @@ export default function Navbar() {
               </Link>
               <Link
                 href="/kontak?kategori=keanggotaan"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold text-white bg-electric hover:bg-electric-hover shadow-md shadow-electric/30 transition-colors duration-150 min-h-[40px]"
+                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full text-xs font-semibold text-white bg-electric hover:bg-electric-hover shadow-md shadow-electric/30 transition-colors duration-150 min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
               >
                 <UserPlus className="w-3.5 h-3.5" aria-hidden="true" />
                 Gabung Anggota
@@ -141,9 +172,14 @@ export default function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((open) => !open)}
-            className="lg:hidden flex items-center gap-1.5 px-3 py-2 text-sm font-medium text-slate-300 rounded-md
-              hover:text-white hover:bg-white/10 transition-colors duration-150
-              min-h-[44px] min-w-[44px] justify-center"
+            className={cn(
+              'lg:hidden flex items-center gap-1.5 px-3 py-2 text-sm font-medium rounded-md transition-colors duration-150',
+              'min-h-[44px] min-w-[44px] justify-center',
+              'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-electric',
+              isSolidNav
+                ? 'text-slate-300 hover:text-white hover:bg-white/10'
+                : 'text-white hover:text-white hover:bg-[#06152F]/70'
+            )}
             aria-expanded={mobileOpen}
             aria-controls="mobile-menu"
             aria-label={mobileOpen ? 'Tutup menu' : 'Buka menu'}
@@ -159,7 +195,7 @@ export default function Navbar() {
         <div
           className={cn(
             'pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-navy-light/80 to-transparent transition-opacity duration-300',
-            scrolled ? 'opacity-100' : 'opacity-0'
+            isSolidNav ? 'opacity-100' : 'opacity-0'
           )}
           aria-hidden="true"
         />

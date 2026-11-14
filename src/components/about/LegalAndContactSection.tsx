@@ -12,14 +12,16 @@ import {
   Clock,
   MessageCircle,
   Building2,
-  CheckCircle2,
+  Info,
   Sparkles,
 } from 'lucide-react';
 import SectionHeader from '@/components/shared/SectionHeader';
 import { cn } from '@/lib/utils';
+import { legalitasClaims } from '@/data/site-claims';
 
 export default function LegalAndContactSection() {
   const shouldReduceMotion = useReducedMotion();
+  const { skKemenkumham, aktaNotaris, berbadanHukum } = legalitasClaims;
 
   const legalDocs = [
     {
@@ -29,6 +31,7 @@ export default function LegalAndContactSection() {
       title: 'Perpres No. 55 Tahun 2019',
       subtitle: 'Landasan Hukum Utama KBLBB',
       desc: 'Peraturan Presiden tentang Percepatan Program Kendaraan Bermotor Listrik Berbasis Baterai untuk Transportasi Jalan — payung hukum fundamental elektrifikasi otomotif nasional.',
+      detail: null as string | null,
     },
     {
       code: 'REG-02',
@@ -36,23 +39,30 @@ export default function LegalAndContactSection() {
       iconBg: 'bg-purple-50 text-purple-600 border-purple-200',
       title: 'Perpres No. 79 Tahun 2023',
       subtitle: 'Perubahan & Penguatan Regulasi',
-      desc: 'Perubahan atas Perpres 55/2019 yang memperluas cakupan insentif, memperbaharui target TKDN, dan mempertegas mandat kementerian dalam percepatan ekosistem KBLBB nasional.',
+      desc: 'Perubahan atas Perpres 55/2019 yang memperluas cakupan insentif, memperbaharui target TKDN dalam kerangka regulasi, dan mempertegas mandat kementerian dalam percepatan ekosistem KBLBB nasional.',
+      detail: null as string | null,
     },
     {
       code: 'REG-03',
       icon: Scale,
       iconBg: 'bg-amber-50 text-amber-600 border-amber-200',
-      title: 'SK Kemenkumham RI',
+      title: skKemenkumham.label,
       subtitle: 'Pengesahan Badan Hukum Resmi',
-      desc: 'Surat Keputusan Kementerian Hukum & HAM Republik Indonesia yang mengesahkan PERIKLINDO sebagai perkumpulan berbadan hukum yang sah, transparan, dan akuntabel.',
+      desc: berbadanHukum,
+      detail: skKemenkumham.number
+        ? `Nomor: ${skKemenkumham.number}${skKemenkumham.date ? ` · ${skKemenkumham.date}` : ''}`
+        : skKemenkumham.status,
     },
     {
       code: 'REG-04',
       icon: ShieldCheck,
       iconBg: 'bg-emerald-50 text-emerald-600 border-emerald-200',
-      title: 'AD/ART Notaris Resmi',
+      title: aktaNotaris.label,
       subtitle: 'Anggaran Dasar & Rumah Tangga',
-      desc: 'Dibuat di hadapan Notaris resmi dengan tata kelola organisasi nirlaba yang berorientasi pada kepentingan industri dan advokasi kebijakan publik secara terstruktur.',
+      desc: 'AD/ART dibuat di hadapan notaris sebagai dasar tata kelola perkumpulan. Nomor akta dan nama notaris dipublikasikan setelah dokumen resmi tersedia dari sekretariat.',
+      detail: aktaNotaris.number
+        ? `Nomor: ${aktaNotaris.number}${aktaNotaris.notaryName ? ` · ${aktaNotaris.notaryName}` : ''}${aktaNotaris.date ? ` · ${aktaNotaris.date}` : ''}`
+        : aktaNotaris.status,
     },
     {
       code: 'REG-05',
@@ -60,7 +70,8 @@ export default function LegalAndContactSection() {
       iconBg: 'bg-slate-100 text-slate-600 border-slate-200',
       title: 'Mitra Kerja Lintas Kementerian',
       subtitle: 'Audiensi & Perumusan Kebijakan',
-      desc: 'Diakui sebagai mitra audiensi resmi Kemenko Marves/Perekonomian, Kementerian Perindustrian, Kementerian Perhubungan, dan Kementerian ESDM dalam harmonisasi regulasi EV.',
+      desc: 'PERIKLINDO berkoordinasi dengan Kementerian Perindustrian, Kementerian Perhubungan, dan Kementerian ESDM dalam harmonisasi regulasi EV — tanpa mengklaim endorsement visual logo kementerian.',
+      detail: null as string | null,
     },
   ];
 
@@ -136,16 +147,33 @@ export default function LegalAndContactSection() {
                       </div>
                       <p className="text-[11px] font-semibold text-slate-500 mb-1">{doc.subtitle}</p>
                       <p className="text-xs text-slate-600 leading-relaxed">{doc.desc}</p>
+                      {doc.detail && (
+                        <p
+                          className={cn(
+                            'mt-1.5 text-[11px] font-semibold inline-flex items-center gap-1.5',
+                            doc.detail === 'Belum dipublikasikan'
+                              ? 'text-amber-700'
+                              : 'text-emerald-700'
+                          )}
+                        >
+                          <Info className="w-3 h-3 shrink-0" aria-hidden="true" />
+                          {doc.detail}
+                        </p>
+                      )}
                     </div>
                   </motion.div>
                 );
               })}
             </div>
 
-            {/* Verification Status Footer */}
-            <div className="mt-5 pt-4 border-t border-slate-100 flex items-center gap-2 text-xs text-slate-500">
-              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span className="font-medium">Seluruh dokumen legalitas terverifikasi dan sah secara hukum sejak 2021</span>
+            {/* Status publikasi nomor resmi */}
+            <div className="mt-5 pt-4 border-t border-slate-100 flex items-start gap-2 text-xs text-slate-500">
+              <Info className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
+              <span className="font-medium leading-relaxed">
+                PERIKLINDO berbadan hukum berdasarkan SK Kemenkumham RI sejak pendirian
+                2021. Nomor SK dan akta notaris akan dipublikasikan setelah dokumen resmi
+                diterima sekretariat — tidak diisi dengan data fiktif.
+              </span>
             </div>
           </motion.div>
 

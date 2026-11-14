@@ -4,8 +4,7 @@ import ScrollReveal from '@/components/shared/ScrollReveal';
 
 export default function OrgHero() {
   return (
-    <section className="relative bg-navy text-white overflow-hidden py-14 sm:py-18 md:py-20 lg:py-24 border-b border-navy-light">
-      {/* Background Architectural Grid Pattern */}
+    <section className="relative bg-[#06152F] text-white overflow-hidden py-14 sm:py-18 md:py-20 lg:py-24 border-b border-white/10">
       <div
         className="absolute inset-0 opacity-[0.035] pointer-events-none"
         style={{
@@ -16,9 +15,8 @@ export default function OrgHero() {
         aria-hidden="true"
       />
 
-      {/* Decorative ambient gradient glows */}
       <div
-        className="absolute -top-32 -right-32 w-96 h-96 bg-electric/15 rounded-full blur-3xl pointer-events-none"
+        className="absolute -top-32 -right-32 w-96 h-96 bg-[#087BEB]/15 rounded-full blur-3xl pointer-events-none"
         aria-hidden="true"
       />
       <div
@@ -27,15 +25,11 @@ export default function OrgHero() {
       />
 
       <div className="container-main relative z-10">
-        {/* Breadcrumb */}
         <ScrollReveal delay={50}>
           <nav aria-label="Breadcrumb" className="mb-6">
             <ol className="flex items-center gap-2 text-xs sm:text-sm text-slate-400">
               <li>
-                <Link
-                  href="/"
-                  className="hover:text-white transition-colors duration-150"
-                >
+                <Link href="/" className="hover:text-white transition-colors duration-150">
                   Beranda
                 </Link>
               </li>
@@ -50,34 +44,34 @@ export default function OrgHero() {
         </ScrollReveal>
 
         <div className="max-w-4xl">
-          {/* Status Badge with Legal Legitimacy */}
           <ScrollReveal delay={100}>
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-electric/15 text-blue-300 border border-electric/30 mb-5">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-[#087BEB]/15 text-blue-300 border border-[#087BEB]/30 mb-5">
               <ShieldCheck className="w-3.5 h-3.5 text-teal" />
-              <span>Kepengurusan Resmi Periode Berjalan &bull; Landasan AD/ART & SK Kemenkumham RI</span>
+              <span>
+                Kepengurusan Resmi Periode 2026–2031 • Landasan AD/ART & SK Kemenkumham RI
+              </span>
             </div>
           </ScrollReveal>
 
-          {/* Heading */}
           <ScrollReveal delay={180}>
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white leading-[1.18] mb-6">
-              Struktur Organisasi PERIKLINDO
+              Kepengurusan PERIKLINDO Periode 2026–2031
             </h1>
           </ScrollReveal>
 
-          {/* Subtitle */}
           <ScrollReveal delay={260}>
             <p className="text-base sm:text-lg md:text-xl text-slate-300 leading-relaxed mb-8 max-w-3xl font-normal">
-              Bagan susunan dewan pimpinan inti, penasihat senior, dan ketua bidang eksekutif yang memandu arah kebijakan, riset, standardisasi, serta advokasi ekosistem industri kendaraan bermotor listrik berbasis baterai nasional.
+              Susunan resmi Dewan Pembina, Dewan Pengawas, Pimpinan Inti, dan Ketua Bidang
+              yang memandu arah kebijakan, riset, standardisasi, serta advokasi ekosistem
+              industri kendaraan bermotor listrik berbasis baterai nasional.
             </p>
           </ScrollReveal>
 
-          {/* Action Anchors */}
           <ScrollReveal delay={320}>
             <div className="flex flex-wrap items-center gap-4 mb-12">
               <a
                 href="#struktur-hirarki"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-electric text-white font-semibold text-sm hover:bg-electric-hover active:scale-[0.98] transition-all duration-150 min-h-[44px] shadow-md shadow-electric/25"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-[#087BEB] text-white font-semibold text-sm hover:bg-[#0669c9] active:scale-[0.98] transition-all duration-150 min-h-[44px] shadow-md shadow-[#087BEB]/25"
               >
                 <span>Jelajahi Hierarki Pengurus</span>
                 <ArrowDown className="w-4 h-4" />
@@ -85,7 +79,7 @@ export default function OrgHero() {
 
               <a
                 href="#bagan-resmi"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg border border-slate-700 bg-white/5 text-slate-200 font-semibold text-sm hover:bg-white/10 hover:border-slate-500 active:scale-[0.98] transition-all duration-150 min-h-[44px]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full border border-white/15 bg-white/5 text-slate-200 font-semibold text-sm hover:bg-white/10 active:scale-[0.98] transition-all duration-150 min-h-[44px]"
               >
                 <FileText className="w-4 h-4 text-slate-400" />
                 <span>Lihat Bagan Resmi</span>
@@ -94,52 +88,41 @@ export default function OrgHero() {
           </ScrollReveal>
         </div>
 
-        {/* Quick Stats Grid */}
         <ScrollReveal delay={380}>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 pt-8 border-t border-slate-800">
-            <div className="bg-navy-light/60 border border-slate-800 rounded-xl p-4">
-              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-white mb-0.5">
-                1
-              </p>
-              <p className="text-xs text-slate-400 font-medium">
-                Chairman (Ketua Umum)
-              </p>
-            </div>
-
-            <div className="bg-navy-light/60 border border-slate-800 rounded-xl p-4">
-              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-blue-400 mb-0.5">
-                2
-              </p>
-              <p className="text-xs text-slate-400 font-medium">
-                Sekretariat Jenderal
-              </p>
-            </div>
-
-            <div className="bg-navy-light/60 border border-slate-800 rounded-xl p-4">
-              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-emerald-400 mb-0.5">
-                1
-              </p>
-              <p className="text-xs text-slate-400 font-medium">
-                Treasury (Bendahara)
-              </p>
-            </div>
-
-            <div className="bg-navy-light/60 border border-slate-800 rounded-xl p-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 pt-8 border-t border-white/10">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
               <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-amber-300 mb-0.5">
                 2
               </p>
-              <p className="text-xs text-slate-400 font-medium">
-                Senior Advisors
-              </p>
+              <p className="text-xs text-slate-400 font-medium">Dewan Pembina</p>
             </div>
 
-            <div className="bg-navy-light/60 border border-slate-800 rounded-xl p-4 col-span-2 sm:col-span-1">
-              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-purple-400 mb-0.5">
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-sky-300 mb-0.5">
+                SK
+              </p>
+              <p className="text-xs text-slate-400 font-medium">Dewan Pengawas</p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-white mb-0.5">
+                4
+              </p>
+              <p className="text-xs text-slate-400 font-medium">Pimpinan Inti</p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-[#087BEB] mb-0.5">
                 6
               </p>
-              <p className="text-xs text-slate-400 font-medium">
-                Vice Chairmen (Ketua Bidang)
+              <p className="text-xs text-slate-400 font-medium">Ketua Bidang</p>
+            </div>
+
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 backdrop-blur-sm col-span-2 sm:col-span-1">
+              <p className="font-[family-name:var(--font-heading)] text-2xl font-extrabold text-emerald-400 mb-0.5">
+                2026–2031
               </p>
+              <p className="text-xs text-slate-400 font-medium">Masa Bakti Resmi</p>
             </div>
           </div>
         </ScrollReveal>

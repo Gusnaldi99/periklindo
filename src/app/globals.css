@@ -121,20 +121,22 @@ button:focus-visible {
  * Motion & Animation System (Dial: MOTION 2)
  * Purposeful choreography: marquee ticker, smooth scroll reveal, hover elevations
  */
+/* Left-to-right seamless loop: tracks start shifted left, then glide right */
 @keyframes marquee-scroll {
   0% {
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(-100%, 0, 0);
   }
   100% {
-    transform: translate3d(-100%, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 
 .animate-marquee-track {
   display: flex;
   flex-shrink: 0;
-  animation: marquee-scroll 30s linear infinite;
+  animation: marquee-scroll 40s linear infinite;
   will-change: transform;
+  backface-visibility: hidden;
 }
 
 .group:hover .animate-marquee-track,
@@ -147,7 +149,7 @@ button:focus-visible {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee-scroll 30s linear infinite;
+  animation: marquee-scroll 40s linear infinite;
   will-change: transform;
 }
 

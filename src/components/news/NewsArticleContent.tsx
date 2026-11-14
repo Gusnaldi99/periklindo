@@ -4,13 +4,7 @@ import { ArrowLeft, CalendarDays, Clock, ExternalLink, Quote, User } from 'lucid
 import { estimateReadMinutes, formatDateId } from '@/lib/content';
 import type { NewsPost } from '@/types';
 import NewsCard from '@/components/shared/NewsCard';
-
-const CATEGORY_LABEL: Record<NewsPost['category'], string> = {
-  'Siaran Pers': 'Siaran Pers',
-  Regulasi: 'Regulasi',
-  Kegiatan: 'Kegiatan Asosiasi',
-  'Industri EV': 'Teknologi EV',
-};
+import NewsShareButtons from '@/components/news/NewsShareButtons';
 
 interface NewsArticleContentProps {
   post: NewsPost;
@@ -80,7 +74,7 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
           </nav>
 
           <span className="inline-flex items-center text-[10px] font-extrabold uppercase tracking-wider bg-electric text-white px-2.5 py-1 rounded-md mb-4">
-            {CATEGORY_LABEL[post.category]}
+            {post.category}
           </span>
           <h1 className="max-w-4xl text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-[1.18] text-white mb-6">
             {post.title}
@@ -101,12 +95,17 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
               <Clock className="w-4 h-4" />
               {readMinutes} menit baca
             </span>
+            {post.sourceName ? (
+              <span className="inline-flex items-center gap-1.5 text-slate-300">
+                Sumber: <strong className="font-semibold text-white">{post.sourceName}</strong>
+              </span>
+            ) : null}
           </div>
         </div>
       </header>
 
       <div className="container-main py-10 md:py-14">
-        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 mb-10">
+        <div className="relative aspect-[16/9] rounded-2xl overflow-hidden border border-slate-200 bg-slate-100 mb-8">
           <Image
             src={post.thumbnailUrl}
             alt={post.title}
@@ -115,6 +114,10 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
             sizes="(max-width: 1200px) 100vw, 1120px"
             className="object-cover"
           />
+        </div>
+
+        <div className="max-w-3xl mx-auto mb-10">
+          <NewsShareButtons title={post.title} slug={post.slug} excerpt={post.excerpt} />
         </div>
 
         <div className="max-w-3xl mx-auto">
@@ -127,10 +130,18 @@ export default function NewsArticleContent({ post, related }: NewsArticleContent
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 mt-2 mb-10 text-sm font-bold text-electric hover:text-electric-hover"
             >
-              Baca liputan asli di {post.sourceName ?? 'sumber'}
+              Baca liputan asli di {post.sourceName ?? 'sumber resmi'}
               <ExternalLink className="w-4 h-4" />
             </a>
-          ) : null}
+          ) : (
+            <p className="text-sm text-slate-500 mb-10">
+              Sumber resmi: {post.sourceName ?? 'Sekretariat PERIKLINDO'}
+            </p>
+          )}
+
+          <div className="mb-10 pt-6 border-t border-slate-100">
+            <NewsShareButtons title={post.title} slug={post.slug} excerpt={post.excerpt} />
+          </div>
 
           <Link
             href="/berita"

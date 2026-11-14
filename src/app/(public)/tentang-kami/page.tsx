@@ -4,6 +4,7 @@ import FoundersSection from '@/components/about/FoundersSection';
 import VisionMissionSection from '@/components/about/VisionMissionSection';
 import StrategicObjectives from '@/components/about/StrategicObjectives';
 import HistoryTimeline from '@/components/about/HistoryTimeline';
+import StrategicPartnersSection from '@/components/about/StrategicPartnersSection';
 import CoreValuesSection from '@/components/about/CoreValuesSection';
 import LeadershipSpotlight from '@/components/about/LeadershipSpotlight';
 import LegalAndContactSection from '@/components/about/LegalAndContactSection';
@@ -12,7 +13,7 @@ import AboutCta from '@/components/about/AboutCta';
 export const metadata: Metadata = {
   title: 'Tentang Kami | PERIKLINDO - Perkumpulan Industri Kendaraan Listrik Indonesia',
   description:
-    'Profil resmi, sejarah pendirian, visi misi, dewan kepemimpinan, dan landasan hukum PERIKLINDO. Berdiri sejak 2021 atas inisiatif pabrikan otomotif nasional untuk mengakselerasi ekosistem KBLBB Indonesia.',
+    'Profil resmi PERIKLINDO: sejarah pendirian April 2021, visi misi AD/ART, milestone 2021–2026, dan landasan Perpres No. 55 Tahun 2019.',
   keywords: [
     'Tentang Periklindo',
     'Profil Periklindo',
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Tentang Kami | PERIKLINDO',
     description:
-      'Wadah resmi industri kendaraan listrik Indonesia. Pelajari sejarah, visi misi, dan jajaran kepemimpinan PERIKLINDO.',
+      'Mengenal Perkumpulan Industri Kendaraan Listrik Indonesia—didirikan April 2021, berbadan hukum SK Kemenkumham RI.',
     type: 'website',
     locale: 'id_ID',
   },
@@ -35,31 +36,15 @@ export const metadata: Metadata = {
 export default function TentangKamiPage() {
   return (
     <>
-      {/* 1. Hero with Breadcrumb & Key Metrics */}
       <AboutHero />
-
-      {/* 2. Founding Members & Inception Story */}
       <FoundersSection />
-
-      {/* 3. Vision & Mission Cards */}
       <VisionMissionSection />
-
-      {/* 4. Strategic Objectives & 4 Pillars */}
       <StrategicObjectives />
-
-      {/* 5. Historical Milestones Timeline (2019 - Present) */}
       <HistoryTimeline />
-
-      {/* 6. Organizational Core Values */}
+      <StrategicPartnersSection />
       <CoreValuesSection />
-
-      {/* 7. Leadership & Executive Board Preview */}
       <LeadershipSpotlight />
-
-      {/* 8. Legal Basis & Secretariat Headquarters */}
       <LegalAndContactSection />
-
-      {/* 9. Membership & Collaboration CTA */}
       <AboutCta />
     </>
   );

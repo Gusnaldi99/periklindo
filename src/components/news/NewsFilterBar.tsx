@@ -4,26 +4,19 @@ import { useMemo, useState } from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import { Search, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import type { NewsPost } from '@/types';
+import type { NewsCategory, NewsPost } from '@/types';
 import NewsCard from '@/components/shared/NewsCard';
 
 const FILTERS = [
   'Semua',
-  'Siaran Pers',
-  'Regulasi',
-  'Kegiatan',
+  'Kegiatan PERIKLINDO',
   'Industri EV',
+  'Kebijakan & Regulasi',
+  'Kerja Sama',
+  'Siaran Pers Resmi',
 ] as const;
 
 type Filter = (typeof FILTERS)[number];
-
-const FILTER_LABEL: Record<Filter, string> = {
-  Semua: 'Semua',
-  'Siaran Pers': 'Siaran Pers',
-  Regulasi: 'Regulasi',
-  Kegiatan: 'Kegiatan Asosiasi',
-  'Industri EV': 'Teknologi EV',
-};
 
 const PAGE_SIZE = 6;
 
@@ -44,7 +37,9 @@ export default function NewsFilterBar({ posts, featuredId }: NewsFilterBarProps)
   const filteredPosts = useMemo(() => {
     return posts.filter((post) => {
       if (!isFiltering && featuredId && post.id === featuredId) return false;
-      if (category !== 'Semua' && post.category !== category) return false;
+      if (category !== 'Semua' && post.category !== (category as NewsCategory)) {
+        return false;
+      }
       if (!normalizedQuery) return true;
       const haystack = `${post.title} ${post.excerpt} ${post.author}`.toLowerCase();
       return haystack.includes(normalizedQuery);
@@ -70,6 +65,15 @@ export default function NewsFilterBar({ posts, featuredId }: NewsFilterBarProps)
   return (
     <section id="arsip-berita" className="py-16 md:py-20 bg-slate-50">
       <div className="container-main">
+        <div className="mb-8">
+          <h2 className="text-2xl md:text-3xl font-bold text-navy mb-2">Arsip Berita</h2>
+          <span className="block h-0.5 w-12 rounded-full bg-gradient-to-r from-electric to-teal mb-3" />
+          <p className="text-sm text-slate-500 max-w-2xl">
+            Saring berdasarkan kategori resmi: Kegiatan PERIKLINDO, Industri EV, Kebijakan &
+            Regulasi, Kerja Sama, dan Siaran Pers Resmi.
+          </p>
+        </div>
+
         <div className="flex flex-col lg:flex-row lg:items-center gap-4 mb-8">
           <label className="relative flex-1">
             <span className="sr-only">Cari berita</span>
@@ -118,20 +122,22 @@ export default function NewsFilterBar({ posts, featuredId }: NewsFilterBarProps)
                   setPage(1);
                 }}
                 className={cn(
-                  'relative whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold min-h-[44px] flex items-center gap-2',
+                  'relative isolate whitespace-nowrap px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold min-h-[44px] flex items-center gap-2',
                   isActive
-                    ? 'text-white'
+                    ? // Solid navy fallback keeps white text visible even if layout pill flickers
+                      'text-white bg-navy border border-navy'
                     : 'bg-white text-slate-600 hover:text-navy border border-slate-200'
                 )}
               >
                 {isActive ? (
                   <motion.span
                     layoutId={shouldReduceMotion ? undefined : 'news-filter-active'}
-                    className="absolute inset-0 rounded-xl bg-navy -z-10"
+                    className="absolute inset-0 z-0 rounded-xl bg-navy"
                     transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+                    aria-hidden="true"
                   />
                 ) : null}
-                <span className="relative z-10">{FILTER_LABEL[filter]}</span>
+                <span className="relative z-10">{filter}</span>
                 <span
                   className={cn(
                     'relative z-10 text-[11px] px-2 py-0.5 rounded-full font-extrabold',

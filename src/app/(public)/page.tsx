@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import HeroSection from '@/components/home/HeroSection';
 import LeadershipMessage from '@/components/home/LeadershipMessage';
 import MemberShowcase from '@/components/home/MemberShowcase';
-import PevsSpotlight from '@/components/home/PevsSpotlight';
 import StrategicPillars from '@/components/home/StrategicPillars';
 import LatestNews from '@/components/home/LatestNews';
 import SocialMediaFeed from '@/components/home/SocialMediaFeed';
@@ -44,28 +43,25 @@ export const metadata: Metadata = {
 export default function HomePage() {
   return (
     <>
-      {/* 1. Asymmetrical Editorial Hero with Live Telemetry */}
+      {/* 1. Cinematic Hero — Glass Stats + dual highlight PEVS & PEVC (#kegiatan) */}
       <HeroSection />
 
-      {/* 2. Institutional Leadership Statement & National Strategy */}
-      <LeadershipMessage />
-
-      {/* 3. Industry Consortium Showcase with Capsule Pills & Infinite Marquee */}
+      {/* 2. Industry Consortium Showcase — Infinite Marquee & Category Filter (#anggota) */}
       <MemberShowcase members={memberBrands} />
 
-      {/* 4. Flagship Spotlight: PEVS (PERIKLINDO Electric Vehicle Show) */}
-      <PevsSpotlight />
+      {/* 3. Institutional Leadership Statement + hierarchy signal */}
+      <LeadershipMessage />
 
-      {/* 5. Strategic Pillars (Advokasi Regulasi, Akselerasi Pasar, Hilirisasi Baterai) */}
+      {/* 4. Strategic Pillars / Visual Alur Ekosistem EV */}
       <StrategicPillars />
 
-      {/* 6. Magazine-Style Editorial News Digest */}
+      {/* 5. Magazine-Style Editorial News Digest */}
       <LatestNews posts={newsPosts} />
 
-      {/* 7. Real Documentation Social & Field Activities */}
+      {/* 6. Real Documentation Social & Field Activities */}
       <SocialMediaFeed posts={socialPosts} />
 
-      {/* 8. Dual-Track Institutional Gateway (B2B vs Secretariat) */}
+      {/* 7. Dual-Track Institutional Gateway (B2B vs Secretariat) */}
       <CtaSection />
     </>
   );

@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { motion, useReducedMotion } from 'motion/react';
-import { Clock, Mail, MapPin, Phone } from 'lucide-react';
+import { Clock, Mail, MapPin, MessageCircle } from 'lucide-react';
+import { contactInfo } from '@/data/mock-data';
 
 export default function ContactHero() {
   const shouldReduceMotion = useReducedMotion();
@@ -70,7 +71,7 @@ export default function ContactHero() {
           <motion.div variants={itemVariants} className="mb-5">
             <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-electric/15 text-blue-300 border border-electric/35">
               <Mail className="w-3.5 h-3.5 text-teal" />
-              <span>Sekretariat Resmi • CTR-12/THAMRIN</span>
+              <span>Sekretariat Resmi • The City Tower, Thamrin</span>
             </div>
           </motion.div>
 
@@ -84,8 +85,8 @@ export default function ContactHero() {
             variants={itemVariants}
             className="text-base sm:text-lg text-slate-300 leading-relaxed max-w-3xl mb-10"
           >
-            Saluran resmi untuk pengajuan keanggotaan, permohonan audiensi,
-            pertanyaan media, dan kemitraan sponsorship PEVS.
+            Saluran resmi untuk pertanyaan umum, audiensi lembaga, dan pengajuan keanggotaan
+            industri. Gunakan nomor WhatsApp sesuai keperluan agar layanan lebih cepat.
           </motion.p>
         </motion.div>
 
@@ -97,28 +98,46 @@ export default function ContactHero() {
         >
           <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
             <MapPin className="w-4 h-4 text-electric mb-2" />
-            <p className="text-sm font-semibold text-white">The City Tower Lt. 12-1N</p>
-            <p className="text-xs text-slate-400 mt-1">Jl. M.H. Thamrin No. 81, Jakarta Pusat</p>
+            <p className="text-sm font-semibold text-white">{contactInfo.address.building}</p>
+            <p className="text-xs text-slate-400 mt-1">
+              {contactInfo.address.street}, {contactInfo.address.city}{' '}
+              {contactInfo.address.postalCode}
+            </p>
           </div>
           <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
             <Clock className="w-4 h-4 text-amber-300 mb-2" />
-            <p className="text-sm font-semibold text-white">Senin–Jumat, 08.00–17.00 WIB</p>
-            <p className="text-xs text-slate-400 mt-1">Sabtu–Minggu tutup</p>
+            <p className="text-sm font-semibold text-white">
+              {contactInfo.officeHours.days}, {contactInfo.officeHours.hours}
+            </p>
+            <p className="text-xs text-slate-400 mt-1">{contactInfo.officeHours.note}</p>
           </div>
           <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <Mail className="w-4 h-4 text-blue-300 mb-2" />
+            <MessageCircle className="w-4 h-4 text-teal mb-2" />
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              WA Sekretariat & Informasi
+            </p>
             <a
-              href="mailto:sekretariat@periklindo.com"
+              href={contactInfo.phone.secretariat.waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-semibold text-white hover:text-teal"
+            >
+              {contactInfo.phone.secretariat.number}
+            </a>
+          </div>
+          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
+            <MessageCircle className="w-4 h-4 text-blue-300 mb-2" />
+            <p className="text-[11px] font-bold uppercase tracking-wider text-slate-400 mb-1">
+              WA Pendaftaran Anggota
+            </p>
+            <a
+              href={contactInfo.phone.registration.waUrl}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm font-semibold text-white hover:text-electric"
             >
-              sekretariat@periklindo.com
+              {contactInfo.phone.registration.number}
             </a>
-            <p className="text-xs text-slate-400 mt-1">Email resmi perkumpulan</p>
-          </div>
-          <div className="bg-navy-light/70 border border-slate-800 rounded-xl p-4">
-            <Phone className="w-4 h-4 text-teal mb-2" />
-            <p className="text-sm font-semibold text-white">+62 877-8970-3728</p>
-            <p className="text-xs text-slate-400 mt-1">WhatsApp sekretariat</p>
           </div>
         </motion.div>
       </div>

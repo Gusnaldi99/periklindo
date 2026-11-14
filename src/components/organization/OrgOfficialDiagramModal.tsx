@@ -43,7 +43,7 @@ export default function OrgOfficialDiagramModal() {
             </div>
             <SectionHeader
               title="Bagan Visual Asli Organisasi"
-              subtitle="Diagram skematik resmi susunan kepengurusan PERIKLINDO yang menghubungkan jalur komando pimpinan, fungsi penasihat senior, dan distribusi 6 bidang kerja."
+              subtitle="Diagram skematik resmi susunan kepengurusan PERIKLINDO Periode 2026–2031 yang menghubungkan Dewan Pembina, Dewan Pengawas, pimpinan harian, dan distribusi enam bidang kerja."
             />
           </div>
         </ScrollReveal>
@@ -58,7 +58,7 @@ export default function OrgOfficialDiagramModal() {
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500" />
                 </span>
-                <span>Format Resmi: Organization Structure PERIKLINDO (Bagan Induk)</span>
+                <span>Format Resmi: Bagan Struktur Organisasi PERIKLINDO Periode 2026–2031</span>
               </div>
 
               <div className="flex items-center gap-2.5">
@@ -171,10 +171,10 @@ export default function OrgOfficialDiagramModal() {
                     <span className="w-3 h-3 rounded-full bg-electric shadow-xs" />
                     <div>
                       <h3 className="font-extrabold text-navy text-sm sm:text-base leading-tight">
-                        Organization Structure &bull; PERIKLINDO
+                        Bagan Struktur Organisasi • PERIKLINDO
                       </h3>
                       <p className="text-[11px] text-slate-500 hidden sm:block">
-                        Bagan Induk Kepengurusan Periode Aktif
+                        Bagan Induk Kepengurusan Periode 2026–2031
                       </p>
                     </div>
                   </div>
