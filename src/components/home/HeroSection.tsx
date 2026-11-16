@@ -89,7 +89,7 @@ export default function HeroSection() {
         {/* Background Image — EV Ecosystem Panoramic */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/assets/hero/hero-ev-ecosystem.jpg"
+            src="/assets/hero/hero-ev.jpg"
             alt="Ekosistem kendaraan listrik Indonesia — mobil EV, bus listrik 100% Electric, motor listrik, SPKLU, siluet Monas"
             fill
             priority
